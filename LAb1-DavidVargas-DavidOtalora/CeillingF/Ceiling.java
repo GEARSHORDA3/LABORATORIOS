@@ -1,7 +1,10 @@
-
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.awt.Toolkit;
 
 /**
  * Write a description of class Ceiling here.
@@ -22,7 +25,7 @@ public class Ceiling
     public static Integer x=0;
     public static Integer y=0;
     public static ArrayList<Integer> padres= new ArrayList<Integer>();
-    
+    public static int tamaño=0;    
     /**
      * Constructor for objects of class Ceiling
      */
@@ -34,7 +37,13 @@ public class Ceiling
      * @return    the sum of x and y
      */
    private static void main(int[] args, String color) {
-      Ceiling iat = new Ceiling(args, color);          
+       if (tamaño==2){
+           Toolkit.getDefaultToolkit().beep();
+           JOptionPane.showMessageDialog(null, "No se pueden agregar mas techos");
+       }   
+       else{
+            Ceiling iat = new Ceiling(args, color);          
+       }
    }
 
    /**
@@ -42,38 +51,46 @@ public class Ceiling
      * @param ArrayP,Stringcolor
     */ 
    public Ceiling(int[] p, String color) {
-       // Imprima Rectangulo grande
-       Rectangle Rect= new Rectangle();
-       Rect.changeHeightWidth(53*p.length);
-       Rect.changeColor(color);
-       this.color=color;
-       Rect.moveHorizontal(x);
-       Rect.moveVertical(y);
-       Rect.makeVisible();
-       
-       lista3= new ArrayList<Rectangle>(); //Hacemos la lista
-       BigSquare=new ArrayList<Rectangle>(); //Hacemos la lista    
-       colors.add("black");colors.add("red");colors.add("yellow");colors.add("white");colors.add("blue");colors.add("grey");colors.add("green");colors.add("magenta");colors.add("pink");colors.add("cyan");colors.add("orange");
-       BigSquare.add(Rect);
-       //Imprime Rectangulos pequeños
-       
-       int posicion=(52*p.length)-50;
-       int i;
 
-       for (i=0; i<(p.length); i++){
-          Rectangle Rect2= new Rectangle();
-          Rect2.changeColor(colors.get(p[i]));
-          Rect2.changeSize(40,100);
-          Rect2.moveHorizontal(10);
-          Rect2.moveVertical(posicion);
-          Rect2.moveHorizontal(x);
-          Rect2.moveVertical(y);
-          Rect2.makeVisible();
-          posicion-=50;
-          lista3.add(Rect2);
-          lista4.add(p[i]);
-          
-       } 
+       
+       tamaño+=1;
+       if (tamaño==2){
+           Toolkit.getDefaultToolkit().beep();
+           JOptionPane.showMessageDialog(null, "No se pueden agregar mas techos");
+       }         
+       else{     
+           // Imprima Rectangulo grande
+           Rectangle Rect= new Rectangle();
+           Rect.changeHeightWidth(53*p.length);
+           Rect.changeColor(color);
+           this.color=color;
+           Rect.moveHorizontal(x);
+           Rect.moveVertical(y);    
+           lista3= new ArrayList<Rectangle>(); //Hacemos la lista
+           BigSquare=new ArrayList<Rectangle>(); //Hacemos la lista    
+           colors.add("black");colors.add("red");colors.add("yellow");colors.add("white");colors.add("blue");colors.add("grey");colors.add("green");colors.add("magenta");colors.add("fucsia");colors.add("b");
+           BigSquare.add(Rect);            
+           Rect.makeVisible();
+
+           //Imprime Rectangulos pequeños
+           
+           int posicion=(52*p.length)-50;
+           int i;
+    
+           for (i=0; i<(p.length); i++){
+              Rectangle Rect2= new Rectangle();
+              Rect2.changeColor(colors.get(p[i]));
+              Rect2.changeSize(40,100);
+              Rect2.moveHorizontal(10);
+              Rect2.moveVertical(posicion);
+              Rect2.moveHorizontal(x);
+              Rect2.moveVertical(y);
+              Rect2.makeVisible();
+              posicion-=50;
+              lista3.add(Rect2);
+              lista4.add(p[i]);
+           } 
+        }
     }
 
    /**
@@ -82,6 +99,9 @@ public class Ceiling
     */ 
    public void add(int m){
        //delete
+       //if (lista4.size()==5){
+       //    JOptionPane.showMessageDialog(null, "Hello World");
+       //}        
        int posicion3=(52*lista4.size())-50;
        int t1=0;
        for (t1=0; t1<(lista4.size()); t1++){
@@ -236,8 +256,26 @@ public class Ceiling
        BigSquare.add(Rect);
        
     }
+    public void showCeil(){
+            int nu1=0; int nu2=0;
+            for (nu2=0; nu2<BigSquare.size();nu2++){
+                BigSquare.get(nu2).makeVisible();
+            }            
+            for (nu1=0; nu1<lista3.size();nu1++){
+                lista3.get(nu1).makeVisible();
+            }
+    }  
     
-    public void showTree(){
+    public void deleteAll(){
+            int num1=0; int num2=0;
+            for (num1=0; num1<lista3.size();num1++){
+                lista3.get(num1).makeInvisible();
+            }
+            for (num2=0; num2<BigSquare.size();num2++){
+                BigSquare.get(num2).makeInvisible();
+            }        
+    }    
+        public void showTree(){
       
             //escondemos los rectangulos
             int num1=0; int num2=0;
@@ -285,16 +323,13 @@ public class Ceiling
             int num;int num3;
             // num3 padre
             // num hijo
-            System.out.println(lista4+"lista");
+
             for (num=1;num<(lista4.size());num++){
                 
-                System.out.println("----------HIJO ="+lista4.get(num));
                 Circle circ= new Circle();
                 circ.changeColor(colors.get(lista4.get(num))); //cambia el color del nodo
                 for (num3=0;num3<num;num3++){
-                    //System.out.println(lista4.get(num3));
-                    //System.out.println(lista4.get((hijos[(num3*2)])));
-                    //System.out.println(lista4.get(num3));
+
                     if (nodo_drow[num]!= true){
                     nodo_drow[num]=false;
                     }
@@ -303,105 +338,75 @@ public class Ceiling
                     }
                     //hijo izquierdo
                     if (lista4.get(num) < lista4.get(num3) && num3==0 && (hijos[(num3*2)])==0){ 
-                        System.out.println("1 IF");
-                        System.out.println("PAPA ="+lista4.get(num3));
-                        System.out.println("PAPA_X ="+miLista[(num3*2)]);
-                        System.out.println("PAPA_Y ="+(miLista[(num3*2)+1]));
                         hijos[(num3*2)]=1;
                         circ.moveHorizontal(miLista[(num3*2)]-50);
                         circ.moveVertical(miLista[(num3*2)+1]+30);
-                        circ.makeVisible();
+                        
                         miLista[(num*2)]=miLista[(num3*2)]-50;
                         miLista[(num*2)+1]=miLista[(num3*2)+1]+30;
-                        System.out.println("HIJO_X ="+miLista[(num*2)]);
-                        System.out.println("HIJO_Y ="+miLista[(num*2)+1]);
                         nodo_drow[num]=true;
+                        Line linea = new Line(miLista[num3*2]+35,(miLista[(num3*2)+1])+25,miLista[num*2]+35,miLista[(num*2)+1]+25);
+                        linea.makeVisible();
+                        circ.makeVisible();
                     }
                 
                     else if (lista4.get(num) < lista4.get(num3)&& num3!=0 && (hijos[(num3*2)])==0){ 
-                        System.out.println("2 IF");
-                        System.out.println("PAPA ="+lista4.get(num3));
-                        System.out.println("PAPA_X ="+miLista[(num3*2)]);
-                        System.out.println("PAPA_Y ="+(miLista[(num3*2)+1]+30));
-                        System.out.println("HIJO_Y2222 ="+miLista[(num*2)]);
-                        System.out.println("num ="+num);
                         hijos[(num3*2)]=1;
                         circ.moveHorizontal(miLista[(num3*2)]-50);
                         circ.moveVertical(miLista[(num3*2)+1]+30);
-                        circ.makeVisible();
+                        
                         miLista[(num*2)]=miLista[(num3*2)]-50;
                         miLista[(num*2)+1]=miLista[(num3*2)+1]+30;
-                        System.out.println("HIJO_X ="+miLista[(num*2)]);
-                        System.out.println("HIJO_Y ="+miLista[(num*2)+1]);
                         nodo_drow[num]=true;
+                        Line linea = new Line(miLista[num3*2]+35,(miLista[(num3*2)+1])+25,miLista[num*2]+35,miLista[(num*2)+1]+25);
+                        linea.makeVisible();
+                        circ.makeVisible();
                     }
                     //hijo derecho
                     else if(lista4.get(num) > lista4.get(num3) && num3==0 && (hijos[(num3*2)+1])==0){
-                        System.out.println("3 IF");
-                        System.out.println("PAPA ="+lista4.get(num3));
-                        System.out.println("PAPA_X ="+miLista[(num3*2)]);
-                        System.out.println("PAPA_Y ="+miLista[(num3*2)+1]);
                         hijos[(num3*2)+1]=1;
-                        //System.out.println((miLista[(num3*2)+1]+50)+"x hijo y pa"+(miLista[(num3*2)+1]));
-                        //System.out.println((miLista[(num3*2)]+30)+"y hijo y pa"+(miLista[(num3*2)]));
                         circ.moveHorizontal(miLista[(num3*2)]+50);
                         circ.moveVertical(miLista[(num3*2)+1]+30);
-                        circ.makeVisible();
+                        
                         miLista[(num*2)]=miLista[(num3*2)]+50;
                         miLista[(num*2)+1]=miLista[(num3*2)+1]+30;
-                        System.out.println("HIJO_X ="+miLista[(num*2)-1]);
-                        System.out.println("HIJO_Y ="+miLista[(num*2)]);
                         nodo_drow[num]=true;
+                        Line linea = new Line(miLista[num3*2]+35,(miLista[(num3*2)+1])+25,miLista[num*2]+35,miLista[(num*2)+1]+25);
+                        linea.makeVisible();
+                        circ.makeVisible();
                     }
                     else if(lista4.get(num) > lista4.get(num3)&& num3!=0 && (hijos[(num3*2)+1])==0){
-                        System.out.println("4 IF");
-                        System.out.println("PAPA ="+lista4.get(num3));
-                        System.out.println("PAPA_X ="+miLista[(num3*2)]);
-                        System.out.println("PAPA_Y ="+miLista[(num3*2)+1]);
                         hijos[(num3*2)+1]=1;
                         circ.moveHorizontal(miLista[(num3*2)]+50);
                         circ.moveVertical(miLista[(num3*2)+1]+30);
-                        circ.makeVisible();
                         miLista[(num*2)]=miLista[(num3*2)]+50;
                         miLista[(num*2)+1]=miLista[(num3*2)+1]+30;
-                        System.out.println("HIJO_X ="+miLista[(num*2)-1]);
-                        System.out.println("HIJO_Y ="+miLista[(num*2)]);
                         nodo_drow[num]=true;
-                    }
-                    
-                    else if(lista4.get(num)==lista4.get(num3) && (hijos[(num3*2)])==0){
-                        System.out.println("5 IF");
-                        System.out.println("PAPA ="+lista4.get(num3));
-                        System.out.println("PAPA_X ="+miLista[(num3*2)-1]);
-                        System.out.println("PAPA_Y ="+miLista[(num3*2)]);
-                        hijos[(num3*2)]=1;
-                        System.out.println("5");
-                        circ.moveHorizontal(miLista[(num3*2)-1]+50);
-                        circ.moveVertical(miLista[(num3*2)]+30);
+                        Line linea = new Line(miLista[num3*2]+35,(miLista[(num3*2)+1])+25,miLista[num*2]+35,miLista[(num*2)+1]+25);
+                        linea.makeVisible();
                         circ.makeVisible();
-                        miLista[(num*2)]=miLista[(num3*2)-1]+50;
-                        miLista[(num*2)+1]=miLista[(num3*2)]+30;
-                        System.out.println("HIJO_X ="+miLista[(num*2)-1]);
-                        System.out.println("HIJO_Y ="+miLista[(num*2)]);
-                        nodo_drow[num]=true;
                     }
-                    System.out.println(miLista[num]);
-                    System.out.println(miLista[num3]);
-                    //Line linea = new Line(miLista[num*2],miLista[num*2]+1,miLista[num3*2],miLista[(num3*2)+1]);
-                    Line linea = new Line(270,15,320,25);
-                    linea.makeVisible();
                     
-                    
-                    
+                    else if(lista4.get(num)==lista4.get(num3) && (hijos[(num3*2)+1])==0){
+                        hijos[(num3*2)+1]=1;
+                        circ.moveHorizontal(miLista[(num3*2)]+50);
+                        circ.moveVertical(miLista[(num3*2)+1]+30);
+                        miLista[(num*2)]=miLista[(num3*2)]+50;
+                        miLista[(num*2)+1]=miLista[(num3*2)+1]+30;
+                        nodo_drow[num]=true;
+                        Line linea = new Line(miLista[num3*2]+35,(miLista[(num3*2)+1])+25,miLista[num*2]+35,miLista[(num*2)+1]+25);
+                        linea.makeVisible();
+                        circ.makeVisible();
+                    }
+ 
                 }
                
                 circles.add(cir2);
                 
                 
             }
-            
+ 
         }
-        
     }
             
         
