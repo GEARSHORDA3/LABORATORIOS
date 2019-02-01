@@ -169,7 +169,7 @@ public class Circle{
     /*
      * Erase the circle on screen.
      */
-    private void erase(){
+    public void erase(){
         if(isVisible) {
             Canvas canvas = Canvas.getCanvas();
             canvas.erase(this);

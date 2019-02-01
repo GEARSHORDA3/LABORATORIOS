@@ -31,6 +31,16 @@ public class Line {
         isVisible = true;
         draw();
     }
+    private void erase(){
+        if(isVisible) {
+            Canvas canvas = Canvas.getCanvas();
+            canvas.erase(this);
+        }
+    }    
+    public void makeInvisible(){
+        erase();
+        isVisible = false;
+    }    
     
     /**
      * Draw the line with current specifications on screen.
