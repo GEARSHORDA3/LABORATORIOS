@@ -13,8 +13,8 @@ public class Circle{
     public static double PI=3.1416;
     
     private int diameter;
-    private int xPosition;
-    private int yPosition;
+    public double xPosition;
+    public double yPosition;
     private String color;
     private boolean isVisible;
     
@@ -23,8 +23,8 @@ public class Circle{
      */
     public Circle(){
         diameter = 30;
-        xPosition = 20;
-        yPosition = 15;
+        xPosition = 70;
+        yPosition = 155;
         color = "blue";
         isVisible = false;
     }
