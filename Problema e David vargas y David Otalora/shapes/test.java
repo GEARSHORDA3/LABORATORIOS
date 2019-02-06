@@ -27,23 +27,35 @@ public class test
         voy= vo*Math.sin(angulo);
         vox= vo*Math.cos(angulo);
         x = vox*t;
+        Rectangle rect = new Rectangle();    
         y=(h+(voy*t) -(4.9*(t*t)));
         Circle circ = new Circle();
+        Circle circ2 = new Circle();
+        // circ.makeVisible();
+        // double positionX = circ.xPosition;
+        // double positionY = circ.yPosition;
+        circ.xPosition=150;
+        circ.yPosition=100;
+        double conta= y;
         for (int i=0; i<1500;i++){
-            
-            if (y>=0){
+            if (true){
+                conta = y;
                 y=(h+(voy*t) -(4.9*(t*t)));
                 x= vox*t;
                 t+=0.01;
-                circ.yPosition=-y;
-                circ.xPosition=x;
+                circ.yPosition=(100-(y));
+                circ.xPosition=Math.abs((x*2));
                 circ.makeVisible();
-                //System.out.println(y);
+                // System.out.println(circ.yPosition);
+                System.out.println();
+                // System.out.println(circ.xPosition);
             }
             else{
                 break;
             }
         }
+        
+        
         
     }
 
