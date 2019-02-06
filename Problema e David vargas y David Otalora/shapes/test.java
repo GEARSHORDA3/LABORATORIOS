@@ -1,4 +1,5 @@
 
+
 /**
  * Write a description of class test here.
  *
@@ -46,18 +47,17 @@ public class test
         voy= vo*Math.sin(angulo);
         vox= vo*Math.cos(angulo);
         Circle circ = new Circle();
-        circ.xPosition=rect.xPosition;
-        circ.yPosition=rect.yPosition;        
+        circ.xPosition=posicionX;
+        circ.yPosition=posicionY; 
         double conta= y;
-        // System.out.println(h);
         circ.changeSize(10);
         while (y>-posicionY){
                 conta = y;
                 y=((h)+(voy*t) -(4.9*(t*t)));
                 x= vox*t;
                 t+=0.01;
-                circ.yPosition=(posicionX-(y));
-                circ.xPosition=Math.abs((x*2));
+                circ.yPosition=(posicionY-(y));
+                circ.xPosition=((x*2));
                 circ.makeVisible();
         }        
     }
