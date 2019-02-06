@@ -10,54 +10,58 @@ public class test
     // instance variables - replace the example below with your own
     private double x;
     private double t=0;
-    private double h;
+    private int h;
     private double vo;
     private double vox=0;
     private double voy=0;
     private double y;
+    private double posicionY;
+    private double posicionX;
 
     /**
      * Constructor for objects of class test
      */
-    public test(int altura, int angulo, int velocidad)
+    public test()
     {
         // initialise instance variables
+        x = vox*t;
+        y=(h+(voy*t) -(4.9*(t*t)));
+    }
+    
+    public void setxPosition(double a){
+        posicionX=a;
+    }
+    
+    public void setyPosition (double b){
+        posicionY=b;
+    }
+    
+    public void setHeight(int c){
+        h=c/3;
+    }
+    
+    public void Jump(int angulo, int velocidad){
         vo=velocidad;
-        h=altura;
+        Rectangle rect = new Rectangle();  
         voy= vo*Math.sin(angulo);
         vox= vo*Math.cos(angulo);
-        x = vox*t;
-        Rectangle rect = new Rectangle();    
-        y=(h+(voy*t) -(4.9*(t*t)));
         Circle circ = new Circle();
-        Circle circ2 = new Circle();
-        // circ.makeVisible();
-        // double positionX = circ.xPosition;
-        // double positionY = circ.yPosition;
-        circ.xPosition=150;
-        circ.yPosition=100;
+        circ.xPosition=rect.xPosition;
+        circ.yPosition=rect.yPosition;        
         double conta= y;
-        for (int i=0; i<1500;i++){
-            if (true){
+        // System.out.println(h);
+        circ.changeSize(10);
+        while (y>-posicionY){
                 conta = y;
-                y=(h+(voy*t) -(4.9*(t*t)));
+                y=((h)+(voy*t) -(4.9*(t*t)));
                 x= vox*t;
                 t+=0.01;
-                circ.yPosition=(100-(y));
+                circ.yPosition=(posicionX-(y));
                 circ.xPosition=Math.abs((x*2));
                 circ.makeVisible();
-                // System.out.println(circ.yPosition);
-                System.out.println();
-                // System.out.println(circ.xPosition);
-            }
-            else{
-                break;
-            }
-        }
-        
-        
-        
+        }        
     }
+    
 
 
 
