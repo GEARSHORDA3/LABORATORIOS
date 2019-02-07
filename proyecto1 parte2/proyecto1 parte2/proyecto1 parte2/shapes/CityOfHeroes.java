@@ -1,3 +1,9 @@
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import java.util.List;
+import java.util.Collections;
+import java.awt.Toolkit; 
 import java.util.ArrayList;
 import java.util.*;
 
@@ -10,7 +16,6 @@ import java.util.*;
 public class CityOfHeroes
 {
 
-// Pyoyecto 1 varibales 
     private  int heightNew;
     private  int wightNew; 
     public   int width1;
@@ -21,8 +26,6 @@ public class CityOfHeroes
     private  Rectangle ciudadBlack;
     private Hashtable<Integer,Integer> infCoordenadas = new Hashtable<Integer,Integer>();
     private ArrayList<Integer>positionX = new ArrayList<Integer>();
-    
-
 
     public CityOfHeroes(int widthNew, int heightNew) {
         Builds= new ArrayList<Building>();
@@ -31,11 +34,18 @@ public class CityOfHeroes
         height1=heightNew;
         canvas = Canvas.getCanvas(widthNew,heightNew);
 
-
     }
     
+    public int getHeight(){
+        return height1;
+    }
+    
+    public int getWidth(){
+        return width1;
+    }    
+    
     /**
-     * An example of a method - replace this comment with your own
+     * Builder
      *
      * @param  y  a sample parameter for a method
      * @return    the sum of x and y
@@ -57,13 +67,18 @@ public class CityOfHeroes
      */
     public void addHeroe(String color,int hidingBuilding, int strength){
         Collections.sort(positionX);
-        int x =positionX.get(hidingBuilding-1);
-        int y= infCoordenadas.get(x);
         // Condicion de que si no hay edificio salga el error
-        int edificioHeroe= Builds.get(hidingBuilding-1).getWidth();
-        // System.out.println(edificioHeroe + "aaaaaaaaaaaaaaaaaaaaaaaaaa");
-        Heroe heroe= new Heroe(color,hidingBuilding,strength, x,y, edificioHeroe);
-        Heroes.add(heroe);        
+        try{
+            int x =positionX.get(hidingBuilding-1);
+            int y= infCoordenadas.get(x);          
+            int edificioHeroe= Builds.get(hidingBuilding-1).getWidth();
+            Heroe heroe= new Heroe(color,hidingBuilding,strength, x,y, edificioHeroe);
+            Heroes.add(heroe);
+        }
+        catch(IndexOutOfBoundsException e) {
+            Toolkit.getDefaultToolkit().beep();
+            JOptionPane.showMessageDialog(null, "No existe un edificio al cual");
+        }
     }
     
     /**
@@ -97,9 +112,13 @@ public class CityOfHeroes
 
     }
     }
+    
+    /** Move a Heroe with the angle and the velocity
+     * @param String color, int angulo, int velocidad
+     * @return void
+     */ 
     public void jump(String color, int angulo, int velocidad){  
      int altCanvas= canvas.getWidth();
-     
        for(int i=0;i<Heroes.size();i++){
            if (Heroes.get(i).getHeroeColor(Heroes.get(i)).equals(color)){
                int posiXHeroe= (Heroes.get(i)).getxPosition();
@@ -111,13 +130,11 @@ public class CityOfHeroes
                    int anchoEdi= edificio.getWidth()+xpositionEdi;
                    if (xpositionEdi<=posiXHeroe && posiXHeroe<=anchoEdi){
                        (Heroes.get(i)).Jump(color, angulo, velocidad, altCanvas-posiYHeroe,
-                       posiYHeroe, posiXHeroe);
+                       posiYHeroe, posiXHeroe,altCanvas);
                        return;
                     }
                 }
            }
-
-    }        
-       
+    }         
 }
 }
