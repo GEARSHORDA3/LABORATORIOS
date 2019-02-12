@@ -1,0 +1,42 @@
+Class documentation
+<---- javadoc command: ---->
+/Applications/BlueJ.app/Contents/JDK/Home/bin/javadoc
+-author
+-version
+-nodeprecated
+-package
+-Xdoclint:none
+-noindex
+-notree
+-nohelp
+-nonavbar
+-source
+1.8
+-classpath
+/Applications/BlueJ.app/Contents/Resources/Java/bluejcore.jar:/Applications/BlueJ.app/Contents/Resources/Java/junit-4.11.jar:/Applications/BlueJ.app/Contents/Resources/Java/hamcrest-core-1.3.jar:/Applications/BlueJ.app/Contents/Resources/Java/lang-stride.jar:/Applications/BlueJ.app/Contents/Resources/Java/userlib/pi4j-core.jar:/Applications/BlueJ.app/Contents/Resources/Java/userlib/pi4j-gpio-extension.jar:/Applications/BlueJ.app/Contents/Resources/Java/userlib/pi4j-service.jar:/Applications/BlueJ.app/Contents/Resources/Java/userlib/pi4j-device.jar:/Users/davidandres/Library/Mobile Documents/com~apple~CloudDocs/5 semestre/poob/LAb1-DavidVargas-DavidOtalora/LAb1-DavidVargas-DavidOtalora/CeillingF
+-d
+/Users/davidandres/Library/Mobile Documents/com~apple~CloudDocs/5 semestre/poob/LAb1-DavidVargas-DavidOtalora/LAb1-DavidVargas-DavidOtalora/CeillingF/doc
+-encoding
+UTF-8
+-charset
+UTF-8
+/Users/davidandres/Library/Mobile Documents/com~apple~CloudDocs/5 semestre/poob/LAb1-DavidVargas-DavidOtalora/LAb1-DavidVargas-DavidOtalora/CeillingF/Ceiling.java
+<---- end of javadoc command ---->
+Loading source file /Users/davidandres/Library/Mobile Documents/com~apple~CloudDocs/5 semestre/poob/LAb1-DavidVargas-DavidOtalora/LAb1-DavidVargas-DavidOtalora/CeillingF/Ceiling.java...
+Constructing Javadoc information...
+Standard Doclet version 1.8.0_192
+Building tree for all the packages and classes...
+Generating /Users/davidandres/Library/Mobile Documents/com~apple~CloudDocs/5 semestre/poob/LAb1-DavidVargas-DavidOtalora/LAb1-DavidVargas-DavidOtalora/CeillingF/doc/Ceiling.html...
+/Users/davidandres/Library/Mobile Documents/com~apple~CloudDocs/5 semestre/poob/LAb1-DavidVargas-DavidOtalora/LAb1-DavidVargas-DavidOtalora/CeillingF/Ceiling.java:55: warning - @param argument "ArrayP,Stringcolor" is not a parameter name.
+/Users/davidandres/Library/Mobile Documents/com~apple~CloudDocs/5 semestre/poob/LAb1-DavidVargas-DavidOtalora/LAb1-DavidVargas-DavidOtalora/CeillingF/Ceiling.java:102: warning - @param argument "IntM" is not a parameter name.
+/Users/davidandres/Library/Mobile Documents/com~apple~CloudDocs/5 semestre/poob/LAb1-DavidVargas-DavidOtalora/LAb1-DavidVargas-DavidOtalora/CeillingF/Ceiling.java:215: warning - @param argument "none" is not a parameter name.
+/Users/davidandres/Library/Mobile Documents/com~apple~CloudDocs/5 semestre/poob/LAb1-DavidVargas-DavidOtalora/LAb1-DavidVargas-DavidOtalora/CeillingF/Ceiling.java:159: warning - @param argument "Intx,Inty" is not a parameter name.
+Generating /Users/davidandres/Library/Mobile Documents/com~apple~CloudDocs/5 semestre/poob/LAb1-DavidVargas-DavidOtalora/LAb1-DavidVargas-DavidOtalora/CeillingF/doc/package-frame.html...
+Generating /Users/davidandres/Library/Mobile Documents/com~apple~CloudDocs/5 semestre/poob/LAb1-DavidVargas-DavidOtalora/LAb1-DavidVargas-DavidOtalora/CeillingF/doc/package-summary.html...
+Generating /Users/davidandres/Library/Mobile Documents/com~apple~CloudDocs/5 semestre/poob/LAb1-DavidVargas-DavidOtalora/LAb1-DavidVargas-DavidOtalora/CeillingF/doc/constant-values.html...
+Building index for all the packages and classes...
+Building index for all classes...
+Generating /Users/davidandres/Library/Mobile Documents/com~apple~CloudDocs/5 semestre/poob/LAb1-DavidVargas-DavidOtalora/LAb1-DavidVargas-DavidOtalora/CeillingF/doc/allclasses-frame.html...
+Generating /Users/davidandres/Library/Mobile Documents/com~apple~CloudDocs/5 semestre/poob/LAb1-DavidVargas-DavidOtalora/LAb1-DavidVargas-DavidOtalora/CeillingF/doc/allclasses-noframe.html...
+Generating /Users/davidandres/Library/Mobile Documents/com~apple~CloudDocs/5 semestre/poob/LAb1-DavidVargas-DavidOtalora/LAb1-DavidVargas-DavidOtalora/CeillingF/doc/index.html...
+4 warnings
