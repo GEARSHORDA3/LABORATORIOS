@@ -48,7 +48,7 @@ public class Canvas{
      * @param title  title to appear in Canvas Frame
      * @param width  the desired width for the canvas
      * @param height  the desired height for the canvas
-     * @param bgClour  the desired background colour of the canvas..
+     * @param bgClour  the desired background colour of the canvas
      */
     private Canvas(String title, int width, int height, Color bgColour){
         frame = new JFrame();
@@ -64,9 +64,9 @@ public class Canvas{
 
     /**
      * Set the canvas visibility and brings canvas to the front of screen
-     * when made visible. This method can also be used to bring an already...
+     * when made visible. This method can also be used to bring an already.
      * visible canvas to the front of other windows.
-     * @param visible  boolean value representing the desired visibility of..
+     * @param visible  boolean value representing the desired visibility of
      * the canvas (true or false) 
      */
     public void setVisible(boolean visible){
