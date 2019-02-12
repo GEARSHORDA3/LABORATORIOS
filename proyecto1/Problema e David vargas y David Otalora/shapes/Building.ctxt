@@ -1,7 +1,0 @@
-#BlueJ class context
-comment0.target=Building
-comment0.text=\n\ Write\ a\ description\ of\ class\ Building\ here.\n\n\ @author\ (your\ name)\n\ @version\ (a\ version\ number\ or\ a\ date)\n
-comment1.params=x\ width\ height\ hardness
-comment1.target=Building(int,\ int,\ int,\ int)
-comment1.text=\n\ Constructor\ for\ objects\ of\ class\ Building\n
-numComments=2

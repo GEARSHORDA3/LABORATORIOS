@@ -1,9 +1,0 @@
-#BlueJ class context
-comment0.target=CityOfHeroes
-comment0.text=\n\ Write\ a\ description\ of\ class\ CityOfHeroes\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
-comment1.params=widthNew\ heightNew
-comment1.target=CityOfHeroes(int,\ int)
-comment2.params=x\ width\ height\ hardness
-comment2.target=void\ addBuilding(int,\ int,\ int,\ int)
-comment2.text=\n\ An\ example\ of\ a\ method\ -\ replace\ this\ comment\ with\ your\ own\n\n\ @param\ \ y\ \ a\ sample\ parameter\ for\ a\ method\n\ @return\ \ \ \ the\ sum\ of\ x\ and\ y\n
-numComments=3
