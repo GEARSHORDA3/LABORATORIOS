@@ -11,13 +11,13 @@ import java.util.*;
  * @author: Bruce Quig
  * @author: Michael Kolling (mik)
  *
- * @version: 1.6 (shapes)
+ * @version: 1.6 (shapes).
  */
 public class Canvas{
     // Note: The implementation of this class (specifically the handling of
     // shape identity and colors) is slightly more complex than necessary. This
     // is done on purpose to keep the interface and instance fields of the
-    // shape objects in this project clean and simple for educational purposes.
+    // shape objects in this project clean and simple for educational purposes..
 
 	private static Canvas canvasSingleton;
 
@@ -64,7 +64,7 @@ public class Canvas{
 
     /**
      * Set the canvas visibility and brings canvas to the front of screen
-     * when made visible. This method can also be used to bring an already
+     * when made visible. This method can also be used to bring an already.
      * visible canvas to the front of other windows.
      * @param visible  boolean value representing the desired visibility of
      * the canvas (true or false) 
