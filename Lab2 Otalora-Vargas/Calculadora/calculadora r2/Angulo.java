@@ -88,7 +88,7 @@ public class Angulo {
      * @return this * a
      */
     public Angulo multiplique (Angulo ang) {
-        return new Angulo(grados*ang.grados,1);
+        return new Angulo(grados*ang.grados(),1);
     }
 
     /**
@@ -97,7 +97,7 @@ public class Angulo {
      * @return this / a
      */
     public Angulo divida (Angulo a) {
-        return new Angulo(grados/a.grados,1);
+        return new Angulo(grados/a.grados(),1);
     }
     
     

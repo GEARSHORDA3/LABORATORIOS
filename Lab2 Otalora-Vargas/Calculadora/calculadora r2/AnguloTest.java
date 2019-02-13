@@ -14,7 +14,7 @@ import org.junit.Test;
 public class AnguloTest
 {
     // Variables para hacer las pruebas: el "test fixture"
-    private Angulo a0, a30, a45, a60, a90, a180, a360, a720, am90, aPI, gon100, gon400;
+    private Angulo a0, a30, a45, a60, a90, a180, a360, a720, am90, aPI, gon100, gon400,a1,a2,a3,a8;
     
     /**
      * Sets up the test fixture.
@@ -37,6 +37,10 @@ public class AnguloTest
         aPI = new Angulo (Math.PI, Angulo.RADIANES);
         gon100 = new Angulo(90,Angulo.GRADOS);
         gon400 = new Angulo(0,Angulo.GRADOS);
+        a1=new Angulo(1,Angulo.GRADOS);
+        a3=new Angulo(3,Angulo.GRADOS);
+        a2=new Angulo(2,Angulo.GRADOS);
+        a8=new Angulo(8.0,Angulo.GRADOS);
     }
 
     @Test 
@@ -128,8 +132,37 @@ public class AnguloTest
         assertEquals (am90, a0.reste(a90));
         assertEquals (a0, a180.reste(a90).reste(a90));
     }
-
-
+    
+    @Test
+    public void deberiaMultiplicar() {
+        assertEquals(a0, a0.multiplique(a0));
+        assertEquals (a90, a30.multiplique(3));
+        assertEquals (am90, a30.multiplique(-3));
+        assertEquals (a180, a90.multiplique(2));
+        assertEquals (a720, a90.multiplique(8));
+    }
+    
+    @Test
+    public void deberiaDividir() {
+        assertEquals(a0, a0.divida(a1));
+        assertEquals (a30, a90.divida(a3));
+        assertEquals (a90, a180.divida(a2));
+    }
+    
+    @Test
+    public void deberiaCalcularSeno() {
+        assertEquals(0, a180.seno(),100);
+        assertEquals (1, a90.seno(),55);
+        assertEquals (0, a0.seno(),1000);
+    }
+    
+    @Test
+    public void deberiaCalcularCoseno() {
+        assertEquals(0, a180.coseno(),100);
+        assertEquals (1, a90.coseno(),55);
+        assertEquals (0, a0.coseno(),1000);
+    }
+    
     /**
      * Tears down the test fixture.
      *

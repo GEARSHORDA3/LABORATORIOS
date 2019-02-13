@@ -1,7 +1,7 @@
 
 /**
- * @author ECI, 2017
- *
+ * @author Otalor
+ * @autor  Vargas
  */
 public class Velocidad{
 
@@ -16,6 +16,8 @@ public class Velocidad{
      * @param a angulo de la velocidad
      */
     public Velocidad (double l, Angulo a) {
+        longitud=l;
+        angulo=a;
     }
 
     /**
@@ -23,7 +25,7 @@ public class Velocidad{
      * @return componente horizontal de la velocidad
      */
     public double componenteH() {
-        return 0.0;
+        return longitud*Math.cos(angulo.radianes());
     }
 
     /**
@@ -31,7 +33,7 @@ public class Velocidad{
      * @return componente vertical de la velocidad
      */
     public double componenteV() {
-        return 0.0;
+        return longitud *Math.sin(angulo.radianes());
     }
 
 
@@ -40,7 +42,7 @@ public class Velocidad{
      * @return angulo de la velocidad
      */
     public Angulo angulo () {
-        return null;
+        return angulo;
     }
 
 
@@ -49,10 +51,8 @@ public class Velocidad{
      * @return la longitud del origen al velocidad
      */
     public double longitud() {
-        return 0.0;
+        return longitud;
     }
-    
-
     
     /**
      * Compara este velocidad con otro. Serán iguales si la distancia entre ellos es menor que MAXERROR
@@ -81,12 +81,23 @@ public class Velocidad{
     }
 
     public  void sume(Velocidad v){
+        double a=(angulo.coseno()*longitud)+(v.angulo.coseno()*v.longitud);
+        double b=(angulo.seno()*longitud)+(v.angulo.seno()*v.longitud);
+        longitud=Math.sqrt(Math.pow(a,2)+Math.pow(b,2));
+        angulo=new Angulo(Math.acos(a/longitud),Angulo.RADIANES);
     }
     
     public void reste(Velocidad v){
+        double a=(angulo.coseno()*longitud)-(v.angulo.coseno()*v.longitud);
+        double b=(angulo.seno()*longitud)-(v.angulo.seno()*v.longitud);
+        longitud=Math.sqrt(Math.pow(a,2)+Math.pow(b,2));
+        angulo=new Angulo(Math.acos(a/longitud),Angulo.RADIANES);        
     }
     
     public void escalar(int operando){
+        double u=operando*componenteH();
+        double v=operando*componenteV();
+        // angulo=new Angulo()
     }    
     
     public void vectorial(Velocidad v){
