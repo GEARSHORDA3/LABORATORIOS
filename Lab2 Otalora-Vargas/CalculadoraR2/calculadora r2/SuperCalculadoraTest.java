@@ -99,9 +99,8 @@ public class SuperCalculadoraTest
     public void deberiaConsultar(){
         cal.adicione(10, 45);        
         assertEquals("longitud=10.0 grados=45.0", cal.consulte());
-        // cal.adicione(-10, 45);
-        // System.out.println(cal.consulte()+" xxxxxxx "+"longitud=10.0 grados=45.0");
-        // assertEquals("longitud=10.0 grados=225.0", cal.consulte());
+        cal.adicione(-10, 45);
+        assertEquals("longitud=-10.0 grados=45.0", cal.consulte());
         // cal.adicione(10, -45);
         // assertEquals("longitud=10.0 grados=315.0", cal.consulte());
     }
