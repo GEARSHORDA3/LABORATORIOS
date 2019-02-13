@@ -110,9 +110,11 @@ public class VelocidadTest
         Velocidad Velocidad21 = new Velocidad(10, new Angulo(0, Angulo.GRADOS));
         Velocidad Velocidad31 = new Velocidad(15, new Angulo(0, Angulo.GRADOS));
         Velocidad31.reste(Velocidad21);
-        assertEquals(Velocidad31, Velocidad12);
-        // Velocidad21.reste(Velocidad12);
-        // assertEquals(Velocidad12, Velocidad21);
+        assertEquals(Velocidad12.longitud(),Velocidad31.longitud(),1);
+        assertEquals(Velocidad12.angulo(),Velocidad31.angulo());
+        Velocidad21.reste(Velocidad12);
+        assertEquals(Velocidad12.longitud(),Velocidad21.longitud(),1);
+        assertEquals(Velocidad12.angulo(),Velocidad21.angulo());
     }
     
     // @Test
