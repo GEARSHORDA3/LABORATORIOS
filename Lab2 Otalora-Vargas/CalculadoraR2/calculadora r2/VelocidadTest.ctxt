@@ -1,12 +1,14 @@
 #BlueJ class context
 comment0.target=VelocidadTest
-comment0.text=\n\ The\ test\ class\ VelocidadTest.\n\n\ @author\ \ (your\ name)\n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment0.text=\r\n\ The\ test\ class\ VelocidadTest.\r\n\r\n\ @author\ \ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=
 comment1.target=void\ setUp()
-comment1.text=\n\ Sets\ up\ the\ test\ fixture.\n\n\ Called\ before\ every\ test\ case\ method.\n
+comment1.text=\r\n\ Sets\ up\ the\ test\ fixture.\r\n\r\n\ Called\ before\ every\ test\ case\ method.\r\n
 comment10.params=
-comment10.target=void\ tearDown()
-comment10.text=\n\ Tears\ down\ the\ test\ fixture.\n\n\ Called\ after\ every\ test\ case\ method.\n
+comment10.target=void\ deberiaConvertirloString()
+comment11.params=
+comment11.target=void\ tearDown()
+comment11.text=\r\n\ Tears\ down\ the\ test\ fixture.\r\n\r\n\ Called\ after\ every\ test\ case\ method.\r\n
 comment2.params=
 comment2.target=void\ deberiaCrearBienLosVelocidades()
 comment3.params=
@@ -22,5 +24,5 @@ comment7.target=void\ deberiaMultiplicarEscalar()
 comment8.params=
 comment8.target=void\ deberiaRestar()
 comment9.params=
-comment9.target=void\ deberiaConvertirloString()
-numComments=11
+comment9.target=void\ deberiaMultiplicarVelocidades()
+numComments=12

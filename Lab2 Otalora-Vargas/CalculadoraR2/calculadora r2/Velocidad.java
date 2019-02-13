@@ -72,8 +72,8 @@ public class Velocidad{
      */
     @Override
     public boolean equals (Object v) {
-            Velocidad v2 = (Velocidad) v;
-            return equals (v2) ;
+        Velocidad v2 = (Velocidad) v;
+        return equals (v2) ;
     }
     
 
@@ -129,6 +129,7 @@ public class Velocidad{
      * @return vector vector nuevo del producto vectorial 
      */
     public void vectorial(Velocidad v){
+        angulo = new Angulo(0,angulo.GRADOS);
     }
     
     //Adicione los métodos que requiera
@@ -140,7 +141,7 @@ public class Velocidad{
     public String toString () {
           String s =String.valueOf(longitud);
           String a=String.valueOf(angulo.grados());
-          return "r="+s+" grados="+a;
+          return "longitud="+s+" grados="+a;
     }
 
 }

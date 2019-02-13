@@ -81,7 +81,6 @@ public class VelocidadTest
         // assertEquals(20.615528128088304, Velocidad5.distancia(Velocidad1), Velocidad.MAXERROR);
     // }
     
-
     @Test
     public void deberiaMultiplicarEscalar(){
         Velocidad Velocidad21 = new Velocidad(10, new Angulo(0, Angulo.GRADOS));
@@ -117,25 +116,25 @@ public class VelocidadTest
         assertEquals(Velocidad12.angulo(),Velocidad21.angulo());
     }
     
-    // @Test
-    // public void deberiaMultiplicarVelocidades(){
-        // Velocidad Velocidad12 = new Velocidad(5, new Angulo(0, Angulo.GRADOS));
-        // Velocidad Velocidad21 = new Velocidad(88.38834764831844, new Angulo(0, Angulo.GRADOS));
-        // Velocidad Velocidad31 = new Velocidad(15, new Angulo(45, Angulo.GRADOS));
-        // Velocidad Velocidad41 = new Velocidad(1125, new Angulo(45, Angulo.GRADOS));
-        // Velocidad12.multiplique(Velocidad1);
-        // assertEquals(Velocidad21, Velocidad12);
-        // Velocidad31.multiplique(Velocidad1);
-        // assertEquals(Velocidad41, Velocidad31);
-    // }
+    @Test
+    public void deberiaMultiplicarVelocidades(){
+        Velocidad Velocidad12 = new Velocidad(5, new Angulo(0, Angulo.GRADOS));
+        Velocidad Velocidad21 = new Velocidad(88.38834764831844, new Angulo(0, Angulo.GRADOS));
+        Velocidad Velocidad31 = new Velocidad(15, new Angulo(45, Angulo.GRADOS));
+        Velocidad Velocidad41 = new Velocidad(1125, new Angulo(45, Angulo.GRADOS));
+        Velocidad12.vectorial(Velocidad1);
+        assertEquals(Velocidad21, Velocidad12);
+        Velocidad31.vectorial(Velocidad1);
+        assertEquals(Velocidad41, Velocidad31);
+    }
     
     @Test
     public void deberiaConvertirloString(){
-        assertEquals("r=5.0 grados=45.0", Velocidad1.toString());
-        assertEquals("r=10.0 grados=0.0", Velocidad2.toString());
-        assertEquals("r=15.0 grados=90.0", Velocidad3.toString());
-        assertEquals("r=20.0 grados=270.0", Velocidad4.toString());
-        assertEquals("r=20.0 grados=315.0", Velocidad5.toString());
+        assertEquals("longitud=5.0 grados=45.0", Velocidad1.toString());
+        assertEquals("longitud=10.0 grados=0.0", Velocidad2.toString());
+        assertEquals("longitud=15.0 grados=90.0", Velocidad3.toString());
+        assertEquals("longitud=20.0 grados=270.0", Velocidad4.toString());
+        assertEquals("longitud=20.0 grados=315.0", Velocidad5.toString());
     }
     /**
      * Tears down the test fixture.
