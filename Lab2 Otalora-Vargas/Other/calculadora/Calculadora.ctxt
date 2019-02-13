@@ -1,0 +1,24 @@
+#BlueJ class context
+comment0.target=Calculadora
+comment0.text=\ Calculadora.java\r\n\ Representa\ una\ calculadora\ de\ vectores\ \r\n\ @author\ ESCUELA\ 2017-02\r\n
+comment1.params=
+comment1.target=Calculadora()
+comment1.text=\r\n\ Este\ es\ el\ constructor\r\n
+comment2.params=longitud\ grados
+comment2.target=void\ adicione(double,\ double)
+comment2.text=\r\n\ Adiciona\ un\ vector\ a\ la\ calculadora\r\n\ @param\ longitud\ del\ vector\r\n\ @param\ grados\ del\ vector\r\n
+comment3.params=
+comment3.target=void\ elimine()
+comment3.text=\r\n\ Elimina\ un\ vector\ de\ la\ calculadora\ en\ la\ ultima\ posicion\ del\ Stack\r\n
+comment4.params=
+comment4.target=void\ duplique()
+comment4.text=\r\n\ Duplica\ el\ vector\ en\ la\ calculadora\r\n
+comment5.params=operacion
+comment5.target=void\ opere(char)
+comment5.text=\r\n\ Hace\ una\ operacion\ determinada\ en\ la\ calculadora\r\n\ @param\ operacion\ a\ realizar\r\n
+comment6.params=
+comment6.target=java.lang.String\ consulte()
+comment6.text=\r\n\ Consulta\ la\ ultima\ posicion\ de\ la\ calculadora\r\n\ @return\ ultimo\ vector\r\n
+comment7.params=
+comment7.target=boolean\ ok()
+numComments=8
