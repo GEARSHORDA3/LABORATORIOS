@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=SuperCalculadora
-comment0.text=\ \n\ Representa\ una\ calculadora\ de\ velocidades\n\ @author\ ESCUELA\ 2018-01\n
+comment0.text=\ \r\n\ Representa\ una\ calculadora\ de\ velocidades\r\n\ @author\ ESCUELA\ 2018-01\r\n
 comment1.params=
 comment1.target=SuperCalculadora()
 comment2.params=longitud\ grados

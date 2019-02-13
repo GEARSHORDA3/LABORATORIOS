@@ -103,8 +103,9 @@ public class Velocidad{
      * @return this + a
      */
     public void reste(Velocidad v){
-        double restaX=(angulo.coseno()*longitud)-(v.angulo.coseno()*v.longitud);
-        double restaY=(angulo.seno()*longitud)-(v.angulo.seno()*v.longitud);
+        double restaX=(this.angulo.coseno()*this.longitud)-(v.angulo.coseno()*v.longitud);
+        double restaY=(this.angulo.seno()*this.longitud)-(v.angulo.seno()*v.longitud);
+        System.out.println(restaX+"  "+restaY);
         longitud=Math.sqrt(Math.pow(restaX,2)+Math.pow(restaY,2));
         angulo=new Angulo(Math.acos(restaX/longitud),Angulo.RADIANES);        
     }
@@ -117,7 +118,8 @@ public class Velocidad{
     public void escalar(int operando){
         double u=operando*componenteH();
         double v=operando*componenteV();
-        // angulo=new Angulo()
+        longitud=Math.sqrt(Math.pow(u,2)+Math.pow(v,2));
+        angulo= new Angulo(Math.atan(v/u),angulo.RADIANES);
     }    
     
     /**
@@ -135,7 +137,9 @@ public class Velocidad{
      */
     @Override
     public String toString () {
-        return String.valueOf(longitud);
+          String s =String.valueOf(longitud);
+          String a=String.valueOf(angulo.grados());
+          return "r="+s+" grados="+a;
     }
 
 }
