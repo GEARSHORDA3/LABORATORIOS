@@ -1,7 +1,7 @@
 
 /**
- * @author ECI, 2017
- *
+ * @author Otalora
+ * @author Vargas
  */
 public class Velocidad{
 
@@ -15,9 +15,9 @@ public class Velocidad{
      * @param l longitud de la velocidad
      * @param a angulo de la velocidad
      */
-    public Velocidad (double l, Angulo a) {
+    public Velocidad (double l, Angulo angulo) {
         longitud=l;
-        angulo=a;
+        this.angulo=angulo;
     }
 
     /**
@@ -59,6 +59,10 @@ public class Velocidad{
      * @param v el velocidad a comparar con este
      */
     private boolean equals (Velocidad v) {
+        double distancia=Math.sqrt(Math.pow(componenteH()-v.componenteH(),2)+(Math.pow(componenteV()-v.componenteH(),2)));
+        if (distancia<MAXERROR){
+            return true;
+        }
         return false;
     }
 
@@ -67,8 +71,9 @@ public class Velocidad{
      * (Es el método que usa JUnit)
      */
     @Override
-    public boolean equals (Object o) {
-            return false;
+    public boolean equals (Object v) {
+            Velocidad v2 = (Velocidad) v;
+            return equals (v2) ;
     }
     
 
@@ -79,27 +84,47 @@ public class Velocidad{
      */
     public void rote(Angulo a) {
     }
-
+    
+    /**
+     * Suma esta velocidad con otra. Retorna una nueva velocidad
+     * @param v velocidad a sumar
+     * @return this + a
+     */
     public  void sume(Velocidad v){
-        double a=(angulo.coseno()*longitud)+(v.angulo.coseno()*v.longitud);
-        double b=(angulo.seno()*longitud)+(v.angulo.seno()*v.longitud);
-        longitud=Math.sqrt(Math.pow(a,2)+Math.pow(b,2));
-        angulo=new Angulo(Math.acos(a/longitud),Angulo.RADIANES);
+        double sumaX=(angulo.coseno()*longitud)+(v.angulo.coseno()*v.longitud);
+        double sumaY=(angulo.seno()*longitud)+(v.angulo.seno()*v.longitud);
+        longitud=Math.sqrt(Math.pow(sumaX,2)+Math.pow(sumaY,2));
+        angulo=new Angulo(Math.acos(sumaX/longitud),Angulo.RADIANES);
     }
     
+    /**
+     * Resta esta velocidad con otra. Retorna una nueva velocidad
+     * @param v velocidad a restar
+     * @return this + a
+     */
     public void reste(Velocidad v){
-        double a=(angulo.coseno()*longitud)-(v.angulo.coseno()*v.longitud);
-        double b=(angulo.seno()*longitud)-(v.angulo.seno()*v.longitud);
-        longitud=Math.sqrt(Math.pow(a,2)+Math.pow(b,2));
-        angulo=new Angulo(Math.acos(a/longitud),Angulo.RADIANES);        
+        double restaX=(angulo.coseno()*longitud)-(v.angulo.coseno()*v.longitud);
+        double restaY=(angulo.seno()*longitud)-(v.angulo.seno()*v.longitud);
+        longitud=Math.sqrt(Math.pow(restaX,2)+Math.pow(restaY,2));
+        angulo=new Angulo(Math.acos(restaX/longitud),Angulo.RADIANES);        
     }
     
+    /**
+     * Calcula el producto escalar de un vector
+     * @param operando
+     * @return numEscalar producto escalar
+     */
     public void escalar(int operando){
         double u=operando*componenteH();
         double v=operando*componenteV();
         // angulo=new Angulo()
     }    
     
+    /**
+     * Calcula el producto vectorial 
+     * @param velocidad
+     * @return vector vector nuevo del producto vectorial 
+     */
     public void vectorial(Velocidad v){
     }
     
@@ -110,8 +135,7 @@ public class Velocidad{
      */
     @Override
     public String toString () {
-          String s = "";
-          return s;
+        return String.valueOf(longitud);
     }
 
 }
