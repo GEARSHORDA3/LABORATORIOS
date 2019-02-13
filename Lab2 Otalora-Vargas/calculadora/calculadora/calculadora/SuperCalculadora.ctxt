@@ -1,0 +1,20 @@
+#BlueJ class context
+comment0.target=SuperCalculadora
+comment0.text=\ \n\ Representa\ una\ calculadora\ de\ velocidades\n\ @author\ ESCUELA\ 2018-01\n
+comment1.params=
+comment1.target=SuperCalculadora()
+comment2.params=longitud\ grados
+comment2.target=void\ adicione(int,\ int)
+comment3.params=
+comment3.target=void\ elimine()
+comment4.params=
+comment4.target=void\ duplique()
+comment5.params=operacion
+comment5.target=void\ calcule(char)
+comment6.params=operacion\ parametro
+comment6.target=void\ calcule(char,\ int)
+comment7.params=
+comment7.target=java.lang.String\ consulte()
+comment8.params=
+comment8.target=boolean\ ok()
+numComments=9

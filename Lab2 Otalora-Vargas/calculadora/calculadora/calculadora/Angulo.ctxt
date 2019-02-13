@@ -1,0 +1,43 @@
+#BlueJ class context
+comment0.target=Angulo
+comment0.text=\n\ Esta\ clase\ sirve\ para\ manejar\ angulos.\ \n\ La\ medida\ de\ los\ \u00E1ngulos\ podr\u00E1\ especificarse\ en\ grados\ o\ radianes\n\ y\ podr\u00E1\ solicitarse\ en\ cualquiera\ de\ estas\ unidades,\ independientemente\ de\ con\ cual\ hayan\ sido\ creados.\n\ Internamente\ se\ har\u00E1n\ las\ conversiones\ que\ sean\ necesarias\ para\ mantenerlos\ en\ grados\n\ Lo\ trabajaremos\ mediante\ objetos\ inmutables,\ es\ decir,\ sin\ m\u00E9todos\ modificadores.\ \n\ @author\ ECI,\ \n
+comment1.params=valor\ tipo
+comment1.target=Angulo(double,\ int)
+comment1.text=\ Crea\ un\ angulo\ a\ partir\ del\ valor\ dado\ en\ grados\ o\ en\ radianes\n\ @param\ valor\ el\ valor\ de\ medida\ del\ angulo\n\ @param\ tipo\ Tipo\ de\ medida\ del\ angulo\:\ puede\ ser\ GRADOS,\ RADIANES,\ GRADIANES\n
+comment10.params=o
+comment10.target=boolean\ equals(java.lang.Object)
+comment10.text=\ overrides\ Object.equals()\n\ @see\ java.lang.Object\#equals(java.lang.Object)\n
+comment11.params=
+comment11.target=double\ seno()
+comment11.text=Calcula\ el\ seno\n\ @return\ el\ seno\ de\ este\ angulo\n
+comment12.params=
+comment12.target=double\ coseno()
+comment12.text=Calcula\ el\ coseno\n\ @return\ el\ coseno\ de\ este\ angulo\n
+comment13.params=
+comment13.target=java.lang.String\ toString()
+comment13.text=\n\ Retorna\ el\ valor\ del\ angulo\ en\ grados\n\ @return\ the\ information\ of\ this\ object\n
+comment2.params=
+comment2.target=double\ grados()
+comment2.text=Valor\ del\ angulo\ en\ grados\n\ @return\ el\ valor\ del\ angulo\ en\ grados,\ 0\ <\=\ result\ <\ 360\n
+comment3.params=
+comment3.target=double\ radianes()
+comment3.text=Valor\ del\ angulo\ en\ radianes\n\ @return\ el\ valor\ del\ angulo\ en\ radianes,\ 0\ <\=\ result\ <\ 2*PI\n
+comment4.params=ang
+comment4.target=Angulo\ sume(Angulo)
+comment4.text=\n\ Suma\ este\ angulo\ con\ otro.\ Retorna\ un\ nuevo\ angulo\n\ @param\ a\ El\ angulo\ a\ sumar\n\ @return\ this\ +\ a\n
+comment5.params=a
+comment5.target=Angulo\ reste(Angulo)
+comment5.text=\n\ Resta\ este\ angulo\ con\ otro.\ Retorna\ un\ nuevo\ angulo\n\ @param\ a\ El\ angulo\ a\ sumar\n\ @return\ this\ -\ a\n
+comment6.params=ang
+comment6.target=Angulo\ multiplique(Angulo)
+comment6.text=\n\ Multiplica\ este\ angulo\ con\ otro.\ Retorna\ un\ nuevo\ angulo\n\ @param\ a\ El\ angulo\ a\ multiplicar\n\ @return\ this\ *\ a\n
+comment7.params=a
+comment7.target=Angulo\ divida(Angulo)
+comment7.text=\n\ Divide\ este\ angulo\ con\ otro.\ Retorna\ un\ nuevo\ angulo\n\ @param\ a\ El\ angulo\ a\ dividir\n\ @return\ this\ /\ a\n
+comment8.params=r
+comment8.target=Angulo\ multiplique(double)
+comment8.text=\n\ Multiplica\ esta\ angulo\ por\ un\ real\n\ @param\ r\ real\ para\ hacer\ el\ producto\ \n\ @return\ r\ *\ this\n
+comment9.params=a
+comment9.target=boolean\ equals(Angulo)
+comment9.text=\n\ Compara\ a\ este\ angulo\ con\ otro,\ para\ ver\ si\ son\ iguales,\ \n\ teniendo\ en\ cuenta\ el\ margen\ de\ error\ MAXERROR,\ dado\ que\ se\ trabaja\ con\ punto\ flotante\n\ @param\ a\ angulo\ para\ compararse\n\ @return\ |this\ -\ a|\ <\ MAXERROR\n
+numComments=14
