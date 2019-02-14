@@ -46,21 +46,6 @@ public class AnguloTest
         assertTrue (a0.equals(a360));        
     }
     
-    // @Test
-    // public void deberiaFallar(){
-        // assertTrue (a0.equals(a0));
-        // assertTrue (a0.equals(new Angulo(0,Angulo.GRADOS))); 
-        // assertTrue (a720.equals(a0));
-        // assertTrue (aPI.equals(a180));
-        // assertTrue (a180.equals(aPI));        
-    // }
-    
-    // @Test
-    // public void deberiaErrar(){
-        // assertFalse (gon100.equals(""));
-        // assertFalse (gon100.equals(""));
-    // }
-    
     @Test
     public void deberiaCrearBienLosAngulo() {
         assertTrue (a0.equals(a0));

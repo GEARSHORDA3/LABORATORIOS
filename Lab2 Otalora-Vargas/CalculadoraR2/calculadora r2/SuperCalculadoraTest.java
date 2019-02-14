@@ -64,8 +64,6 @@ public class SuperCalculadoraTest
         assertTrue(cal.ok());
         cal.duplique();
         assertEquals(cal.consulteNumFinal(), cal.consulte().toString());
-        
-
         cal.adicione(30, 45);
         assertTrue(cal.ok());
         operandos.add(new Velocidad(30, new Angulo(45, Angulo.GRADOS)));
@@ -76,53 +74,35 @@ public class SuperCalculadoraTest
     
     @Test
     public void deberiaCalcular(){
-        cal.adicione(10, 45);
-        operandos.add(new Velocidad(10, new Angulo(45, Angulo.GRADOS)));
+        cal.adicione(5, 25);
+        operandos.add(new Velocidad(5, new Angulo(25, Angulo.GRADOS)));
         cal.adicione(-10, 45);
-        operandos.add(new Velocidad(10, new Angulo(225, Angulo.GRADOS)));
+        operandos.add(new Velocidad(-10, new Angulo(45, Angulo.GRADOS)));
         cal.adicione(10, -45);
-        operandos.add(new Velocidad(10, new Angulo(315, Angulo.GRADOS)));
-        cal.calcule('+');
+        operandos.add(new Velocidad(10, new Angulo(-45, Angulo.GRADOS)));
         
+        cal.calcule('+');
         Velocidad temp = operandos.peek();
         temp=operandos.peek();
-        System.out.println(temp);
-        System.out.println(cal.consulte()+"  aaaaa");
-        
-        
-        operandos.pop();
+        operandos.remove(0);
         temp.sume(operandos.peek());
         operandos.add(temp);
-        System.out.println(temp);
-        System.out.println(operandos.peek());
-        System.out.println(cal.consulte());
-        assertEquals(cal.consulte(), operandos.peek().toString());
+        assertEquals(cal.consulteNumFinal(), operandos.peek().toString());
         
-        // cal.calcule('x');
-        // Velocidad temp4 = operandos.peek();
-        // operandos.pop();
-        // temp.vectorial(operandos.peek());
-        // operandos.add(temp4);
-        // assertEquals(cal.consulte(), operandos.peek().toString());        
+        cal.calcule('x');
+        Velocidad temp4 = operandos.peek();
+        operandos.remove(0);
+        temp.vectorial(operandos.peek());
+        operandos.add(temp4);
+        assertEquals(cal.consulte(), operandos.peek().toString());        
         
 
-        // cal.calcule('-');
-        // Velocidad temp2 = operandos.peek();
-        // operandos.pop();
-        // temp.reste(operandos.peek());
-        // operandos.add(temp2);
-        // assertEquals(cal.consulte(), operandos.peek().toString());
-        
-
-        // cal.calcule('*');
-        // Velocidad temp3 = operandos.peek();
-        // operandos.pop();
-        // temp.escalar(5);
-        // operandos.add(temp3);
-        // assertEquals(cal.consulte(), operandos.peek().toString());
-        
-        
-
+        cal.calcule('-');
+        Velocidad temp2 = operandos.peek();
+        operandos.remove(0);
+        temp.reste(operandos.peek());
+        operandos.add(temp2);
+        assertEquals(cal.consulte(), operandos.peek().toString());   
     }
     
     @Test
@@ -133,8 +113,6 @@ public class SuperCalculadoraTest
         cal.adicione(-50, 0);
         assertTrue(cal.ok());
         assertEquals("longitud=-50.0 grados=0.0", cal.consulte());
-        // cal.adicione(10, -45);
-        // assertEquals("longitud=10.0 grados=315.0", cal.consulte());
     }
     /**
      * Tears down the test fixture.

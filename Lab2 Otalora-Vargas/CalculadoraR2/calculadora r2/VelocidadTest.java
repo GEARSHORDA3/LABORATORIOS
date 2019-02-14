@@ -73,13 +73,7 @@ public class VelocidadTest
         assertEquals(20, Velocidad4.longitud(), Velocidad.MAXERROR);
         assertEquals(20, Velocidad5.longitud(), Velocidad.MAXERROR);
     }
-    
-    // @Test
-    // public void deberiaDecirLaDistancia(){
-        // assertEquals(35, Velocidad3.distancia(Velocidad4), Velocidad.MAXERROR);
-        // assertEquals(20.615528128088304, Velocidad1.distancia(Velocidad5), Velocidad.MAXERROR);
-        // assertEquals(20.615528128088304, Velocidad5.distancia(Velocidad1), Velocidad.MAXERROR);
-    // }
+   
     
     @Test
     public void deberiaMultiplicarEscalar(){
@@ -92,17 +86,7 @@ public class VelocidadTest
         assertEquals(21.213203435596427, Velocidad23.componenteH(), Velocidad.MAXERROR);
         assertEquals(21.213203435596427, Velocidad23.componenteV(), Velocidad.MAXERROR);
     }
-    
-    // @Test
-    // public void deberiaRotar(){
 
-    // }
-    
-    // @Test
-    // public void deberiaSumar(){
-
-    // }
-    
     @Test
     public void deberiaRestar(){
         Velocidad Velocidad12 = new Velocidad(5, new Angulo(0, Angulo.GRADOS));
@@ -116,17 +100,6 @@ public class VelocidadTest
         assertEquals(Velocidad12.angulo(),Velocidad21.angulo());
     }
     
-    @Test
-    public void deberiaMultiplicarVelocidades(){
-        Velocidad Velocidad12 = new Velocidad(5, new Angulo(0, Angulo.GRADOS));
-        Velocidad Velocidad21 = new Velocidad(88.38834764831844, new Angulo(0, Angulo.GRADOS));
-        Velocidad Velocidad31 = new Velocidad(15, new Angulo(45, Angulo.GRADOS));
-        Velocidad Velocidad41 = new Velocidad(1125, new Angulo(45, Angulo.GRADOS));
-        Velocidad12.vectorial(Velocidad1);
-        assertEquals(Velocidad21, Velocidad12);
-        Velocidad31.vectorial(Velocidad1);
-        assertEquals(Velocidad41, Velocidad31);
-    }
     
     @Test
     public void deberiaConvertirloString(){

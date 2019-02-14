@@ -83,6 +83,7 @@ public class Velocidad{
      * y la distancia es la misma.
      */
     public void rote(Angulo a) {
+        angulo=angulo.sume(a);
     }
     
     /**
@@ -105,7 +106,6 @@ public class Velocidad{
     public void reste(Velocidad v){
         double restaX=(this.angulo.coseno()*this.longitud)-(v.angulo.coseno()*v.longitud);
         double restaY=(this.angulo.seno()*this.longitud)-(v.angulo.seno()*v.longitud);
-        // System.out.println(restaX+"  "+restaY);
         longitud=Math.sqrt(Math.pow(restaX,2)+Math.pow(restaY,2));
         angulo=new Angulo(Math.acos(restaX/longitud),Angulo.RADIANES);
         

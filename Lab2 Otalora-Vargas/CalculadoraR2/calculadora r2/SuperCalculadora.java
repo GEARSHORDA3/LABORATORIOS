@@ -62,25 +62,23 @@ public class SuperCalculadora{
      * @param operacion es la operacion
      */
     public void calcule(char operacion){
-        Velocidad vel1= operandos.get(0);
-        // System.out.println(vel1);
+        Velocidad vel1= operandos.peek();
         operandos.remove(0);
-        // System.out.println(operandos.get(operandos.size()-1));
         if (operandos.size()==0){
             pruebaOk=false;
         }
         else if(operacion=='+'){
-            vel1.sume(operandos.get(0));
-            operandos.push(vel1);
+            vel1.sume(operandos.peek());
+            operandos.add(vel1);
             pruebaOk=true;
         }
         else if(operacion=='-'){
-             vel1.reste(operandos.get(0));
+             vel1.reste(operandos.peek());
              operandos.push(vel1);
              pruebaOk=true;
         }
         else if(operacion=='x'){
-            vel1.vectorial(operandos.get(0));
+            vel1.vectorial(operandos.peek());
             operandos.push(vel1);
             pruebaOk=true;
         }
@@ -94,7 +92,7 @@ public class SuperCalculadora{
     /** calcula producto escalar de un vector
      * @param operacion,parametro la operacion * y el numero indicado
      */
-    public void calcule(char operacion, int parametro){
+    public void calcule1(char operacion, int parametro){
         Velocidad vel2= operandos.peek();
         
         if(operacion=='*'){
@@ -113,8 +111,6 @@ public class SuperCalculadora{
      */
     public String consulte(){
         pruebaOk=true;
-        // System.out.println(operandos);
-        // System.out.println(operandos.peek().toString()+"quiiiiii");
         return operandos.peek().toString();
     }
     
