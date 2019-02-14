@@ -91,8 +91,8 @@ public class Velocidad{
      * @return this + a
      */
     public  void sume(Velocidad v){
-        double sumaX=(angulo.coseno()*longitud)+(v.angulo.coseno()*v.longitud);
-        double sumaY=(angulo.seno()*longitud)+(v.angulo.seno()*v.longitud);
+        double sumaX=(this.angulo.coseno()*this.longitud)+(v.angulo.coseno()*v.longitud);
+        double sumaY=(this.angulo.seno()*this.longitud)+(v.angulo.seno()*v.longitud);
         longitud=Math.sqrt(Math.pow(sumaX,2)+Math.pow(sumaY,2));
         angulo=new Angulo(Math.acos(sumaX/longitud),Angulo.RADIANES);
     }
