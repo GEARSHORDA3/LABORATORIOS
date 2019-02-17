@@ -59,11 +59,7 @@ public class CityOfHeroes
         draw();
     }
     
-    /**
-     * Dibuja heroes y ciudad presentes en la ciudad 
-     *
-     * 
-     */
+
     /**
      * darw the heroe.
      */    
@@ -130,10 +126,11 @@ public class CityOfHeroes
         }
        else{
          if (xNumeroColores==colores.length-1){
-                            xNumeroColores=0;
-                        }
-                        else{
-                            xNumeroColores++;};
+             xNumeroColores=0;
+         }
+         else{
+             xNumeroColores++;
+         };
          Building edificio = new Building(x, width, height, hardness,xNumeroColores) ;
          Builds.add(edificio);
          positionX.add(x);
@@ -181,6 +178,7 @@ public class CityOfHeroes
         
         if(Builds.size()!=0){
                 if (verifyDeadHero(color)){
+                    return;
                 }
                 else{
                 }
@@ -194,7 +192,6 @@ public class CityOfHeroes
                 };
         }
         else{
-            
                 Toolkit.getDefaultToolkit().beep();
                 JOptionPane.showMessageDialog(null, "No existe un edificio al cual");
             
@@ -219,8 +216,11 @@ public class CityOfHeroes
             JOptionPane.showMessageDialog(null, "El hereoe de color "+Color+" ya existe o esta muerto");
             return true;
         }
-        liveHeroes.add(Color);
-        return false; 
+        else{
+             liveHeroes.add(Color);
+             return false; 
+        }
+
     }
     
     /**
@@ -285,7 +285,8 @@ public class CityOfHeroes
      * @return void
      */
      public void jump(String color, int angulo, int velocidad, boolean slow){  
-     int altCanvas= canvas.getWidth();
+     int achCanvas= canvas.getWidth();
+     int altCanvas= canvas.getHeight();
        for(int i=0;i<Heroes.size();i++){
            if (Heroes.get(i).getHeroeColor(Heroes.get(i)).equals(color)){
                int posiXHeroe= (Heroes.get(i)).getxPosition();
@@ -298,11 +299,11 @@ public class CityOfHeroes
                    if (xpositionEdi<=posiXHeroe && posiXHeroe<=anchoEdi){
                        if (slow){
                            (Heroes.get(i)).Jump(color, angulo, velocidad, altCanvas-posiYHeroe,
-                           posiYHeroe, posiXHeroe,altCanvas, 0.0001,isVisible);
+                           posiYHeroe, posiXHeroe,altCanvas,achCanvas, 0.0001,isVisible,infCoordenadas);
                        }
                        else{
                            (Heroes.get(i)).Jump(color, angulo, velocidad, altCanvas-posiYHeroe,
-                           posiYHeroe, posiXHeroe,altCanvas, 0.01,isVisible);
+                           posiYHeroe, posiXHeroe,altCanvas,achCanvas, 0.01,isVisible,infCoordenadas);
                         }
                        return;
                     }
