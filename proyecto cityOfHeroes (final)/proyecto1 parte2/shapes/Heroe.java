@@ -311,7 +311,7 @@
                     heroe.setXYposition(posiActEdiX+(((int)infCoordenadasAncho.get(posiActEdiX))-12),y-15);
                     varibleBool=false;
                     return; 
-                    }
+                }
                 if (isVisible==true){
                     heroe.makeVisible();
                     ListaVitalidad.get(pos1).makeVisible();
@@ -379,8 +379,12 @@
          * @param String color, int angulo, int velocidad
          * @return boolean
          */
-        public boolean isSafeJump(String color, int angulo, int velocidad,int alturaEdi, int posy, int posx, int altoCanvas, double avance, double posiXheroe, double posiYheroe, boolean rta)
-        {
+         public boolean isSafeJump(int posXoriginal,int posYoriginal,String color, int angulo, int velocidad,int alturaEdi, int posy, int posx, int altoCanvas,int anchoCanvas,double avance,
+         boolean isVisible,Hashtable infCoordenadas,ArrayList posicionesX,Hashtable durezasEdificios,Hashtable infCoordenadasAncho)
+        {   
+            //
+            int pos1=ColoresHeroes.indexOf(color);
+            //
             h=alturaEdi;
             vo=velocidad/4;
             voy= vo*Math.sin(-angulo);
@@ -394,22 +398,51 @@
             while (y>-posicionY){
                 t+=avance;
                 y=((posicionY)-(voy*t) + (4.9*(t*t)));
-                if (y>=altoCanvas-15){
-                    rta=false;
-                    return rta;
+                if (chocoEdificio(posicionX,y,altoCanvas,anchoCanvas,infCoordenadas,color,posicionesX,durezasEdificios,infCoordenadasAncho)){
+                   posicionX=posXoriginal;
+                   posicionY=posYoriginal;
+                   heroe.setXYposition(posicionX,posicionY); 
+                   Toolkit.getDefaultToolkit().beep();
+                   JOptionPane.showMessageDialog(null, "true");                    
+                   return true;
                 }
-                else if (y<=-posicionY){
-                    rta=false;
-                    return rta;                
-                }
+                if (!chocoEdificio(posicionX,y,altoCanvas,anchoCanvas,infCoordenadas,color,posicionesX,durezasEdificios,infCoordenadasAncho)){
+                   posicionX=posXoriginal;
+                   posicionY=posYoriginal;                    
+                   heroe.setXYposition(posicionX,posicionY);
+                   Toolkit.getDefaultToolkit().beep();
+                   JOptionPane.showMessageDialog(null, "false");
+                   return false;
+                }                
                 x= Math.abs(vox*t);
                 t+=avance;
                 posicionX+=(x/2);
                 posicionY=y;
-                posiXheroe=posicionX;
-                posiYheroe=posicionY;
-            }
-            return true;
+                (ListaVitalidad.get(pos1)).setXYposition(posicionX,posicionY);
+                heroe.setXYposition(posicionX,posicionY);
+                if(varibleBool){
+                    (ListaVitalidad.get(pos1)).setXYposition(posicionX,posicionY);
+                    heroe.setXYposition(posicionX,posicionY);
+                    heroe.setXYposition(posiActEdiX+(((int)infCoordenadasAncho.get(posiActEdiX))-12),y-15);
+                    varibleBool=false;
+                    posicionX=posXoriginal;
+                    posicionY=posYoriginal;                        
+                    heroe.setXYposition(posicionX,posicionY);
+                    Toolkit.getDefaultToolkit().beep();
+                    JOptionPane.showMessageDialog(null, "true"); 
+                    return true; 
+                }
+                if (isVisible==true){
+                    //heroe.makeVisible();
+                    ListaVitalidad.get(pos1).makeVisible();
+                };
+            }  
+            posicionX=posXoriginal;
+            posicionY=posYoriginal;                        
+            heroe.setXYposition(posicionX,posicionY);
+            Toolkit.getDefaultToolkit().beep();
+            JOptionPane.showMessageDialog(null, "false");
+            return false;
         } 
     
 

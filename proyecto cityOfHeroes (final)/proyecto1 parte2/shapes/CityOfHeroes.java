@@ -326,19 +326,22 @@ public class CityOfHeroes
      * @param String int velocidad
      */
     public void isSafejump(String color, int angulo, int velocidad){  
-     int altCanvas= canvas.getWidth();
+     int achCanvas= canvas.getWidth();
+     int altCanvas= canvas.getHeight();
        for(int i=0;i<Heroes.size();i++){
            if (Heroes.get(i).getHeroeColor(Heroes.get(i)).equals(color)){
                int posiXHeroe= (Heroes.get(i)).getxPosition();
                int posiYHeroe= (Heroes.get(i)).getyPosition();
+               int posXoriginal=posiXHeroe;
+               int posYoriginal=posiYHeroe;
                int a;
                for(a=0;a<Builds.size();a++){
                    Building edificio =Builds.get(a);
                    int xpositionEdi= (edificio.getPositionX());
                    int anchoEdi= edificio.getWidth()+xpositionEdi;
                    if (xpositionEdi<=posiXHeroe && posiXHeroe<=anchoEdi){
-                       (Heroes.get(i)).isSafeJump(color, angulo, velocidad, altCanvas-posiYHeroe,
-                       posiYHeroe, posiXHeroe,altCanvas, 0.01,posiXHeroe,posiYHeroe,false);
+                       (Heroes.get(i)).isSafeJump(posXoriginal,posYoriginal,color, angulo, velocidad, altCanvas-posiYHeroe,
+                           posiYHeroe, posiXHeroe,altCanvas,achCanvas, 0.01,isVisible,infCoordenadas,positionX,durezasEdificios,infCoordenadasAncho);
                        return;
                     }
                 }
