@@ -1,3 +1,5 @@
+
+
     import javax.swing.ImageIcon;
     import javax.swing.JFrame;
     import javax.swing.JOptionPane;
@@ -34,7 +36,8 @@
         private Rectangle vitalidad;
         private  ArrayList<Rectangle>vidasHeores= new ArrayList<Rectangle>();
         private boolean heroeMuerto=false;
-        
+        private boolean varibleBool=false;
+        private int posiActEdiX;
         /**
          * Constructor Heore
          *
@@ -46,7 +49,8 @@
          * @param  edificioX
          * @param  isVisible
          */
-        public Heroe(String color,int hidingBuilding, int strength, int x, int y, int edificioX, boolean isVisible){
+        public Heroe(String color,int hidingBuilding, int strength, int x, int y, int edificioX, boolean isVisible,int ediActualPosi){
+            posiActEdiX=ediActualPosi;
             this.isVisible=isVisible;
             ListaVitalidad= new ArrayList<Rectangle>();
             ListaHeroes= new ArrayList<Circle>();
@@ -160,12 +164,12 @@
             return heroe.getColor();
         }
         
-            /** Mostrar estado del heroe respecto a su existencia
-             * 
-             * @return heroeMuerto
-             */
-            public boolean estaHeroDead(){
-               return  heroeMuerto;
+        /** Mostrar estado del heroe respecto a su existencia
+         * 
+         * @return heroeMuerto
+         */
+        public boolean estaHeroDead(){
+            return  heroeMuerto;
         }
         
         
@@ -177,7 +181,7 @@
         private void BorraHeroe(String color)
         {
            Toolkit.getDefaultToolkit().beep();
-           JOptionPane.showMessageDialog(null, "El heroe de color " +color +" ha muerto");
+           JOptionPane.showMessageDialog(null, "El heroe de color " +color +" ha muerto");  
            vidasHeores.remove(0);
            heroeMuerto=true;
            vitalidad.makeInvisible();
@@ -185,172 +189,235 @@
            strength=0; 
     
         }
+        /**
+         * Busca respecto a la posicion en x del heroe a que numero en x de edifico es mayor para mirar si se estrella
+         *
+         * @param  posicionesX  lista de las pocisiones iniciales (x) de los edificios
+         * @param  infocordenadas diccionario (x) y (y) de edificios
+         * @param  x posicion x heroe
+         * @param  y posicion y heroe
+         * @return boolean
+         */
+        private boolean verificaChoqueXEdificio(Hashtable infCoordenadas,double x,double y,ArrayList posicionesX,int altoCanvas,
+        Hashtable durezasEdificios, Hashtable infCoordenadasAncho)
+        {
+            ArrayList<Integer>posicionesX2 = posicionesX;
+            for(Integer i : posicionesX2){
+                System.out.println(i+"i");
+                System.out.println(i+(int)infCoordenadasAncho.get(i)+"i+(int)infCoordenadasAncho.get(i)");
+                System.out.println(x+"x");
+                System.out.println(y+"y");
+                System.out.println((int)infCoordenadas.get(i)-18+"(int)infCoordenadas.get(i)-18");
+                System.out.println((int)infCoordenadas.get(i)-15+"((int)infCoordenadas.get(i)-15");
+                System.out.println(posiActEdiX+"posiActEdiX");
+                if (x>=i && ((int)infCoordenadas.get(i) <= y && y<=altoCanvas )){
+                    if((strength-(int)durezasEdificios.get(i))<=0){
+                        return true; 
+                    }
+                    else{
+                       
+                       strength-= (int)durezasEdificios.get(i);
+                       return false;
+                    }
+                }
+                
+                else if((i!=posiActEdiX) &&( x>i && x<=i+(int)infCoordenadasAncho.get(i)) && (y>=(int)infCoordenadas.get(i)-18 && y<=(int)infCoordenadas.get(i)-15)){
+                    posiActEdiX=i;
+                    varibleBool=true;
+                    return true; 
+ 
+                    
+                    
+                }
+            
+           }
+           return false; 
+        }
+
+        /**
+        * Verifica si se sale del canvas el heroe o si choca con un edifcio
+        * @param x posicion del heroe
+        * @param y posicion del heroe
+        * @param infCoordenadas diccionario con posiciones (x) y (y) de los edificios
+        * @param altoCanvas
+        * @param anchoCanvas
+        * @return choque booleano 
+        */
+            private boolean chocoEdificio(double x,double y,int altoCanvas,int anchoCanvas,Hashtable infCoordenadas,
+            String color,ArrayList posicionesX,Hashtable durezasEdificios,Hashtable infCoordenadasAncho)
+            {
+                if (y>=altoCanvas-15){
+                   BorraHeroe(color);
+                   return true;
+                }
+                else if (y<=0){
+                   BorraHeroe(color);
+                   return true;                
+                }
+                else if (x<=0){
+                   BorraHeroe(color);
+                   return true;                
+                }
+                else if (x>=anchoCanvas){
+                   BorraHeroe(color);
+                   return true;                
+                }
+                else if (verificaChoqueXEdificio(infCoordenadas,x,y,posicionesX,altoCanvas,durezasEdificios,infCoordenadasAncho)){
+                    if(varibleBool){
+                        return false; 
+                    }
+                    else if(!varibleBool){
+                        System.out.println("entrooo");
+                        BorraHeroe(color);
+                        return true; 
+                    }
+                    return true; 
+                   
+                }
+                return false; 
+            }
+            
+
+     
+    
+
+
+        /** Move the heroe in form of parabolic
+         * 
+         * @param String color, int angulo, int velocidad
+         * @return void
+         */
+         public void Jump(String color, int angulo, int velocidad,int alturaEdi, int posy, int posx, int altoCanvas,int anchoCanvas,double avance,
+         boolean isVisible,Hashtable infCoordenadas,ArrayList posicionesX,Hashtable durezasEdificios,Hashtable infCoordenadasAncho)
+        {   
+            //
+            int pos1=ColoresHeroes.indexOf(color);
+            //
+            h=alturaEdi;
+            vo=velocidad/4;
+            voy= vo*Math.sin(-angulo);
+            vox= vo*Math.cos(angulo);
+            angulo*=Math.PI;
+            angulo/=180;
+            heroe.setXYposition(posicionX,posicionY);
+            posicionY=posy;
+            posicionX=posx;
+            h=h/3; 
+            while (y>-posicionY){
+                t+=avance;
+                y=((posicionY)-(voy*t) + (4.9*(t*t)));
+                if (chocoEdificio(posicionX,y,altoCanvas,anchoCanvas,infCoordenadas,color,posicionesX,durezasEdificios,infCoordenadasAncho)){
+                   return;
+                }
+                x= Math.abs(vox*t);
+                t+=avance;
+                posicionX+=(x/2);
+                posicionY=y;
+                (ListaVitalidad.get(pos1)).setXYposition(posicionX,posicionY);
+                heroe.setXYposition(posicionX,posicionY);
+                if (isVisible==true){
+                    heroe.makeVisible();
+                    ListaVitalidad.get(pos1).makeVisible();
+                };
+                if(varibleBool){
+                    System.out.println("entro");
+                    return; 
+                    }
+            }    
+        }
+    
     
         /**
-         * Verifica si se sale del canvas el heroe o si choca con un edifcio
-         * @param x posicion del heroe
-         * @param y posicion del heroe
-         * @param infCoordenadas diccionario con posiciones (x) y (y) de los edificios
-         * @param altoCanvas
-         * @param anchoCanvas
-         * @return choque booleano 
+         * obtener posicion x de heroe
+         *
+         * @return xheroe
          */
-        private boolean chocoEdificio(double x,double y,int altoCanvas,int anchoCanvas,Hashtable infCoordenadas,String color)
-        {
-            if (y>=altoCanvas-15){
-               BorraHeroe(color);
-               return true;
-            }
-            else if (y<=0){
-               BorraHeroe(color);
-               return true;                
-            }
-            else if (x<=0){
-               BorraHeroe(color);
-               return true;                
-            }
-            else if (x>=anchoCanvas){
-               BorraHeroe(color);
-               return true;                
-            }
-            
-            
-        return false;
-    }
-
-
-    /** Move the heroe in form of parabolic
-     * 
-     * @param String color, int angulo, int velocidad
-     * @return void
-     */
-     public void Jump(String color, int angulo, int velocidad,int alturaEdi, int posy, int posx, int altoCanvas,int anchoCanvas,double avance,
-     boolean isVisible,Hashtable infCoordenadas)
-    {   
-        //
-        int pos1=ColoresHeroes.indexOf(color);
-        //
-        h=alturaEdi;
-        vo=velocidad/4;
-        voy= vo*Math.sin(-angulo);
-        vox= vo*Math.cos(angulo);
-        angulo*=Math.PI;
-        angulo/=180;
-        heroe.setXYposition(posicionX,posicionY);
-        posicionY=posy;
-        posicionX=posx;
-        h=h/3; 
-        while (y>-posicionY){
-            t+=avance;
-            y=((posicionY)-(voy*t) + (4.9*(t*t)));
-            x= Math.abs(vox*t);
-            
-            if (chocoEdificio(posicionX,y,altoCanvas,anchoCanvas,infCoordenadas,color)){
-               return;
-            }
-            else if (chocoEdificio(posicionX,y,altoCanvas,anchoCanvas,infCoordenadas,color)){
-               return;                
-            }
-            t+=avance;
-            posicionX+=(x/2);
-            posicionY=y;
-            (ListaVitalidad.get(pos1)).setXYposition(posicionX,posicionY);
-            heroe.setXYposition(posicionX,posicionY);
-            if (isVisible==true){
-                heroe.makeVisible();
-                ListaVitalidad.get(pos1).makeVisible();
-            };
-        }    
-    }
-    
-    /**
-     * obtener posicion x de heroe
-     *
-     * @return xheroe
-     */
-    public int getxPosition(){
-        return heroe.getPositionX();
-    }
-    
-    /**
-     *  obtener posicion y de heroe
-     *
-     * @return yheroe
-     */
-    public int getyPosition(){
-        return heroe.getPositionY();
-    }    
-    
-    /**
-     * cambiar la posicion del heroe respecto al canvas
-     *
-     * @param  x Double
-     * @param  y Double
-     */
-    public void setXYposition(double x, double y){
-        heroe.setPositionX(x);
-        heroe.setPositionY(y);
-    }  
-    
-    /** Hacer visible el heroe
-     * 
-     */
-    public void makeVisible1(){
-        heroe.makeVisible();
-    }
-    
-    /** hacer visible el heroe
-     * 
-     */
-    public void makeInvisible(){
-        heroe.makeInvisible();
-    }
-    
-    /** Obtener la dureza del heroe
-     * 
-     * @return strength
-     */
-    public int getStrength(){
-        return strength ;
-    }
-    
-    /** Move the heroe in form of parabolic
-     * 
-     * @param String color, int angulo, int velocidad
-     * @return boolean
-     */
-    public boolean isSafeJump(String color, int angulo, int velocidad,int alturaEdi, int posy, int posx, int altoCanvas, double avance, double posiXheroe, double posiYheroe, boolean rta)
-    {
-        h=alturaEdi;
-        vo=velocidad/4;
-        voy= vo*Math.sin(-angulo);
-        vox= vo*Math.cos(angulo);
-        angulo*=Math.PI;
-        angulo/=180;
-        heroe.setXYposition(posicionX,posicionY);
-        posicionY=posy;
-        posicionX=posx;
-        h=h/3; 
-        while (y>-posicionY){
-            t+=avance;
-            y=((posicionY)-(voy*t) + (4.9*(t*t)));
-            if (y>=altoCanvas-15){
-                rta=false;
-                return rta;
-            }
-            else if (y<=-posicionY){
-                rta=false;
-                return rta;                
-            }
-            x= Math.abs(vox*t);
-            t+=avance;
-            posicionX+=(x/2);
-            posicionY=y;
-            posiXheroe=posicionX;
-            posiYheroe=posicionY;
+        public int getxPosition(){
+            return heroe.getPositionX();
         }
-        return true;
-    } 
+    
+    
+        /**
+         *  obtener posicion y de heroe
+         *
+         * @return yheroe
+         */
+        public int getyPosition(){
+            return heroe.getPositionY();
+        }    
+    
+    
+        /**
+         * cambiar la posicion del heroe respecto al canvas
+         *
+         * @param  x Double
+         * @param  y Double
+         */
+        public void setXYposition(double x, double y){
+            heroe.setPositionX(x);
+            heroe.setPositionY(y);
+        }  
+    
+    
+        /** Hacer visible el heroe
+         * 
+         */
+        public void makeVisible1(){
+            heroe.makeVisible();
+        }
+    
+        /** hacer visible el heroe
+         * 
+         */
+        public void makeInvisible(){
+            heroe.makeInvisible();
+        }
+    
+        /** Obtener la dureza del heroe
+         * 
+         * @return strength
+         */
+        public int getStrength(){
+            return strength ;
+        }
+    
+        /** Move the heroe in form of parabolic
+         * 
+         * @param String color, int angulo, int velocidad
+         * @return boolean
+         */
+        public boolean isSafeJump(String color, int angulo, int velocidad,int alturaEdi, int posy, int posx, int altoCanvas, double avance, double posiXheroe, double posiYheroe, boolean rta)
+        {
+            h=alturaEdi;
+            vo=velocidad/4;
+            voy= vo*Math.sin(-angulo);
+            vox= vo*Math.cos(angulo);
+            angulo*=Math.PI;
+            angulo/=180;
+            heroe.setXYposition(posicionX,posicionY);
+            posicionY=posy;
+            posicionX=posx;
+            h=h/3; 
+            while (y>-posicionY){
+                t+=avance;
+                y=((posicionY)-(voy*t) + (4.9*(t*t)));
+                if (y>=altoCanvas-15){
+                    rta=false;
+                    return rta;
+                }
+                else if (y<=-posicionY){
+                    rta=false;
+                    return rta;                
+                }
+                x= Math.abs(vox*t);
+                t+=avance;
+                posicionX+=(x/2);
+                posicionY=y;
+                posiXheroe=posicionX;
+                posiYheroe=posicionY;
+            }
+            return true;
+        } 
     
 
 }

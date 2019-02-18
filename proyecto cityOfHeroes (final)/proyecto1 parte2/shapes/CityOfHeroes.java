@@ -32,6 +32,7 @@ public class CityOfHeroes
     private  boolean isVisible=false;
     private  ArrayList<String>DeadsHeroes= new ArrayList<String>();
     private  ArrayList<String>liveHeroes= new ArrayList<String>();
+    private  Hashtable<Integer,Integer> durezasEdificios = new Hashtable<Integer,Integer>();
     
     
     /**
@@ -137,8 +138,10 @@ public class CityOfHeroes
          int y= edificio.getPositionY();
          infCoordenadas.put(x ,y);
          infCoordenadasAncho.put(x,(edificio.getWidth()));
+         durezasEdificios.put(x,hardness);
          if (isVisible==true){
-         edificio.makeVisible();};   
+         edificio.makeVisible();
+         };
         }
        
     }
@@ -150,7 +153,7 @@ public class CityOfHeroes
      * @param     anchoEdi ancho edifico a analizar
      * @return    boolean
      */
-    public boolean  verifyColisionEdi(int xPositionEdi, int anchoEdi){
+    private boolean  verifyColisionEdi(int xPositionEdi, int anchoEdi){
         int a;
         for(a=0;a<Builds.size();a++)
         {
@@ -185,7 +188,8 @@ public class CityOfHeroes
                 int x =positionX.get(hidingBuilding-1);
                 int y= infCoordenadas.get(x);          
                 int edificioHeroe= infCoordenadasAncho.get(x);
-                Heroe heroe= new Heroe(color,hidingBuilding,strength, x,y, edificioHeroe,isVisible);
+                int ediActualPosi=x;
+                Heroe heroe= new Heroe(color,hidingBuilding,strength, x,y, edificioHeroe,isVisible,ediActualPosi);
                 Heroes.add(heroe);
                 if (isVisible==true){
                     heroe.makeVisible();
@@ -204,7 +208,7 @@ public class CityOfHeroes
      * @param     Color
      * @return    boolean
      */
-    public boolean  verifyDeadHero(String Color){
+    private boolean  verifyDeadHero(String Color){
         
         if (DeadsHeroes.contains(Color)){
             Toolkit.getDefaultToolkit().beep();
@@ -299,11 +303,11 @@ public class CityOfHeroes
                    if (xpositionEdi<=posiXHeroe && posiXHeroe<=anchoEdi){
                        if (slow){
                            (Heroes.get(i)).Jump(color, angulo, velocidad, altCanvas-posiYHeroe,
-                           posiYHeroe, posiXHeroe,altCanvas,achCanvas, 0.0001,isVisible,infCoordenadas);
+                           posiYHeroe, posiXHeroe,altCanvas,achCanvas, 0.0001,isVisible,infCoordenadas,positionX,durezasEdificios,infCoordenadasAncho);
                        }
                        else{
                            (Heroes.get(i)).Jump(color, angulo, velocidad, altCanvas-posiYHeroe,
-                           posiYHeroe, posiXHeroe,altCanvas,achCanvas, 0.01,isVisible,infCoordenadas);
+                           posiYHeroe, posiXHeroe,altCanvas,achCanvas, 0.01,isVisible,infCoordenadas,positionX,durezasEdificios,infCoordenadasAncho);
                         }
                        return;
                     }
