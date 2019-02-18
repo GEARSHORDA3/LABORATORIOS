@@ -43,11 +43,18 @@ public class pruebafinal
     @Test
     public void CityHeores()
     {
+        
         CityOfHeroes cityOfHe1 = new CityOfHeroes(500, 500);
         cityOfHe1.makeVisible();
+        Canvas canvas = Canvas.getCanvas1();
         cityOfHe1.addBuilding(0, 50, 100, 1);
-        cityOfHe1.addBuilding(80, 200, 50, 100);
+        canvas.wait(700);
+        cityOfHe1.addBuilding(80, 260, 50, 100);
+        canvas.wait(700);
         cityOfHe1.addHeroe("red", 1, 1);
+        canvas.wait(700);
+        cityOfHe1.jump("red",60,30,false);
+        canvas.wait(1000);
         cityOfHe1.jump("red",60,30,false);
         //cityOfHe1.addHeroe("black", 2, 1);
         // cityOfHe1.addHeroe("grey", 1, 1);

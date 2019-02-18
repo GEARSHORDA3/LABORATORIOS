@@ -187,9 +187,9 @@ public class CityOfHeroes
                 }
                 int x =positionX.get(hidingBuilding-1);
                 int y= infCoordenadas.get(x);          
-                int edificioHeroe= infCoordenadasAncho.get(x);
+                int edificioHeroeAncho= infCoordenadasAncho.get(x);
                 int ediActualPosi=x;
-                Heroe heroe= new Heroe(color,hidingBuilding,strength, x,y, edificioHeroe,isVisible,ediActualPosi);
+                Heroe heroe= new Heroe(color,hidingBuilding,strength, x,y, edificioHeroeAncho,isVisible,ediActualPosi);
                 Heroes.add(heroe);
                 if (isVisible==true){
                     heroe.makeVisible();
@@ -309,6 +309,7 @@ public class CityOfHeroes
                            (Heroes.get(i)).Jump(color, angulo, velocidad, altCanvas-posiYHeroe,
                            posiYHeroe, posiXHeroe,altCanvas,achCanvas, 0.01,isVisible,infCoordenadas,positionX,durezasEdificios,infCoordenadasAncho);
                         }
+                       
                        return;
                     }
                 }

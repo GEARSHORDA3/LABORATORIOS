@@ -203,31 +203,21 @@
         {
             ArrayList<Integer>posicionesX2 = posicionesX;
             for(Integer i : posicionesX2){
-                System.out.println(i+"i");
-                System.out.println(i+(int)infCoordenadasAncho.get(i)+"i+(int)infCoordenadasAncho.get(i)");
-                System.out.println(x+"x");
-                System.out.println(y+"y");
-                System.out.println((int)infCoordenadas.get(i)-18+"(int)infCoordenadas.get(i)-18");
-                System.out.println((int)infCoordenadas.get(i)-15+"((int)infCoordenadas.get(i)-15");
-                System.out.println(posiActEdiX+"posiActEdiX");
-                if (x>=i && ((int)infCoordenadas.get(i) <= y && y<=altoCanvas )){
+                if (x>=i  && (posiActEdiX!=i && posiActEdiX<=((int)infCoordenadasAncho.get(i)+i) ) && 
+                ((int)infCoordenadas.get(i) <= y && y<=altoCanvas )){
+                    
                     if((strength-(int)durezasEdificios.get(i))<=0){
                         return true; 
                     }
                     else{
-                       
                        strength-= (int)durezasEdificios.get(i);
                        return false;
                     }
                 }
-                
-                else if((i!=posiActEdiX) &&( x>i && x<=i+(int)infCoordenadasAncho.get(i)) && (y>=(int)infCoordenadas.get(i)-18 && y<=(int)infCoordenadas.get(i)-15)){
+                else if((i!=posiActEdiX) &&( x>i && x<=i+(int)infCoordenadasAncho.get(i)) && (y>=(int)infCoordenadas.get(i)-20 && y<=(int)infCoordenadas.get(i)-13)){
                     posiActEdiX=i;
                     varibleBool=true;
-                    return true; 
- 
-                    
-                    
+                    return true;   
                 }
             
            }
@@ -267,7 +257,6 @@
                         return false; 
                     }
                     else if(!varibleBool){
-                        System.out.println("entrooo");
                         BorraHeroe(color);
                         return true; 
                     }
@@ -315,14 +304,18 @@
                 posicionY=y;
                 (ListaVitalidad.get(pos1)).setXYposition(posicionX,posicionY);
                 heroe.setXYposition(posicionX,posicionY);
+                
+                if(varibleBool){
+                    (ListaVitalidad.get(pos1)).setXYposition(posicionX,posicionY);
+                    heroe.setXYposition(posicionX,posicionY);
+                    heroe.setXYposition(posiActEdiX+(((int)infCoordenadasAncho.get(posiActEdiX))-12),y-15);
+                    varibleBool=false;
+                    return; 
+                    }
                 if (isVisible==true){
                     heroe.makeVisible();
                     ListaVitalidad.get(pos1).makeVisible();
                 };
-                if(varibleBool){
-                    System.out.println("entro");
-                    return; 
-                    }
             }    
         }
     
