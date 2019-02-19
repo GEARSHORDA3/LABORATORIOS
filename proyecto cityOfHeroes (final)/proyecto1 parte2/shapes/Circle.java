@@ -69,7 +69,6 @@ public class Circle{
     public void setPositionY(double b){
         yPosition+=b;
     }    
-    //
     /**
      * Make this circle invisible. If it was already invisible, do nothing.
      */
@@ -172,7 +171,7 @@ public class Circle{
      */
     public void changeSize(int newDiameter){
         erase();
-        diameter = newDiameter;
+        diameter += newDiameter;
         draw();
     }
 

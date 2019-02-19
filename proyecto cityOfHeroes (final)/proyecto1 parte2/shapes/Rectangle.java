@@ -159,6 +159,13 @@ public class Rectangle{
         draw();
     }
     
+    public void changeSize2(int newHeight, int newWidth) {
+        erase();
+        height += newHeight;
+        width += newWidth;
+        draw();
+    }    
+    
     /**
      * Change the color. 
      * @param color the new color. Valid colors are "red", "yellow", "blue", "green",

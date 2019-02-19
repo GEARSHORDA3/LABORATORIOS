@@ -53,6 +53,10 @@ public class Building
         return cuadrado.getyPosition();
     }
     
+    public void changeSize2(int ancho, int alto){
+        cuadrado.changeSize2(ancho,alto);
+    }
+    
     /**
      * Return the position X
      */

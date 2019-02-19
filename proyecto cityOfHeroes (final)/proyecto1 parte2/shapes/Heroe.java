@@ -82,6 +82,14 @@
             draw();
         }
         
+        public ArrayList listaVitalidad(){
+            return ListaVitalidad;
+        }
+        
+        public int listaVitalidadSize(){
+            return ListaVitalidad.size();
+        }
+        
         /**
          * Remover la barra de vida del heroe
          *
@@ -265,10 +273,6 @@
                 }
                 return false; 
             }
-            
-
-     
-    
 
 
         /** Move the heroe in form of parabolic
@@ -339,7 +343,6 @@
             return heroe.getPositionY();
         }    
     
-    
         /**
          * cambiar la posicion del heroe respecto al canvas
          *
@@ -351,7 +354,9 @@
             heroe.setPositionY(y);
         }  
     
-    
+        public void changeSize(int valor){
+            heroe.changeSize(valor);
+        }
         /** Hacer visible el heroe
          * 
          */

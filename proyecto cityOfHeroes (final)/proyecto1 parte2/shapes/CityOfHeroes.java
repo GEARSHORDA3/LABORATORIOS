@@ -34,7 +34,7 @@ public class CityOfHeroes
     private  ArrayList<String>DeadsHeroes= new ArrayList<String>();
     private  ArrayList<String>liveHeroes= new ArrayList<String>();
     private  Hashtable<Integer,Integer> durezasEdificios = new Hashtable<Integer,Integer>();
-    
+    private  ArrayList<Rectangle> Vitalidades;
     
     /**
      * constructor
@@ -366,10 +366,33 @@ public class CityOfHeroes
     }  
     }
     
-    public void zoom(char signo){
+    public void zoom(char signo){      
         if (signo=='+'){
-            
+           Vitalidades=Heroes.get(0).listaVitalidad();
+           for(int i=0;i<Heroes.size();i++){
+               Heroes.get(i).changeSize(10);
+               Heroes.get(i).setXYposition(0,-15);
+               Builds.get(i).changeSize2(2,2);
+
+           }
+           for (int j=0;j<Heroes.get(0).listaVitalidadSize();j++){
+               Vitalidades.get(j).changeSize2(2,2);
+               Vitalidades.get(j).setXYposition(0,-10);               
+           }
         }
+        else if (signo=='-'){
+           Vitalidades=Heroes.get(0).listaVitalidad();
+           for(int i=0;i<Heroes.size();i++){
+               Heroes.get(i).changeSize(1/10);
+               // Heroes.get(i).setXYposition(0,+15);
+               Builds.get(i).changeSize2(1/2,1/2);
+
+           }
+           for (int j=0;j<Heroes.get(0).listaVitalidadSize();j++){
+               Vitalidades.get(j).changeSize2(1/2,1/2);
+               // Vitalidades.get(j).setXYposition(0,10);               
+           }
+        }        
     }
     /** Evalua si las pruebas estan bien
      * @return el booleano pruebaOk
