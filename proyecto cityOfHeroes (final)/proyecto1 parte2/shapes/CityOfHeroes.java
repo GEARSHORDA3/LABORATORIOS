@@ -16,6 +16,7 @@ import java.util.ArrayList;
 */
 public class CityOfHeroes
 {
+    private boolean pruebaOk=true;
     private  int heightNew;
     private  int wightNew; 
     public   int width1;
@@ -48,6 +49,7 @@ public class CityOfHeroes
         width1=widthNew;
         height1=heightNew;
         canvas = Canvas.getCanvas(widthNew,heightNew);
+        pruebaOk=true;
     }
     
     /**
@@ -141,6 +143,7 @@ public class CityOfHeroes
          durezasEdificios.put(x,hardness);
          if (isVisible==true){
          edificio.makeVisible();
+         pruebaOk=true;
          };
         }
        
@@ -162,6 +165,7 @@ public class CityOfHeroes
           int x2PositionEdi = xPositionEdi+anchoEdi;
           if((xPositionBuild<=xPositionEdi && xPositionEdi<= xwidthBuild) || (xPositionBuild<=x2PositionEdi
           && x2PositionEdi<= xwidthBuild )||(xPositionEdi<=xPositionBuild && xwidthBuild<= x2PositionEdi)){
+             pruebaOk=false;
              Toolkit.getDefaultToolkit().beep();
              JOptionPane.showMessageDialog(null, "El edificio queda sobrepuesto en el edificio "+Builds.get(a).getColor());
              return true; 
@@ -178,27 +182,34 @@ public class CityOfHeroes
      * @param  strength
      */
     public void addHeroe(String color,int hidingBuilding, int strength){
-        
         if(Builds.size()!=0){
                 if (verifyDeadHero(color)){
                     return;
                 }
                 else{
                 }
+                try{
                 int x =positionX.get(hidingBuilding-1);
                 int y= infCoordenadas.get(x);          
                 int edificioHeroeAncho= infCoordenadasAncho.get(x);
                 int ediActualPosi=x;
                 Heroe heroe= new Heroe(color,hidingBuilding,strength, x,y, edificioHeroeAncho,isVisible,ediActualPosi);
                 Heroes.add(heroe);
+                pruebaOk=true;
                 if (isVisible==true){
                     heroe.makeVisible();
-                };
+                }
+                }
+                catch(IndexOutOfBoundsException e){
+                    pruebaOk=false;
+                    Toolkit.getDefaultToolkit().beep();
+                    JOptionPane.showMessageDialog(null, "No existe un edificio al cual");                    
+                }
         }
         else{
+                pruebaOk=false;
                 Toolkit.getDefaultToolkit().beep();
                 JOptionPane.showMessageDialog(null, "No existe un edificio al cual");
-            
         }
     }
     
@@ -209,7 +220,7 @@ public class CityOfHeroes
      * @return    boolean
      */
     private boolean  verifyDeadHero(String Color){
-        
+        pruebaOk=true;
         if (DeadsHeroes.contains(Color)){
             Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(null, "El hereoe de color "+Color+" esta muerto o ya ha sido creado");
@@ -236,12 +247,19 @@ public class CityOfHeroes
     public void removeBuilding(int position)
     {
        position-=1; 
-       Builds.get(position).removeBuilding(Builds.get(position)); 
-       int posiXedi= Builds.get(position).getPositionX();
-       infCoordenadas.remove(posiXedi);
-       infCoordenadasAncho.remove(posiXedi);
-       positionX.remove(positionX.indexOf(posiXedi));
-       Builds.remove(position); 
+       try{
+           Builds.get(position).removeBuilding(Builds.get(position)); 
+           int posiXedi= Builds.get(position).getPositionX();
+           infCoordenadas.remove(posiXedi);
+           infCoordenadasAncho.remove(posiXedi);
+           positionX.remove(positionX.indexOf(posiXedi));
+           Builds.remove(position); 
+           pruebaOk=true;
+       }catch (IndexOutOfBoundsException e){
+           pruebaOk=false;
+           Toolkit.getDefaultToolkit().beep();
+           JOptionPane.showMessageDialog(null, "No existe dicho edificio");
+        }
     }
     
     /**
@@ -257,18 +275,16 @@ public class CityOfHeroes
            if (Heroes.get(i).getHeroeColor(Heroes.get(i)).equals(color)){
                if (Heroes.get(i).getStrength() <= 0){
                    DeadsHeroes.add(Heroes.get(i).getHeroeColor(Heroes.get(i)));
-                }
-               
+               }
                Heroes.get(i).removeBarraVida();
                Heroes.get(i).removeHeroe(Heroes.get(i));
                Heroes.remove(i);
+               pruebaOk=true;
                return;
-               
             }
 
     }
     }
-    
     
     /**
      * Mostrar los heroes muertos 
@@ -278,10 +294,10 @@ public class CityOfHeroes
     public void deads()
     {
         System.out.println(DeadsHeroes);
+        pruebaOk=true;
         return ;
     }
 
-    
     /**
      * The function of the coordenates y,x for the parabolic
      * 
@@ -289,6 +305,7 @@ public class CityOfHeroes
      * @return void
      */
      public void jump(String color, int angulo, int velocidad, boolean slow){  
+     pruebaOk=true;
      int achCanvas= canvas.getWidth();
      int altCanvas= canvas.getHeight();
        for(int i=0;i<Heroes.size();i++){
@@ -309,14 +326,13 @@ public class CityOfHeroes
                            (Heroes.get(i)).Jump(color, angulo, velocidad, altCanvas-posiYHeroe,
                            posiYHeroe, posiXHeroe,altCanvas,achCanvas, 0.01,isVisible,infCoordenadas,positionX,durezasEdificios,infCoordenadasAncho);
                         }
-                       
                        return;
                     }
                 }
            }
     }       
        
-}
+    }
     
     /**
      * Analiza si el salto es seguro para el heroe
@@ -326,6 +342,7 @@ public class CityOfHeroes
      * @param String int velocidad
      */
     public void isSafejump(String color, int angulo, int velocidad){  
+     pruebaOk=true;
      int achCanvas= canvas.getWidth();
      int altCanvas= canvas.getHeight();
        for(int i=0;i<Heroes.size();i++){
@@ -349,4 +366,15 @@ public class CityOfHeroes
     }  
     }
     
+    public void zoom(char signo){
+        if (signo=='+'){
+            
+        }
+    }
+    /** Evalua si las pruebas estan bien
+     * @return el booleano pruebaOk
+     */
+    public boolean ok(){
+        return pruebaOk;
+    }
 }
