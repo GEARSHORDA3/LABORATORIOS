@@ -303,14 +303,21 @@
          */
          public void Jump(String color, int angulo, int velocidad,int alturaEdi, int posy, int posx, int altoCanvas,int anchoCanvas,double avance,
          boolean isVisible,Hashtable infCoordenadas,ArrayList posicionesX,Hashtable durezasEdificios,Hashtable infCoordenadasAncho)
-        {  
+        {
+            Canvas canvas = Canvas.getCanvas1();
             if( modoIsJumpNoSeguro){  
             t=0;
             int pos1=ColoresHeroes.indexOf(color);
             h=alturaEdi;
             vo=velocidad/4;
-            voy= vo*Math.sin(-angulo);
-            vox= vo*Math.cos(angulo);
+            if (velocidad>angulo){
+                voy= 2*(vo*Math.sin(-angulo));
+                vox= vo*Math.cos(angulo);
+            }
+            else{
+                voy= 2*(vo*Math.sin(-angulo))/2;
+                vox= 2*(vo*Math.cos(angulo)); 
+            }            
             angulo*=Math.PI;
             angulo/=180;
             heroe.setXYposition(posicionX,posicionY);
@@ -320,6 +327,10 @@
             while (y>-posicionY){
                 t+=avance;
                 y=((posicionY)-(voy*t) + (4.9*(t*t)));
+                if (avance==0.001){
+                   canvas.wait(70);
+                }
+                
                 if (chocoEdificio(posicionX,y,altoCanvas,anchoCanvas,infCoordenadas,color,posicionesX,durezasEdificios,infCoordenadasAncho)){
                    return;
                 }
@@ -333,13 +344,19 @@
                     heroe.makeVisible();
                     ListaVitalidad.get(pos1).makeVisible();
                    }
-                   
                    return;
                 }
                 x= Math.abs(vox*t);
                 t+=avance;
-                posicionX+=(x/2);
-                posicionY=y;
+                // if (avance!=0.01){
+                    posicionX+=(x/2);
+                    posicionY=y;  
+                // }
+                // else if (avance==0.001){
+                    // System.out.println(y);
+                    // posicionX+=(x/4);
+                    // posicionY=(y);  
+                // }
                 (ListaVitalidad.get(pos1)).setXYposition(posicionX,posicionY);
                 heroe.setXYposition(posicionX,posicionY);
                 if(varibleBool){
@@ -501,6 +518,14 @@
             avance=0.01;
             h=alturaEdi;
             vo=velocidad/4;
+            if (velocidad>angulo){
+                voy= 2*(vo*Math.sin(-angulo));
+                vox= vo*Math.cos(angulo);
+            }
+            else{
+                voy= 2*(vo*Math.sin(-angulo))/2;
+                vox= 2*(vo*Math.cos(angulo)); 
+            }               
             voy= vo*Math.sin(-angulo);
             vox= vo*Math.cos(angulo);
             angulo*=Math.PI;

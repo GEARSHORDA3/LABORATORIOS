@@ -268,7 +268,7 @@ public class CityOfHeroes
      * @param     int position
      * @return    void
      */
-    public void changeHight(int position)
+    private void changeHight(int position)
     {
        position-=1; 
        try{
@@ -344,7 +344,7 @@ public class CityOfHeroes
                    if (xpositionEdi<=posiXHeroe && posiXHeroe<=anchoEdi){
                        if (slow){
                            (Heroes.get(i)).Jump(color, angulo, velocidad, altCanvas-posiYHeroe,
-                           posiYHeroe, posiXHeroe,altCanvas,achCanvas, 0.0001,isVisible,infCoordenadas,positionX,durezasEdificios,infCoordenadasAncho);
+                           posiYHeroe, posiXHeroe,altCanvas,achCanvas, 0.001,isVisible,infCoordenadas,positionX,durezasEdificios,infCoordenadasAncho);
                        }
                        else{
                            (Heroes.get(i)).Jump(color, angulo, velocidad, altCanvas-posiYHeroe,
@@ -391,33 +391,11 @@ public class CityOfHeroes
     }
     
     public void zoom(char signo){      
-        if (signo=='+'){
-           Vitalidades=Heroes.get(0).listaVitalidad();
-           for(int i=0;i<Heroes.size();i++){
-               Heroes.get(i).changeSize(10);
-               Heroes.get(i).setXYposition(0,-15);
-               Builds.get(i).changeSize2(2,2);
-
-           }
-           for (int j=0;j<Heroes.get(0).listaVitalidadSize();j++){
-               Vitalidades.get(j).changeSize2(2,2);
-               Vitalidades.get(j).setXYposition(0,-10);               
-           }
-        }
-        else if (signo=='-'){
-           Vitalidades=Heroes.get(0).listaVitalidad();
-           for(int i=0;i<Heroes.size();i++){
-               Heroes.get(i).changeSize(1/10);
-               // Heroes.get(i).setXYposition(0,+15);
-               Builds.get(i).changeSize2(1/2,1/2);
-
-           }
-           for (int j=0;j<Heroes.get(0).listaVitalidadSize();j++){
-               Vitalidades.get(j).changeSize2(1/2,1/2);
-               // Vitalidades.get(j).setXYposition(0,10);               
-           }
-        }        
+        Canvas canvas = Canvas.getCanvas1();
+        canvas.zoom(signo);
+        pruebaOk=true;
     }
+    
     /** Evalua si las pruebas estan bien
      * @return el booleano pruebaOk
      */
