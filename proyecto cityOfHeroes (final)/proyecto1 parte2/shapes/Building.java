@@ -65,6 +65,13 @@ public class Building
     }
     
     /**
+     * change hight building
+     */
+    public int  setPositionY (){
+        return cuadrado.getyPosition();
+    }
+    
+    /**
      * Return the width
      */
     public int getWidth(){

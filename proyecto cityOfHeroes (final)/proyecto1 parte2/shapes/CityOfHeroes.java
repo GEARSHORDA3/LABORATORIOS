@@ -263,6 +263,30 @@ public class CityOfHeroes
     }
     
     /**
+     * cambia altura de edificio
+     *
+     * @param     int position
+     * @return    void
+     */
+    public void changeHight(int position)
+    {
+       position-=1; 
+       try{
+           Builds.get(position).setPositionY(); 
+           int posiXedi= Builds.get(position).getPositionX();
+           infCoordenadas.remove(posiXedi);
+           infCoordenadasAncho.remove(posiXedi);
+           positionX.remove(positionX.indexOf(posiXedi));
+           Builds.remove(position); 
+           pruebaOk=true;
+       }catch (IndexOutOfBoundsException e){
+           pruebaOk=false;
+           Toolkit.getDefaultToolkit().beep();
+           JOptionPane.showMessageDialog(null, "No existe dicho edificio");
+        }
+    }
+    
+    /**
      * Remove a Heroe
      *
      * @param     int position

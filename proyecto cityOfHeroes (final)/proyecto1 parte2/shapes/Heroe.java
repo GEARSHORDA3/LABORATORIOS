@@ -38,6 +38,12 @@
         private boolean heroeMuerto=false;
         private boolean varibleBool=false;
         private int posiActEdiX;
+        private int edificioHeroeAncho;
+        private int strengthIsSafeJump;
+        private boolean modoIsJumpNoSeguro=true;
+        private boolean sobreviveHeroeEdi=false;
+        private int strenghtt2;
+        private boolean modoIsJumpOn=false;
         /**
          * Constructor Heore
          *
@@ -50,11 +56,14 @@
          * @param  isVisible
          */
         public Heroe(String color,int hidingBuilding, int strength, int x, int y, int edificioX, boolean isVisible,int ediActualPosi){
+            strenghtt2=strength;
+            edificioHeroeAncho=edificioX;
             posiActEdiX=ediActualPosi;
             this.isVisible=isVisible;
             ListaVitalidad= new ArrayList<Rectangle>();
             ListaHeroes= new ArrayList<Circle>();
             ColoresHeroes= new ArrayList<String>();
+            strengthIsSafeJump=strength;
             this.strength=strength;
             this.hidingBuilding=hidingBuilding;
             heroe= new Circle ();
@@ -213,13 +222,24 @@
             for(Integer i : posicionesX2){
                 if (x>=i  && (posiActEdiX!=i && posiActEdiX<=((int)infCoordenadasAncho.get(i)+i) ) && 
                 ((int)infCoordenadas.get(i) <= y && y<=altoCanvas )){
-                    
                     if((strength-(int)durezasEdificios.get(i))<=0){
                         return true; 
                     }
-                    else{
+                    else {
+                       if (!modoIsJumpOn){
+                           strength-= (int)durezasEdificios.get(i);
+                           strenghtt2=strength;
+                           posiActEdiX=i;
+                           sobreviveHeroeEdi=true;
+                           return false;
+                        }
+                       else{
                        strength-= (int)durezasEdificios.get(i);
+                       posiActEdiX=i;
+                       sobreviveHeroeEdi=true;
                        return false;
+                        }
+                       
                     }
                 }
                 else if((i!=posiActEdiX) &&( x>i && x<=i+(int)infCoordenadasAncho.get(i)) && (y>=(int)infCoordenadas.get(i)-20 && y<=(int)infCoordenadas.get(i)-13)){
@@ -229,18 +249,19 @@
                 }
             
            }
+           
            return false; 
         }
 
-        /**
-        * Verifica si se sale del canvas el heroe o si choca con un edifcio
-        * @param x posicion del heroe
-        * @param y posicion del heroe
-        * @param infCoordenadas diccionario con posiciones (x) y (y) de los edificios
-        * @param altoCanvas
-        * @param anchoCanvas
-        * @return choque booleano 
-        */
+            /**
+            * Verifica si se sale del canvas el heroe o si choca con un edifcio
+            * @param x posicion del heroe
+            * @param y posicion del heroe
+            * @param infCoordenadas diccionario con posiciones (x) y (y) de los edificios
+            * @param altoCanvas
+            * @param anchoCanvas
+            * @return choque booleano 
+            */
             private boolean chocoEdificio(double x,double y,int altoCanvas,int anchoCanvas,Hashtable infCoordenadas,
             String color,ArrayList posicionesX,Hashtable durezasEdificios,Hashtable infCoordenadasAncho)
             {
@@ -282,10 +303,10 @@
          */
          public void Jump(String color, int angulo, int velocidad,int alturaEdi, int posy, int posx, int altoCanvas,int anchoCanvas,double avance,
          boolean isVisible,Hashtable infCoordenadas,ArrayList posicionesX,Hashtable durezasEdificios,Hashtable infCoordenadasAncho)
-        {   
-            //
+        {  
+            if( modoIsJumpNoSeguro){  
+            t=0;
             int pos1=ColoresHeroes.indexOf(color);
-            //
             h=alturaEdi;
             vo=velocidad/4;
             voy= vo*Math.sin(-angulo);
@@ -302,25 +323,41 @@
                 if (chocoEdificio(posicionX,y,altoCanvas,anchoCanvas,infCoordenadas,color,posicionesX,durezasEdificios,infCoordenadasAncho)){
                    return;
                 }
+                if (!chocoEdificio(posicionX,y,altoCanvas,anchoCanvas,infCoordenadas,color,posicionesX,durezasEdificios,infCoordenadasAncho)
+                &&sobreviveHeroeEdi==true){
+                   heroe.setXYposition(posiActEdiX+(((int)infCoordenadasAncho.get(posiActEdiX))-12),y+2);
+                   (ListaVitalidad.get(pos1)).setXYposition(heroe.getPositionX()-6,heroe.getPositionY()-7);
+                   varibleBool=false;
+                   infCoordenadas.put(posiActEdiX,(int) heroe.getPositionY()+7);
+                   if (isVisible==true){
+                    heroe.makeVisible();
+                    ListaVitalidad.get(pos1).makeVisible();
+                   }
+                   
+                   return;
+                }
                 x= Math.abs(vox*t);
                 t+=avance;
                 posicionX+=(x/2);
                 posicionY=y;
                 (ListaVitalidad.get(pos1)).setXYposition(posicionX,posicionY);
                 heroe.setXYposition(posicionX,posicionY);
-                
                 if(varibleBool){
-                    (ListaVitalidad.get(pos1)).setXYposition(posicionX,posicionY);
-                    heroe.setXYposition(posicionX,posicionY);
-                    heroe.setXYposition(posiActEdiX+(((int)infCoordenadasAncho.get(posiActEdiX))-12),y-15);
+                    heroe.setXYposition(posiActEdiX+(((int)infCoordenadasAncho.get(posiActEdiX))-12),y+2);
+                    (ListaVitalidad.get(pos1)).setXYposition(heroe.getPositionX()-6,heroe.getPositionY()-7);
                     varibleBool=false;
+                    if (isVisible==true){
+                    heroe.makeVisible();
+                    ListaVitalidad.get(pos1).makeVisible();
+                   }
                     return; 
                 }
                 if (isVisible==true){
                     heroe.makeVisible();
                     ListaVitalidad.get(pos1).makeVisible();
                 };
-            }    
+            }
+        }
         }
     
     
@@ -357,6 +394,7 @@
         public void changeSize(int valor){
             heroe.changeSize(valor);
         }
+        
         /** Hacer visible el heroe
          * 
          */
@@ -378,18 +416,89 @@
         public int getStrength(){
             return strength ;
         }
-    
+        
+        /**
+        * Verifica si se sale del canvas el heroe o si choca con un edifcio
+        * @param x posicion del heroe
+        * @param y posicion del heroe
+        * @param infCoordenadas diccionario con posiciones (x) y (y) de los edificios
+        * @param altoCanvas
+        * @param anchoCanvas
+        * @return choque booleano 
+        */
+            private boolean chocoEdificio2(double x,double y,int altoCanvas,int anchoCanvas,Hashtable infCoordenadas,
+            String color,ArrayList posicionesX,Hashtable durezasEdificios,Hashtable infCoordenadasAncho)
+            {
+                if (y>=altoCanvas-15){
+                   varibleBool=false;
+                   return false;
+                }
+                else if (y<=0){
+                   varibleBool=false;
+                   return false;                
+                }
+                else if (x<=0){
+                   varibleBool=false;
+                   return false;                
+                }
+                else if (x>=anchoCanvas){
+                   varibleBool=false;
+                   return false;                
+                }
+                else if (verificaChoqueXEdificio2(infCoordenadas,x,y,posicionesX,altoCanvas,durezasEdificios,infCoordenadasAncho)){
+                        return true; 
+                }
+                return false;  
+            }
+            
+        /**
+         * Busca respecto a la posicion en x del heroe a que numero en x de edifico es mayor para mirar si se estrella
+         *
+         * @param  posicionesX  lista de las pocisiones iniciales (x) de los edificios
+         * @param  infocordenadas diccionario (x) y (y) de edificios
+         * @param  x posicion x heroe
+         * @param  y posicion y heroe
+         * @return boolean
+         */
+        private boolean verificaChoqueXEdificio2(Hashtable infCoordenadas,double x,double y,ArrayList posicionesX,int altoCanvas,
+        Hashtable durezasEdificios, Hashtable infCoordenadasAncho)
+        {
+           ArrayList<Integer>posicionesX2 = posicionesX;
+            for(Integer i : posicionesX2){
+                if (x>=i  && (posiActEdiX!=i && posiActEdiX<=((int)infCoordenadasAncho.get(i)+i) ) && 
+                ((int)infCoordenadas.get(i) <= y && y<=altoCanvas )){
+                    if((strength-(int)durezasEdificios.get(i))<=0){
+                        return false; 
+                    }
+                    else{
+                       strength-= (int)durezasEdificios.get(i);
+                       varibleBool=true;
+                       return true;
+                    }
+                }
+                else if((i!=posiActEdiX) &&( x>i && x<=i+(int)infCoordenadasAncho.get(i)) && (y>=(int)infCoordenadas.get(i)-20 && y<=(int)infCoordenadas.get(i)-13))
+                {
+                    posiActEdiX=i;
+                    varibleBool=true;
+                    return true;   
+                }
+           }
+           varibleBool=true;
+           return false; 
+        }
+        
         /** Move the heroe in form of parabolic
          * 
          * @param String color, int angulo, int velocidad
          * @return boolean
          */
-         public boolean isSafeJump(int posXoriginal,int posYoriginal,String color, int angulo, int velocidad,int alturaEdi, int posy, int posx, int altoCanvas,int anchoCanvas,double avance,
-         boolean isVisible,Hashtable infCoordenadas,ArrayList posicionesX,Hashtable durezasEdificios,Hashtable infCoordenadasAncho)
-        {   
-            //
+         public boolean isSafeJump(int posXoriginal,int posYoriginal,String color, int angulo, int velocidad,int alturaEdi, int posy, int posx,
+         int altoCanvas,int anchoCanvas,double avance,boolean isVisible,Hashtable infCoordenadas,ArrayList posicionesX,Hashtable durezasEdificios,
+         Hashtable infCoordenadasAncho)
+        {  
             int pos1=ColoresHeroes.indexOf(color);
-            //
+            t=0;
+            avance=0.01;
             h=alturaEdi;
             vo=velocidad/4;
             voy= vo*Math.sin(-angulo);
@@ -403,52 +512,45 @@
             while (y>-posicionY){
                 t+=avance;
                 y=((posicionY)-(voy*t) + (4.9*(t*t)));
-                if (chocoEdificio(posicionX,y,altoCanvas,anchoCanvas,infCoordenadas,color,posicionesX,durezasEdificios,infCoordenadasAncho)){
-                   posicionX=posXoriginal;
-                   posicionY=posYoriginal;
-                   heroe.setXYposition(posicionX,posicionY); 
+                if (chocoEdificio2(posicionX,y,altoCanvas,anchoCanvas,infCoordenadas,color,posicionesX,durezasEdificios,infCoordenadasAncho)
+                && varibleBool==true){
                    Toolkit.getDefaultToolkit().beep();
-                   JOptionPane.showMessageDialog(null, "true");                    
+                   JOptionPane.showMessageDialog(null, "true");
+                   this.Jump(color,angulo,velocidad,alturaEdi,posy,posx,altoCanvas,anchoCanvas,avance,
+                   isVisible,infCoordenadas,posicionesX,durezasEdificios,infCoordenadasAncho);
+                   strength=strenghtt2;
+                   heroe.setXYposition(posXoriginal,posYoriginal);
+                   y=0.0;
+                   varibleBool=false;
                    return true;
+                   
                 }
-                if (!chocoEdificio(posicionX,y,altoCanvas,anchoCanvas,infCoordenadas,color,posicionesX,durezasEdificios,infCoordenadasAncho)){
-                   posicionX=posXoriginal;
-                   posicionY=posYoriginal;                    
-                   heroe.setXYposition(posicionX,posicionY);
-                   Toolkit.getDefaultToolkit().beep();
-                   JOptionPane.showMessageDialog(null, "false");
-                   return false;
-                }                
+                else if(!chocoEdificio2(posicionX,y,altoCanvas,anchoCanvas,infCoordenadas,color,posicionesX,durezasEdificios,infCoordenadasAncho)
+                && varibleBool==false){
+                    modoIsJumpOn=true;
+                    Toolkit.getDefaultToolkit().beep();
+                    JOptionPane.showMessageDialog(null, "false");
+                    modoIsJumpNoSeguro=false;
+                    strength=strenghtt2;
+                    this.Jump(color,angulo,velocidad,alturaEdi,posy,posx,altoCanvas,anchoCanvas,avance,
+                    isVisible,infCoordenadas,posicionesX,durezasEdificios,infCoordenadasAncho);
+                    strength=strenghtt2;
+                    varibleBool=true;
+                    heroe.setXYposition(posXoriginal,posYoriginal);
+                    y=0.0;
+                    varibleBool=false;
+                    modoIsJumpNoSeguro=true;
+                    modoIsJumpOn=false;
+                    return false;
+                }
                 x= Math.abs(vox*t);
                 t+=avance;
                 posicionX+=(x/2);
                 posicionY=y;
-                (ListaVitalidad.get(pos1)).setXYposition(posicionX,posicionY);
                 heroe.setXYposition(posicionX,posicionY);
-                if(varibleBool){
-                    (ListaVitalidad.get(pos1)).setXYposition(posicionX,posicionY);
-                    heroe.setXYposition(posicionX,posicionY);
-                    heroe.setXYposition(posiActEdiX+(((int)infCoordenadasAncho.get(posiActEdiX))-12),y-15);
-                    varibleBool=false;
-                    posicionX=posXoriginal;
-                    posicionY=posYoriginal;                        
-                    heroe.setXYposition(posicionX,posicionY);
-                    Toolkit.getDefaultToolkit().beep();
-                    JOptionPane.showMessageDialog(null, "true"); 
-                    return true; 
-                }
-                if (isVisible==true){
-                    //heroe.makeVisible();
-                    ListaVitalidad.get(pos1).makeVisible();
-                };
-            }  
-            posicionX=posXoriginal;
-            posicionY=posYoriginal;                        
-            heroe.setXYposition(posicionX,posicionY);
-            Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(null, "false");
-            return false;
+            }
+            return false; 
         } 
-    
+        
 
 }
