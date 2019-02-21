@@ -48,6 +48,9 @@
         private int posiEdiModificado;
         private boolean veriHeroNoMuerto=false;
         private int anchoVitalidad=30;
+        private ArrayList<Integer>listaPlan;
+        private boolean encimaEdificio=false;
+        private int numeroEdificio;
         /**
          * Constructor Heore
          *
@@ -406,6 +409,7 @@
                 }
                 
                 if (chocoEdificio(posicionX,y,altoCanvas,anchoCanvas,infCoordenadas,color,posicionesX,durezasEdificios,infCoordenadasAncho)){
+                    System.out.println("aqui");
                    return;
                 }
                 if (!chocoEdificio(posicionX,y,altoCanvas,anchoCanvas,infCoordenadas,color,posicionesX,durezasEdificios,infCoordenadasAncho)
@@ -433,7 +437,6 @@
                     heroe.setXYposition(posiActEdiX+(((int)infCoordenadasAncho.get(posiActEdiX))-12),y+2);
                     (ListaVitalidad.get(pos1)).setXYposition(heroe.getPositionX()-6,heroe.getPositionY()-7);
                     varibleBool=false;
-                    
                     if (isVisible==true){
                     heroe.makeVisible();
                     ListaVitalidad.get(pos1).makeVisible();
@@ -447,8 +450,13 @@
             }
         }
         }
-    
-    
+        public ArrayList ColoresHeroes(){
+            return ColoresHeroes;
+        }
+        
+        public int numeroEdificio(){
+            return numeroEdificio;
+        }
         /**
          * obtener posicion x de heroe
          *
@@ -522,6 +530,8 @@
                    return false;
                 }
                 else if (y<=0){
+                   encimaEdificio=true;
+                   numeroEdificio=posiActEdiX;
                    varibleBool=false;
                    return false;                
                 }
@@ -583,7 +593,7 @@
          */
          public boolean isSafeJump(int posXoriginal,int posYoriginal,String color, int angulo, int velocidad,int alturaEdi, int posy, int posx,
          int altoCanvas,int anchoCanvas,double avance,boolean isVisible,Hashtable infCoordenadas,ArrayList posicionesX,Hashtable durezasEdificios,
-         Hashtable infCoordenadasAncho)
+         Hashtable infCoordenadasAncho, boolean message)
         {  
             int pos1=ColoresHeroes.indexOf(color);
             t=0;
@@ -611,8 +621,10 @@
                 y=((posicionY)-(voy*t) + (4.9*(t*t)));
                 if (chocoEdificio2(posicionX,y,altoCanvas,anchoCanvas,infCoordenadas,color,posicionesX,durezasEdificios,infCoordenadasAncho)
                 && varibleBool==true){
-                   Toolkit.getDefaultToolkit().beep();
-                   JOptionPane.showMessageDialog(null, "true");
+                   if (message){
+                       Toolkit.getDefaultToolkit().beep();
+                       JOptionPane.showMessageDialog(null, "true");
+                   }
                    this.Jump(color,angulo,velocidad,alturaEdi,posy,posx,altoCanvas,anchoCanvas,avance,
                    isVisible,infCoordenadas,posicionesX,durezasEdificios,infCoordenadasAncho);
                    strength=strenghtt2;
@@ -620,13 +632,14 @@
                    y=0.0;
                    varibleBool=false;
                    return true;
-                   
                 }
                 else if(!chocoEdificio2(posicionX,y,altoCanvas,anchoCanvas,infCoordenadas,color,posicionesX,durezasEdificios,infCoordenadasAncho)
                 && varibleBool==false){
                     modoIsJumpOn=true;
-                    Toolkit.getDefaultToolkit().beep();
-                    JOptionPane.showMessageDialog(null, "false");
+                    if (message){
+                        Toolkit.getDefaultToolkit().beep();
+                        JOptionPane.showMessageDialog(null, "false");
+                    }
                     modoIsJumpNoSeguro=false;
                     strength=strenghtt2;
                     this.Jump(color,angulo,velocidad,alturaEdi,posy,posx,altoCanvas,anchoCanvas,avance,
@@ -638,6 +651,7 @@
                     varibleBool=false;
                     modoIsJumpNoSeguro=true;
                     modoIsJumpOn=false;
+                    
                     return false;
                 }
                 x= Math.abs(vox*t);
@@ -649,5 +663,6 @@
             return false; 
         } 
         
+      
 
 }

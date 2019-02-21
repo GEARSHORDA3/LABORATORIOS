@@ -35,6 +35,9 @@ public class CityOfHeroes
     private  ArrayList<String>liveHeroes= new ArrayList<String>();
     private  Hashtable<Integer,Integer> durezasEdificios = new Hashtable<Integer,Integer>();
     private  ArrayList<Rectangle> Vitalidades;
+    private ArrayList<Integer>listaPlan;
+    private boolean message=true;
+    int PosicionColor=-2;
     
     /**
      * constructor
@@ -322,7 +325,7 @@ public class CityOfHeroes
      * @param  edificoModificadoX posicion en x del edifico
      * @param  posicion y del edificio para su nueva altura
      */
-    public void modiAltuEdiChoqueHeroe(int edificoModificadoX,int nuevaAlturaEdiY)
+    private void modiAltuEdiChoqueHeroe(int edificoModificadoX,int nuevaAlturaEdiY)
     {
        try{
            int i; 
@@ -399,8 +402,7 @@ public class CityOfHeroes
      * @param String int angulo
      * @param String int velocidad
      */
-    public void isSafejump(String color, int angulo, int velocidad){  
-     
+    public boolean isSafejump(String color, int angulo, int velocidad){  
      int achCanvas= canvas.getWidth();
      int altCanvas= canvas.getHeight();
        for(int i=0;i<Heroes.size();i++){
@@ -415,14 +417,46 @@ public class CityOfHeroes
                    int xpositionEdi= (edificio.getPositionX());
                    int anchoEdi= edificio.getWidth()+xpositionEdi;
                    if (xpositionEdi<=posiXHeroe && posiXHeroe<=anchoEdi){
-                       (Heroes.get(i)).isSafeJump(posXoriginal,posYoriginal,color, angulo, velocidad, altCanvas-posiYHeroe,
-                       posiYHeroe, posiXHeroe,altCanvas,achCanvas, 0.01,isVisible,infCoordenadas,positionX,durezasEdificios,infCoordenadasAncho);
+                       boolean n=(Heroes.get(i)).isSafeJump(posXoriginal,posYoriginal,color, angulo, velocidad, altCanvas-posiYHeroe,
+                       posiYHeroe, posiXHeroe,altCanvas,achCanvas, 0.01,isVisible,infCoordenadas,positionX,durezasEdificios,infCoordenadasAncho, message);
                        pruebaOk=true;
-                       return;
+                       return n;
                     }
                 }
            }
     }  
+    return false;
+    }
+    
+    public ArrayList jumpPlan(String heroe, int building){
+        listaPlan = new ArrayList<Integer>();
+        notShowMessage();
+        for (int angulo=1; angulo<100;angulo++){
+            for (int velocidad=1; velocidad<100;velocidad++){
+                boolean a= isSafejump(heroe,angulo,velocidad);
+                if (a){
+                    listaPlan.add(angulo);
+                    listaPlan.add(velocidad);                    
+                }
+                if (a && building==Heroes.get(0).numeroEdificio()){
+                    listaPlan.add(angulo);
+                    listaPlan.add(velocidad);
+                }
+            }
+        }
+        showMessage();
+        System.out.println(listaPlan);
+        System.out.println((listaPlan.get((listaPlan.size())-1)));
+        System.out.println((listaPlan.get((listaPlan.size())-2)));
+        return listaPlan;
+    }
+    
+    public void showMessage(){
+        message= true;
+    }
+    
+    public void notShowMessage(){
+        message= false;
     }
     
     public void zoom(char signo){      
@@ -452,7 +486,7 @@ public class CityOfHeroes
      * @param  y  a sample parameter for a method
      * @return    the sum of x and y
      */
-    public int sampleMethod(int y)
+    private int sampleMethod(int y)
     {
         // put your code here
         return y;
