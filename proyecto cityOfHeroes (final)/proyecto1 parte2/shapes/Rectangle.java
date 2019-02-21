@@ -230,6 +230,10 @@ public class Rectangle{
         yPosition+=yPosition2;
     }
     
+    public void setNewYPosition(int yPosition2){
+        yPosition=yPosition2;
+    }
+    
     public void setWidth(int width2){
         width+=width2;
     }

@@ -59,6 +59,7 @@ public class CityOfHeroes
      */   
     public void makeVisible(){
         isVisible = true;
+        pruebaOk=true;
         draw();
     }
     
@@ -82,7 +83,8 @@ public class CityOfHeroes
            for(a=0;a<Builds.size();a++){
                Builds.get(a).makeVisible();
                 }
-    }
+           pruebaOk=true;
+    }      
     } 
     
     /**
@@ -92,6 +94,7 @@ public class CityOfHeroes
      */
     public void makeInvisible(){
         erase();
+        pruebaOk=true;
         isVisible = false;
     }
     
@@ -110,6 +113,7 @@ public class CityOfHeroes
            for(a=0;a<Builds.size();a++){
                Builds.get(a).makeInvisible();
                 } 
+           pruebaOk=true;     
         }
     }
     
@@ -130,6 +134,7 @@ public class CityOfHeroes
        else{
          if (xNumeroColores==colores.length-1){
              xNumeroColores=0;
+             pruebaOk=true;
          }
          else{
              xNumeroColores++;
@@ -170,7 +175,8 @@ public class CityOfHeroes
              JOptionPane.showMessageDialog(null, "El edificio queda sobrepuesto en el edificio "+Builds.get(a).getColor());
              return true; 
             }
-        } 
+        }
+        pruebaOk=true;
         return false; 
     }
    
@@ -184,11 +190,13 @@ public class CityOfHeroes
     public void addHeroe(String color,int hidingBuilding, int strength){
         if(Builds.size()!=0){
                 if (verifyDeadHero(color)){
+                    pruebaOk=true;
                     return;
                 }
                 else{
                 }
                 try{
+                Collections.sort(positionX);
                 int x =positionX.get(hidingBuilding-1);
                 int y= infCoordenadas.get(x);          
                 int edificioHeroeAncho= infCoordenadasAncho.get(x);
@@ -224,15 +232,18 @@ public class CityOfHeroes
         if (DeadsHeroes.contains(Color)){
             Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(null, "El hereoe de color "+Color+" esta muerto o ya ha sido creado");
+            pruebaOk=true;
             return true;
         }
         else if(liveHeroes.contains(Color)){
             Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(null, "El hereoe de color "+Color+" ya existe o esta muerto");
+            pruebaOk=true;
             return true;
         }
         else{
              liveHeroes.add(Color);
+             pruebaOk=true;
              return false; 
         }
 
@@ -248,37 +259,20 @@ public class CityOfHeroes
     {
        position-=1; 
        try{
-           Builds.get(position).removeBuilding(Builds.get(position)); 
-           int posiXedi= Builds.get(position).getPositionX();
-           infCoordenadas.remove(posiXedi);
-           infCoordenadasAncho.remove(posiXedi);
-           positionX.remove(positionX.indexOf(posiXedi));
-           Builds.remove(position); 
-           pruebaOk=true;
-       }catch (IndexOutOfBoundsException e){
-           pruebaOk=false;
-           Toolkit.getDefaultToolkit().beep();
-           JOptionPane.showMessageDialog(null, "No existe dicho edificio");
-        }
-    }
-    
-    /**
-     * cambia altura de edificio
-     *
-     * @param     int position
-     * @return    void
-     */
-    private void changeHight(int position)
-    {
-       position-=1; 
-       try{
-           Builds.get(position).setPositionY(); 
-           int posiXedi= Builds.get(position).getPositionX();
-           infCoordenadas.remove(posiXedi);
-           infCoordenadasAncho.remove(posiXedi);
-           positionX.remove(positionX.indexOf(posiXedi));
-           Builds.remove(position); 
-           pruebaOk=true;
+           Collections.sort(positionX);
+           int buscador=positionX.get(position);
+           int i; 
+           for(i=0;i<Builds.size();i++){
+             if (Builds.get(i).getPositionX()==buscador){
+                int posiXedi= Builds.get(i).getPositionX();
+                infCoordenadas.remove(posiXedi);
+                infCoordenadasAncho.remove(posiXedi);
+                positionX.remove(positionX.indexOf(posiXedi)); 
+                pruebaOk=true;
+                Builds.get(i).removeBuilding(Builds.get(i));
+                Builds.remove(i);
+                }
+           }
        }catch (IndexOutOfBoundsException e){
            pruebaOk=false;
            Toolkit.getDefaultToolkit().beep();
@@ -321,6 +315,29 @@ public class CityOfHeroes
         pruebaOk=true;
         return ;
     }
+    
+    
+    /**
+     * Modificar un edifico en altura tras el choque de un heroe al sobrevivir 
+     * @param  edificoModificadoX posicion en x del edifico
+     * @param  posicion y del edificio para su nueva altura
+     */
+    public void modiAltuEdiChoqueHeroe(int edificoModificadoX,int nuevaAlturaEdiY)
+    {
+       try{
+           int i; 
+           for(i=0;i<Builds.size();i++){
+             if (Builds.get(i).getPositionX()==edificoModificadoX){
+                 Builds.get(i).changeHightEdi(nuevaAlturaEdiY);
+                 Builds.get(i).makeVisible();
+                }
+           }
+       }catch (IndexOutOfBoundsException e){
+           pruebaOk=false;
+           Toolkit.getDefaultToolkit().beep();
+           JOptionPane.showMessageDialog(null, "No existe dicho edificio para modificar");
+        }
+    }
 
     /**
      * The function of the coordenates y,x for the parabolic
@@ -329,7 +346,7 @@ public class CityOfHeroes
      * @return void
      */
      public void jump(String color, int angulo, int velocidad, boolean slow){  
-     pruebaOk=true;
+     
      int achCanvas= canvas.getWidth();
      int altCanvas= canvas.getHeight();
        for(int i=0;i<Heroes.size();i++){
@@ -345,15 +362,32 @@ public class CityOfHeroes
                        if (slow){
                            (Heroes.get(i)).Jump(color, angulo, velocidad, altCanvas-posiYHeroe,
                            posiYHeroe, posiXHeroe,altCanvas,achCanvas, 0.001,isVisible,infCoordenadas,positionX,durezasEdificios,infCoordenadasAncho);
+                           if(Heroes.get(i).getVeriHeroNoMuerto()){
+                               infCoordenadas.put(Heroes.get(i).getPosiActEdiX(),((int) Heroes.get(i).getPositionY())+7);
+                               Heroes.get(i).changeVeriHeroNoMuerto();
+                               int edificoModificadoX=Heroes.get(i).getposiEdiModificado();
+                               int nuevaAlturaEdiY=Heroes.get(i).getNuevaAlturaEdificio();
+                               modiAltuEdiChoqueHeroe(edificoModificadoX,nuevaAlturaEdiY);
+                               pruebaOk=true;
+                            }
                        }
                        else{
                            (Heroes.get(i)).Jump(color, angulo, velocidad, altCanvas-posiYHeroe,
                            posiYHeroe, posiXHeroe,altCanvas,achCanvas, 0.01,isVisible,infCoordenadas,positionX,durezasEdificios,infCoordenadasAncho);
+                           if(Heroes.get(i).getVeriHeroNoMuerto()){
+                               infCoordenadas.put(Heroes.get(i).getPosiActEdiX(),((int) Heroes.get(i).getPositionY())+7);
+                               Heroes.get(i).changeVeriHeroNoMuerto();
+                               int edificoModificadoX=Heroes.get(i).getposiEdiModificado();
+                               int nuevaAlturaEdiY=Heroes.get(i).getNuevaAlturaEdificio();
+                               modiAltuEdiChoqueHeroe(edificoModificadoX,nuevaAlturaEdiY);
+                               pruebaOk=true;
+                            }
                         }
                        return;
                     }
                 }
            }
+           pruebaOk=false;
     }       
        
     }
@@ -366,7 +400,7 @@ public class CityOfHeroes
      * @param String int velocidad
      */
     public void isSafejump(String color, int angulo, int velocidad){  
-     pruebaOk=true;
+     
      int achCanvas= canvas.getWidth();
      int altCanvas= canvas.getHeight();
        for(int i=0;i<Heroes.size();i++){
@@ -382,7 +416,8 @@ public class CityOfHeroes
                    int anchoEdi= edificio.getWidth()+xpositionEdi;
                    if (xpositionEdi<=posiXHeroe && posiXHeroe<=anchoEdi){
                        (Heroes.get(i)).isSafeJump(posXoriginal,posYoriginal,color, angulo, velocidad, altCanvas-posiYHeroe,
-                           posiYHeroe, posiXHeroe,altCanvas,achCanvas, 0.01,isVisible,infCoordenadas,positionX,durezasEdificios,infCoordenadasAncho);
+                       posiYHeroe, posiXHeroe,altCanvas,achCanvas, 0.01,isVisible,infCoordenadas,positionX,durezasEdificios,infCoordenadasAncho);
+                       pruebaOk=true;
                        return;
                     }
                 }
@@ -402,4 +437,26 @@ public class CityOfHeroes
     public boolean ok(){
         return pruebaOk;
     }
+    
+    /**
+     * Terminar todo el programa
+     */
+    public void finish()
+    {
+        System.exit(0);
+    }
+    
+    /**
+     * Retorna la vida del 
+     *
+     * @param  y  a sample parameter for a method
+     * @return    the sum of x and y
+     */
+    public int sampleMethod(int y)
+    {
+        // put your code here
+        return y;
+    }
+
+
 }

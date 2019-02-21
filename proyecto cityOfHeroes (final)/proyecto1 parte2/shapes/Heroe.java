@@ -44,6 +44,10 @@
         private boolean sobreviveHeroeEdi=false;
         private int strenghtt2;
         private boolean modoIsJumpOn=false;
+        private int nuevaAlturaEdificio;
+        private int posiEdiModificado;
+        private boolean veriHeroNoMuerto=false;
+        private int anchoVitalidad=30;
         /**
          * Constructor Heore
          *
@@ -71,7 +75,7 @@
             heroe.setXYposition(x+((edificioX)-12),y-15);
             vitalidad = new Rectangle();
             vidasHeores.add(vitalidad);
-            vitalidad.changeSize(7,30);
+            vitalidad.changeSize(7,anchoVitalidad);
             vitalidad.setXposition(x+(edificioX-8)-7);
             vitalidad.setYposition(y-11-12);
             if (isVisible==true){
@@ -95,9 +99,27 @@
             return ListaVitalidad;
         }
         
-        public int listaVitalidadSize(){
-            return ListaVitalidad.size();
+        /**
+         * retornar nueva altura modificado por choque de heroe
+         * @return  nuevaAlturaEdificio
+         */
+        public int getNuevaAlturaEdificio()
+        {
+            return nuevaAlturaEdificio;
         }
+        
+        /**
+         * retornar la posiscion del edificio a modificar en altura
+         * @return  posiEdiModificado
+         */
+        public int getposiEdiModificado()
+        {
+            return posiEdiModificado;
+        }
+        
+        public int listaVitalidadSize(){
+                return ListaVitalidad.size();
+            }
         
         /**
          * Remover la barra de vida del heroe
@@ -122,6 +144,21 @@
                     }
         }
         
+        public int getPositionY()
+        {
+         return heroe.getPositionY();
+         }
+         
+        public int getPositionX()
+        {
+         return heroe.getPositionX();
+         }
+         
+        public int getPosiActEdiX()
+        {
+         return  posiActEdiX;
+         }
+
         /**
          * Retornar el objeto vitalidad del heroe
          *
@@ -171,6 +208,22 @@
         }
         
         /**
+         * cambiar estado de veriHeroNoMuerto=false
+         */
+        public void changeVeriHeroNoMuerto()
+        {
+            veriHeroNoMuerto=false;
+        }
+        
+        /**
+         * consultar el valor boolean de la varibale veriHeroNoMuerto
+         */
+        public boolean getVeriHeroNoMuerto()
+        {
+            return veriHeroNoMuerto;
+        }
+        
+        /**
          * get color heroe
          *
          * @param  Object Building
@@ -197,8 +250,23 @@
          */
         private void BorraHeroe(String color)
         {
+           //mensajeeeeeeee xd 
+           
            Toolkit.getDefaultToolkit().beep();
-           JOptionPane.showMessageDialog(null, "El heroe de color " +color +" ha muerto");  
+           JOptionPane p = new JOptionPane("El heroe de color " +color +" ha muerto");
+           JFrame frame= new JFrame();
+           frame.setContentPane(p);
+           frame.setVisible(true);
+           frame.pack();
+           frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+           
+           try{ 
+               Thread.sleep(10000);
+            } catch (InterruptedException e){
+            }
+            frame.setVisible(false);
+            
+           
            vidasHeores.remove(0);
            heroeMuerto=true;
            vitalidad.makeInvisible();
@@ -228,6 +296,7 @@
                     else {
                        if (!modoIsJumpOn){
                            strength-= (int)durezasEdificios.get(i);
+                           vitalidad.changeSize(7,anchoVitalidad-5);
                            strenghtt2=strength;
                            posiActEdiX=i;
                            sobreviveHeroeEdi=true;
@@ -324,10 +393,15 @@
             posicionY=posy;
             posicionX=posx;
             h=h/3; 
+            boolean lento=false;
+            if (avance==0.001){
+                avance=0.01;
+                lento=true;
+            }
             while (y>-posicionY){
                 t+=avance;
                 y=((posicionY)-(voy*t) + (4.9*(t*t)));
-                if (avance==0.001){
+                if (lento){ 
                    canvas.wait(70);
                 }
                 
@@ -339,6 +413,9 @@
                    heroe.setXYposition(posiActEdiX+(((int)infCoordenadasAncho.get(posiActEdiX))-12),y+2);
                    (ListaVitalidad.get(pos1)).setXYposition(heroe.getPositionX()-6,heroe.getPositionY()-7);
                    varibleBool=false;
+                   nuevaAlturaEdificio=heroe.getPositionY()+15;
+                   posiEdiModificado=posiActEdiX;
+                   veriHeroNoMuerto=true;
                    infCoordenadas.put(posiActEdiX,(int) heroe.getPositionY()+7);
                    if (isVisible==true){
                     heroe.makeVisible();
@@ -348,21 +425,15 @@
                 }
                 x= Math.abs(vox*t);
                 t+=avance;
-                // if (avance!=0.01){
-                    posicionX+=(x/2);
-                    posicionY=y;  
-                // }
-                // else if (avance==0.001){
-                    // System.out.println(y);
-                    // posicionX+=(x/4);
-                    // posicionY=(y);  
-                // }
+                posicionX+=(x/2);
+                posicionY=y;  
                 (ListaVitalidad.get(pos1)).setXYposition(posicionX,posicionY);
                 heroe.setXYposition(posicionX,posicionY);
                 if(varibleBool){
                     heroe.setXYposition(posiActEdiX+(((int)infCoordenadasAncho.get(posiActEdiX))-12),y+2);
                     (ListaVitalidad.get(pos1)).setXYposition(heroe.getPositionX()-6,heroe.getPositionY()-7);
                     varibleBool=false;
+                    
                     if (isVisible==true){
                     heroe.makeVisible();
                     ListaVitalidad.get(pos1).makeVisible();
@@ -489,6 +560,7 @@
                     }
                     else{
                        strength-= (int)durezasEdificios.get(i);
+                       
                        varibleBool=true;
                        return true;
                     }

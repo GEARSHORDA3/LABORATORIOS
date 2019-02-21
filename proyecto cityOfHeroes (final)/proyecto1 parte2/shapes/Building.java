@@ -14,15 +14,15 @@ public class Building
     private int nColores;
     private static int hardness;
     private Rectangle cuadrado;
-    
-    
+    private int height;
+    private int width;
     /**
      * Constructor for objects of class Building
      */
     public Building(int x, int width, int height, int hardness,int numero){
-                        
-
                         Canvas canvas = Canvas.getCanvas1();
+                        this.height=height;
+                        this.width=width;
                         this.hardness=hardness;
                         ArrayList<Rectangle> Builder= new ArrayList<Rectangle>();
                         cuadrado = new Rectangle();
@@ -30,9 +30,6 @@ public class Building
                         cuadrado.setxPosition(x);
                         cuadrado.setyPosition((canvas.getHeight()-cuadrado.getHeight()));
                         cuadrado.changeColor(colores[numero]);
-                        
-    
-                    
     }
     
     /**
@@ -45,6 +42,19 @@ public class Building
     {
        cuadrado.makeInvisible(); 
     }
+    
+    /**
+     * cambia altura de edificio 
+     * param posiYHeroe posicion en (y) donde se queda el heroe al sobrevivir a un choque con un edificio
+     */
+    public void changeHightEdi(int posiYHeroe)
+    {
+        Canvas canvas = Canvas.getCanvas1();
+        int altura = canvas.getHeight()-posiYHeroe;
+        cuadrado.changeSize(altura,width);
+        cuadrado.setNewYPosition((canvas.getHeight()-cuadrado.getHeight()));
+    }
+
     
     /**
      * Return the position Y

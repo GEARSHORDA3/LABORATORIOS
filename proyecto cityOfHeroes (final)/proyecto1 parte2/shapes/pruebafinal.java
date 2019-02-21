@@ -47,13 +47,15 @@ public class pruebafinal
         cityOfHe1.makeVisible();
         Canvas canvas = Canvas.getCanvas1();
         cityOfHe1.addBuilding(0, 50, 100, 1);
-        canvas.wait(700);
-        // cityOfHe1.addBuilding(60,30,500, 20);
-        canvas.wait(700);
-        cityOfHe1.addHeroe("red", 1, 30);
-        canvas.wait(700);
+        canvas.wait(1000);
+        cityOfHe1.addBuilding(200, 50, 400, 1);
+        canvas.wait(1000);
+        cityOfHe1.addBuilding(120, 50, 100, 1);
+        canvas.wait(1000);
+        cityOfHe1.addHeroe("red", 2, 30);
+        canvas.wait(1000);
         cityOfHe1.isSafejump("red",60,30);
-        cityOfHe1.jump("red",60,30,false);
+        cityOfHe1.jump("red",60,30,true);
     }
 }
 
