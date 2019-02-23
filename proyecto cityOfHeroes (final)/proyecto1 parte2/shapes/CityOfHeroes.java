@@ -74,7 +74,7 @@ public class CityOfHeroes
         if(isVisible) {
            int i; 
            for(i=0;i<Heroes.size();i++){
-               if (Heroes.get(i).estaHeroDead()){
+               if (Heroes.get(i).deads()){
                    removeHeroe(Heroes.get(i).getHeroeColor2(Heroes.get(i)));
                 }
                else{    
@@ -175,7 +175,7 @@ public class CityOfHeroes
           && x2PositionEdi<= xwidthBuild )||(xPositionEdi<=xPositionBuild && xwidthBuild<= x2PositionEdi)){
              pruebaOk=false;
              Toolkit.getDefaultToolkit().beep();
-             JOptionPane.showMessageDialog(null, "El edificio queda sobrepuesto en el edificio "+Builds.get(a).getColor());
+             mostrarMensaje("El edificio queda sobrepuesto en el edificio "+Builds.get(a).getColor());
              return true; 
             }
         }
@@ -214,13 +214,13 @@ public class CityOfHeroes
                 catch(IndexOutOfBoundsException e){
                     pruebaOk=false;
                     Toolkit.getDefaultToolkit().beep();
-                    JOptionPane.showMessageDialog(null, "No existe un edificio al cual");                    
+                    mostrarMensaje("No existe un edificio al cual");                  
                 }
         }
         else{
                 pruebaOk=false;
                 Toolkit.getDefaultToolkit().beep();
-                JOptionPane.showMessageDialog(null, "No existe un edificio al cual");
+                mostrarMensaje("No existe un edificio al cual"); 
         }
     }
     
@@ -234,13 +234,13 @@ public class CityOfHeroes
         pruebaOk=true;
         if (DeadsHeroes.contains(Color)){
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(null, "El hereoe de color "+Color+" esta muerto o ya ha sido creado");
+            mostrarMensaje("El hereoe de color "+Color+" esta muerto o ya ha sido creado"); 
             pruebaOk=true;
             return true;
         }
         else if(liveHeroes.contains(Color)){
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(null, "El hereoe de color "+Color+" ya existe o esta muerto");
+            mostrarMensaje("El hereoe de color "+Color+" ya existe o esta muerto");
             pruebaOk=true;
             return true;
         }
@@ -279,7 +279,7 @@ public class CityOfHeroes
        }catch (IndexOutOfBoundsException e){
            pruebaOk=false;
            Toolkit.getDefaultToolkit().beep();
-           JOptionPane.showMessageDialog(null, "No existe dicho edificio");
+           mostrarMensaje("No existe dicho edificio");
         }
     }
     
@@ -294,9 +294,6 @@ public class CityOfHeroes
        int i; 
        for(i=0;i<Heroes.size();i++){
            if (Heroes.get(i).getHeroeColor(Heroes.get(i)).equals(color)){
-               if (Heroes.get(i).getStrength() <= 0){
-                   DeadsHeroes.add(Heroes.get(i).getHeroeColor(Heroes.get(i)));
-               }
                Heroes.get(i).removeBarraVida();
                Heroes.get(i).removeHeroe(Heroes.get(i));
                Heroes.remove(i);
@@ -312,11 +309,10 @@ public class CityOfHeroes
      *
      * @return    lista DeadsHeroes
      */
-    public void deads()
+    public ArrayList<String> deads()
     {
-        System.out.println(DeadsHeroes);
         pruebaOk=true;
-        return ;
+        return DeadsHeroes ;
     }
     
     
@@ -338,7 +334,7 @@ public class CityOfHeroes
        }catch (IndexOutOfBoundsException e){
            pruebaOk=false;
            Toolkit.getDefaultToolkit().beep();
-           JOptionPane.showMessageDialog(null, "No existe dicho edificio para modificar");
+           mostrarMensaje("No existe dicho edificio para modificar");
         }
     }
 
@@ -349,7 +345,6 @@ public class CityOfHeroes
      * @return void
      */
      public void jump(String color, int angulo, int velocidad, boolean slow){  
-     
      int achCanvas= canvas.getWidth();
      int altCanvas= canvas.getHeight();
        for(int i=0;i<Heroes.size();i++){
@@ -371,10 +366,19 @@ public class CityOfHeroes
                                int edificoModificadoX=Heroes.get(i).getposiEdiModificado();
                                int nuevaAlturaEdiY=Heroes.get(i).getNuevaAlturaEdificio();
                                modiAltuEdiChoqueHeroe(edificoModificadoX,nuevaAlturaEdiY);
+                               this.asignarEdiDañado(Heroes.get(i).getXEdiDañado());
+                               this.addDeads(Heroes.get(i).deads(),Heroes.get(i));
                                pruebaOk=true;
                             }
+                            else{
+                                this.asignarEdiDañado(Heroes.get(i).getXEdiDañado());
+                                this.addDeads(Heroes.get(i).deads(),Heroes.get(i));
+                                pruebaOk=true;
+                            }
+                           
                        }
                        else{
+  
                            (Heroes.get(i)).Jump(color, angulo, velocidad, altCanvas-posiYHeroe,
                            posiYHeroe, posiXHeroe,altCanvas,achCanvas, 0.01,isVisible,infCoordenadas,positionX,durezasEdificios,infCoordenadasAncho);
                            if(Heroes.get(i).getVeriHeroNoMuerto()){
@@ -383,7 +387,14 @@ public class CityOfHeroes
                                int edificoModificadoX=Heroes.get(i).getposiEdiModificado();
                                int nuevaAlturaEdiY=Heroes.get(i).getNuevaAlturaEdificio();
                                modiAltuEdiChoqueHeroe(edificoModificadoX,nuevaAlturaEdiY);
+                               this.asignarEdiDañado(Heroes.get(i).getXEdiDañado());
+                               this.addDeads(Heroes.get(i).deads(),Heroes.get(i));
                                pruebaOk=true;
+                            }
+                            else{
+                                this.asignarEdiDañado(Heroes.get(i).getXEdiDañado());
+                                this.addDeads(Heroes.get(i).deads(),Heroes.get(i));
+                                pruebaOk=true;
                             }
                         }
                        return;
@@ -431,31 +442,51 @@ public class CityOfHeroes
     public ArrayList jumpPlan(String heroe, int building){
         listaPlan = new ArrayList<Integer>();
         notShowMessage();
-        for (int angulo=1; angulo<100;angulo++){
-            for (int velocidad=1; velocidad<100;velocidad++){
-                boolean a= isSafejump(heroe,angulo,velocidad);
-                if (a){
+        
+        for (int angulo=1; angulo<90;angulo++){
+            for (int velocidad=1; velocidad<90;velocidad++){
+                if (isSafeJump2(heroe,angulo,velocidad)){
                     listaPlan.add(angulo);
                     listaPlan.add(velocidad);                    
-                }
-                if (a && building==Heroes.get(0).numeroEdificio()){
-                    listaPlan.add(angulo);
-                    listaPlan.add(velocidad);
                 }
             }
         }
         showMessage();
         System.out.println(listaPlan);
-        System.out.println((listaPlan.get((listaPlan.size())-1)));
-        System.out.println((listaPlan.get((listaPlan.size())-2)));
         return listaPlan;
     }
+
+    public boolean isSafeJump2(String color, int angulo, int velocidad){  
+     int achCanvas= canvas.getWidth();
+     int altCanvas= canvas.getHeight();
+       for(int i=0;i<Heroes.size();i++){
+           if (Heroes.get(i).getHeroeColor(Heroes.get(i)).equals(color)){
+               int posiXHeroe= (Heroes.get(i)).getxPosition();
+               int posiYHeroe= (Heroes.get(i)).getyPosition();
+               int a;
+               boolean b;
+               for(a=0;a<Builds.size();a++){
+                   Building edificio =Builds.get(a);
+                   int xpositionEdi= (edificio.getPositionX());
+                   int anchoEdi= edificio.getWidth()+xpositionEdi;
+                   int posXoriginal=posiXHeroe;
+                   int posYoriginal=posiYHeroe;  
+                   if (xpositionEdi<=posiXHeroe && posiXHeroe<=anchoEdi){      
+                       b= (Heroes.get(i)).isSafeJump2(color, angulo, velocidad, altCanvas-posiYHeroe,
+                       posiYHeroe, posiXHeroe,altCanvas,achCanvas, 0.01,isVisible,infCoordenadas,positionX,durezasEdificios,infCoordenadasAncho, posXoriginal,posYoriginal);
+                       return b;
+                    }
+                }
+           }
+           pruebaOk=false;
+     }   return true;
+     }
     
-    public void showMessage(){
+    private void showMessage(){
         message= true;
     }
     
-    public void notShowMessage(){
+    private void notShowMessage(){
         message= false;
     }
     
@@ -465,6 +496,26 @@ public class CityOfHeroes
         pruebaOk=true;
     }
     
+    /**
+         * reutilizar codigo para crear mensaje
+         * @param  string cadena a representar
+         */
+        private void mostrarMensaje(String string)
+        {
+           Toolkit.getDefaultToolkit().beep();
+           JOptionPane p = new JOptionPane(string);
+           JFrame frame= new JFrame();
+           frame.setContentPane(p);
+           frame.setVisible(true);
+           frame.pack();
+           frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+           try{ 
+               Thread.sleep(2000);
+            } catch (InterruptedException e){
+            }
+           frame.setVisible(false);
+        }
+        
     /** Evalua si las pruebas estan bien
      * @return el booleano pruebaOk
      */
@@ -477,20 +528,80 @@ public class CityOfHeroes
      */
     public void finish()
     {
-        System.exit(0);
+        System.exit(1);
     }
     
     /**
-     * Retorna la vida del 
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
+     * asigna un heroe a la lista deads si el valor o indicador que entra como parametro es true
+     * @param bool booleano con true o false
+     * @param hereoe objecto de la clase heroe
      */
-    private int sampleMethod(int y)
+    private void addDeads(boolean indicador,Heroe heroe)
     {
-        // put your code here
-        return y;
+        if (indicador){
+           this.removeHeroe(heroe.getColor());
+           DeadsHeroes.add(heroe.getHeroeColor(heroe));
+        }
+    }
+    
+    /**
+     * asignar al objeto building correspondiente si esta dañado con un numero diferente a -1000000.
+     * @param  x  cordenada x del edifico
+     */
+    private void asignarEdiDañado(int x)
+    {
+        if (x!=-1000000){
+            int buscador1=x;
+            int i; 
+            for(i=0;i<Builds.size();i++){
+             if (Builds.get(i).getPositionX()==buscador1){
+                Builds.get(i).setDañadoEdifcioTrue();
+                }
+           }
+            
+        }
     }
 
+    /**
+         * Retorna la vida del heroe
+         * @param  color de heroe
+         * @return vida es la vida actual del heroe
+         */
+        public int strength(String color1)
+        
+        {
+        try
+        {
+          int i; 
+           for(i=0;i<Heroes.size();i++)
+           {
+               if (Heroes.get(i).getHeroeColor(Heroes.get(i)).equals(color1)){
+                   return Heroes.get(i).getStrength();
+            }
+          } 
+            }catch(IndexOutOfBoundsException e)
+            {
+                mostrarMensaje("No existe dicho heroe");
+            } 
+        return -1000000;
+      }
+    
+        /**
+         * Indicar si un edificio esta dañado
+         * @param  position posicion del edificio
+         * @return boolean si es true es que esta dañado, si retorna false es que no esta dañado
+         */
+        public boolean isDamaged(int position)
+        {
+           Collections.sort(positionX);
+           int buscador=positionX.get(position-1);
+           int i; 
+           for(i=0;i<Builds.size();i++){
+             if (Builds.get(i).getPositionX()==buscador && Builds.get(i).getDañadoEdifcio()==true){
+                return true;
+                }
+            } 
+           return false;
+    }
 
 }

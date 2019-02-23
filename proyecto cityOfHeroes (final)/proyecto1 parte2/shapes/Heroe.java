@@ -51,6 +51,8 @@
         private ArrayList<Integer>listaPlan;
         private boolean encimaEdificio=false;
         private int numeroEdificio;
+        private int EdificiosDañado= -1000000;
+        private boolean hereoEnEdiRoto = false;
         /**
          * Constructor Heore
          *
@@ -156,12 +158,17 @@
         {
          return heroe.getPositionX();
          }
+        
+         public void setHeroeMuerto()
+        {
+         heroeMuerto=true;
+         }
          
         public int getPosiActEdiX()
         {
          return  posiActEdiX;
          }
-
+        
         /**
          * Retornar el objeto vitalidad del heroe
          *
@@ -211,6 +218,15 @@
         }
         
         /**
+         * get color heroe
+         * @return color
+         */
+        public String getColor()
+        {
+            return heroe.getColor();
+        }
+        
+        /**
          * cambiar estado de veriHeroNoMuerto=false
          */
         public void changeVeriHeroNoMuerto()
@@ -241,42 +257,47 @@
          * 
          * @return heroeMuerto
          */
-        public boolean estaHeroDead(){
+        public boolean deads(){
             return  heroeMuerto;
         }
-        
-        
+
+
         /**
-         * Instrucciones para quitar una heroe al estar muerto
-         *
-         * @param  color Color del heroe
+         * reutilizar codigo para crear mensaje
+         * @param  string cadena a representar
          */
-        private void BorraHeroe(String color)
+        public void mostrarMensaje(String string)
         {
-           //mensajeeeeeeee xd 
-           
            Toolkit.getDefaultToolkit().beep();
-           JOptionPane p = new JOptionPane("El heroe de color " +color +" ha muerto");
+           JOptionPane p = new JOptionPane(string);
            JFrame frame= new JFrame();
            frame.setContentPane(p);
            frame.setVisible(true);
            frame.pack();
            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-           
            try{ 
-               Thread.sleep(10000);
+               Thread.sleep(2000);
             } catch (InterruptedException e){
             }
-            frame.setVisible(false);
-            
-           
-           vidasHeores.remove(0);
-           heroeMuerto=true;
-           vitalidad.makeInvisible();
-           makeInvisible();
-           strength=0; 
-    
+           frame.setVisible(false);
         }
+
+        /**
+                 * Instrucciones para quitar una heroe al estar muerto
+                 *
+                 * @param  color Color del heroe
+                 */
+                private void BorraHeroe(String color)
+                {
+                   String mensaje = "El heroe de color " +color +" ha muerto";
+                   mostrarMensaje(mensaje);
+                   vidasHeores.remove(0);
+                   heroeMuerto=true;
+                   vitalidad.makeInvisible();
+                   makeInvisible();
+                   strength=0; 
+            }
+        
         /**
          * Busca respecto a la posicion en x del heroe a que numero en x de edifico es mayor para mirar si se estrella
          *
@@ -294,34 +315,39 @@
                 if (x>=i  && (posiActEdiX!=i && posiActEdiX<=((int)infCoordenadasAncho.get(i)+i) ) && 
                 ((int)infCoordenadas.get(i) <= y && y<=altoCanvas )){
                     if((strength-(int)durezasEdificios.get(i))<=0){
+                        EdificiosDañado=i;
+                        this.setHeroeMuerto();
                         return true; 
                     }
                     else {
+                       EdificiosDañado=i;
                        if (!modoIsJumpOn){
                            strength-= (int)durezasEdificios.get(i);
                            vitalidad.changeSize(7,anchoVitalidad-5);
                            strenghtt2=strength;
                            posiActEdiX=i;
                            sobreviveHeroeEdi=true;
+                           hereoEnEdiRoto=true;
                            return false;
                         }
                        else{
-                       strength-= (int)durezasEdificios.get(i);
-                       posiActEdiX=i;
-                       sobreviveHeroeEdi=true;
-                       return false;
+                           hereoEnEdiRoto=true;
+                           posiActEdiX=i;
+                           sobreviveHeroeEdi=true;
+                           return false;
                         }
                        
                     }
                 }
-                else if((i!=posiActEdiX) &&( x>i && x<=i+(int)infCoordenadasAncho.get(i)) && (y>=(int)infCoordenadas.get(i)-20 && y<=(int)infCoordenadas.get(i)-13)){
+                else if((i!=posiActEdiX) &&( x>i && x<=i+(int)infCoordenadasAncho.get(i)) && (y>=(int)infCoordenadas.get(i)-20 && y<=(int)infCoordenadas.get(i)-13))
+                {
+                    
                     posiActEdiX=i;
                     varibleBool=true;
                     return true;   
                 }
             
            }
-           
            return false; 
         }
 
@@ -338,18 +364,22 @@
             String color,ArrayList posicionesX,Hashtable durezasEdificios,Hashtable infCoordenadasAncho)
             {
                 if (y>=altoCanvas-15){
+                   this.setHeroeMuerto();
                    BorraHeroe(color);
                    return true;
                 }
                 else if (y<=0){
+                   this.setHeroeMuerto();
                    BorraHeroe(color);
                    return true;                
                 }
                 else if (x<=0){
+                   this.setHeroeMuerto();
                    BorraHeroe(color);
                    return true;                
                 }
                 else if (x>=anchoCanvas){
+                   this.setHeroeMuerto();
                    BorraHeroe(color);
                    return true;                
                 }
@@ -367,17 +397,32 @@
                 return false; 
             }
 
+        
 
-        /** Move the heroe in form of parabolic
+
+    /** Move the heroe in form of parabolic
          * 
-         * @param String color, int angulo, int velocidad
+         * @param String color 
+         * @param int angulo
+         * @param int velocidad
+         * @param int alturaEdi
+         * @param int posy
+         * @param int posx
+         * @param int altoCanvas
+         * @param int anchoCanvas
+         * @param double avance
+         * @param boolean isVisible
+         * @param Hashtable infCoordenadas
+         * @param ArrayList posicionesX
+         * @param Hashtable durezasEdificios
+         * @param Hashtable infCoordenadasAncho
          * @return void
          */
          public void Jump(String color, int angulo, int velocidad,int alturaEdi, int posy, int posx, int altoCanvas,int anchoCanvas,double avance,
          boolean isVisible,Hashtable infCoordenadas,ArrayList posicionesX,Hashtable durezasEdificios,Hashtable infCoordenadasAncho)
         {
-            Canvas canvas = Canvas.getCanvas1();
-            if( modoIsJumpNoSeguro){  
+            Canvas canvas = Canvas.getCanvas1(); 
+            if( modoIsJumpNoSeguro && !hereoEnEdiRoto){  
             t=0;
             int pos1=ColoresHeroes.indexOf(color);
             h=alturaEdi;
@@ -409,8 +454,7 @@
                 }
                 
                 if (chocoEdificio(posicionX,y,altoCanvas,anchoCanvas,infCoordenadas,color,posicionesX,durezasEdificios,infCoordenadasAncho)){
-                    System.out.println("aqui");
-                   return;
+                    return;
                 }
                 if (!chocoEdificio(posicionX,y,altoCanvas,anchoCanvas,infCoordenadas,color,posicionesX,durezasEdificios,infCoordenadasAncho)
                 &&sobreviveHeroeEdi==true){
@@ -448,6 +492,10 @@
                     ListaVitalidad.get(pos1).makeVisible();
                 };
             }
+        }
+        else if(modoIsJumpNoSeguro && hereoEnEdiRoto){ 
+            hereoEnEdiRoto=false; 
+            this.Jump(color, angulo,velocidad,alturaEdi, posy,posx, altoCanvas, anchoCanvas,avance,isVisible,infCoordenadas, posicionesX,durezasEdificios,infCoordenadasAncho);
         }
         }
         public ArrayList ColoresHeroes(){
@@ -623,7 +671,7 @@
                 && varibleBool==true){
                    if (message){
                        Toolkit.getDefaultToolkit().beep();
-                       JOptionPane.showMessageDialog(null, "true");
+                       this.mostrarMensaje("true");
                    }
                    this.Jump(color,angulo,velocidad,alturaEdi,posy,posx,altoCanvas,anchoCanvas,avance,
                    isVisible,infCoordenadas,posicionesX,durezasEdificios,infCoordenadasAncho);
@@ -637,8 +685,7 @@
                 && varibleBool==false){
                     modoIsJumpOn=true;
                     if (message){
-                        Toolkit.getDefaultToolkit().beep();
-                        JOptionPane.showMessageDialog(null, "false");
+                        this.mostrarMensaje("false");
                     }
                     modoIsJumpNoSeguro=false;
                     strength=strenghtt2;
@@ -651,7 +698,6 @@
                     varibleBool=false;
                     modoIsJumpNoSeguro=true;
                     modoIsJumpOn=false;
-                    
                     return false;
                 }
                 x= Math.abs(vox*t);
@@ -663,6 +709,112 @@
             return false; 
         } 
         
+        /**
+         * retorna el edificios dañado por un heroe
+         * @param  x cordena en x del edificio
+         */
+        public int getXEdiDañado()
+        {
+            int a = EdificiosDañado;
+            EdificiosDañado= -1000000;
+            return a;
+            
+        }
+
+        private boolean chocoEdificio3(double x,double y,int altoCanvas,int anchoCanvas,Hashtable infCoordenadas,
+            String color,ArrayList posicionesX,Hashtable durezasEdificios,Hashtable infCoordenadasAncho)
+            {
+                if (y>=altoCanvas-15){
+                   // BorraHeroe(color);
+                   return false;
+                }
+                else if (y<=0){
+                   // BorraHeroe(color);
+                   return true;                
+                }
+                else if (x<=0){
+                   // BorraHeroe(color);
+                   return true;                
+                }
+                else if (x>=anchoCanvas){
+                   // BorraHeroe(color);
+                   return true;                
+                }
+                else if (verificaChoqueXEdificio(infCoordenadas,x,y,posicionesX,altoCanvas,durezasEdificios,infCoordenadasAncho)){
+                    if(varibleBool){
+                        return false; 
+                    }
+                    else if(!varibleBool){
+                        // BorraHeroe(color);
+                        return true; 
+                    }
+                    return true; 
+                }
+                return false; 
+            }        
+        
+        
+        
+        
+
+        
+        
+        
+        
+        
+        public boolean isSafeJump2(String color, int angulo, int velocidad,int alturaEdi, int posy, int posx, int altoCanvas,int anchoCanvas,double avance,
+         boolean isVisible,Hashtable infCoordenadas,ArrayList posicionesX,Hashtable durezasEdificios,Hashtable infCoordenadasAncho,int posiXoriginal, int posiYoriginal)
+        {
+            Canvas canvas = Canvas.getCanvas1(); 
+            t=0;
+            int pos1=ColoresHeroes.indexOf(color);
+            h=alturaEdi;
+            vo=velocidad/4;
+            if (velocidad>angulo){
+                voy= 2*(vo*Math.sin(-angulo));
+                vox= vo*Math.cos(angulo);
+            }
+            else{
+                voy= 2*(vo*Math.sin(-angulo))/2;
+                vox= 2*(vo*Math.cos(angulo)); 
+            }            
+            angulo*=Math.PI;
+            angulo/=180;
+            heroe.setXYposition(posicionX,posicionY);
+            posicionY=posy;
+            posicionX=posx;
+            h=h/3; 
+            boolean lento=false;
+            while (y<altoCanvas){
+                t+=avance;
+                y=((posicionY)-(voy*t) + (4.9*(t*t)));
+                if (chocoEdificio3(posicionX,y,altoCanvas,anchoCanvas,infCoordenadas,color,posicionesX,durezasEdificios,infCoordenadasAncho)){
+                   heroe.setXYposition(posiXoriginal,posiYoriginal);
+                   return true;
+                }
+                if (!chocoEdificio3(posicionX,y,altoCanvas,anchoCanvas,infCoordenadas,color,posicionesX,durezasEdificios,infCoordenadasAncho)
+                &&sobreviveHeroeEdi==true){
+                   varibleBool=false;
+                   if (isVisible==true){
+                   }
+                   heroe.setXYposition(posiXoriginal,posiYoriginal);
+                   return true;
+                }
+                x= Math.abs(vox*t);
+                t+=avance;
+                posicionX+=(x/2);
+                posicionY=y;  
+                heroe.setXYposition(posicionX,posicionY);
+                if(varibleBool){
+                    varibleBool=false;
+                }
+            }
+        heroe.setXYposition(posiXoriginal,posiYoriginal);
+        //heroe.makeVisible();
+        return false;
+        }        
+        
+
       
 
 }

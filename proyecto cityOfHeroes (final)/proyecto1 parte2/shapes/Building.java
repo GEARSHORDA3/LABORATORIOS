@@ -16,6 +16,7 @@ public class Building
     private Rectangle cuadrado;
     private int height;
     private int width;
+    private boolean dañadoEdifcio=false;
     /**
      * Constructor for objects of class Building
      */
@@ -108,5 +109,19 @@ public class Building
     public void makeInvisible(){
         cuadrado.makeInvisible();
     }
-
+    
+    /**
+     * asignar a la variable dañadoEdifcio true como indicador de que ha sido golpeado por un heroe
+     */
+    public void setDañadoEdifcioTrue(){
+        dañadoEdifcio=true;
+    }
+    
+    /**
+     * retornar la varibale dañadoEdifcio para saber si esta dañado un edifico
+     * @return dañadoEdifcio variable que indica si el heroe esta dañado o no 
+     */
+    public boolean getDañadoEdifcio(){
+        return dañadoEdifcio;
+    }
 }
