@@ -767,6 +767,7 @@
         {
             Canvas canvas = Canvas.getCanvas1(); 
             t=0;
+            y=0;
             int pos1=ColoresHeroes.indexOf(color);
             h=alturaEdi;
             vo=velocidad/4;

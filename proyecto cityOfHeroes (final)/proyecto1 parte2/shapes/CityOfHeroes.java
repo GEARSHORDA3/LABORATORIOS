@@ -439,6 +439,32 @@ public class CityOfHeroes
     return false;
     }
     
+
+    public boolean isSafeJump2(String color, int angulo, int velocidad){  
+     int achCanvas= canvas.getWidth();
+     int altCanvas= canvas.getHeight();
+       for(int i=0;i<Heroes.size();i++){
+           if (Heroes.get(i).getHeroeColor(Heroes.get(i)).equals(color)){
+               int posiXHeroe= (Heroes.get(i)).getxPosition();
+               int posiYHeroe= (Heroes.get(i)).getyPosition();
+               int posXoriginal=posiXHeroe;
+               int posYoriginal=posiYHeroe;                 
+               int a;
+               for(a=0;a<Builds.size();a++){
+                   Building edificio =Builds.get(a);
+                   int xpositionEdi= (edificio.getPositionX());
+                   int anchoEdi= edificio.getWidth()+xpositionEdi;
+                   if (xpositionEdi<=posiXHeroe && posiXHeroe<=anchoEdi){      
+                       boolean b= (Heroes.get(i)).isSafeJump2(color, angulo, velocidad, altCanvas-posiYHeroe,
+                       posiYHeroe, posiXHeroe,altCanvas,achCanvas, 0.01,isVisible,infCoordenadas,positionX,durezasEdificios,infCoordenadasAncho, posXoriginal,posYoriginal);
+                       return b;
+                    }
+                }
+           }
+           pruebaOk=false;
+     }   return false;
+     }
+
     public ArrayList jumpPlan(String heroe, int building){
         listaPlan = new ArrayList<Integer>();
         notShowMessage();
@@ -455,32 +481,6 @@ public class CityOfHeroes
         System.out.println(listaPlan);
         return listaPlan;
     }
-
-    public boolean isSafeJump2(String color, int angulo, int velocidad){  
-     int achCanvas= canvas.getWidth();
-     int altCanvas= canvas.getHeight();
-       for(int i=0;i<Heroes.size();i++){
-           if (Heroes.get(i).getHeroeColor(Heroes.get(i)).equals(color)){
-               int posiXHeroe= (Heroes.get(i)).getxPosition();
-               int posiYHeroe= (Heroes.get(i)).getyPosition();
-               int a;
-               boolean b;
-               for(a=0;a<Builds.size();a++){
-                   Building edificio =Builds.get(a);
-                   int xpositionEdi= (edificio.getPositionX());
-                   int anchoEdi= edificio.getWidth()+xpositionEdi;
-                   int posXoriginal=posiXHeroe;
-                   int posYoriginal=posiYHeroe;  
-                   if (xpositionEdi<=posiXHeroe && posiXHeroe<=anchoEdi){      
-                       b= (Heroes.get(i)).isSafeJump2(color, angulo, velocidad, altCanvas-posiYHeroe,
-                       posiYHeroe, posiXHeroe,altCanvas,achCanvas, 0.01,isVisible,infCoordenadas,positionX,durezasEdificios,infCoordenadasAncho, posXoriginal,posYoriginal);
-                       return b;
-                    }
-                }
-           }
-           pruebaOk=false;
-     }   return true;
-     }
     
     private void showMessage(){
         message= true;
