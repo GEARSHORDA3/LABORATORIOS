@@ -51,7 +51,7 @@ public class prueba2
         canvas.wait(1000);
         cityOfHe2.addHeroe("red", 1, 30);
         canvas.wait(1000);
-        cityOfHe2.isSafejump("red",60,30);
+        cityOfHe2.isSafeJump("red",60,30);
         cityOfHe2.jump("red",60,30,false);
         cityOfHe2.jump("red",60,30,false);
     }

@@ -1,5 +1,3 @@
-
-
 import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
@@ -11,12 +9,12 @@ import org.junit.Test;
  * @author  (your name)
  * @version (a version number or a date)
  */
-public class pruebafinal
+public class pruebaJumpIsSafeJump
 {
     /**
      * Default constructor for test class pruebafinal
      */
-    public pruebafinal()
+    public pruebaJumpIsSafeJump()
     {
     }
 
@@ -39,27 +37,19 @@ public class pruebafinal
     public void tearDown()
     {
     }
-
     @Test
-    public void CityHeores()
+    public void CityHeores2()
     {
-        CityOfHeroes cityOfHe1 = new CityOfHeroes(500, 500);
-        cityOfHe1.makeVisible();
+        CityOfHeroes cityOfHe2 = new CityOfHeroes(500, 500);
+        cityOfHe2.makeVisible();
         Canvas canvas = Canvas.getCanvas1();
-        cityOfHe1.addBuilding(0, 50, 100, 1);
+        cityOfHe2.addBuilding(0, 50, 200, 1);
+        cityOfHe2.addBuilding(70,100, 50, 1);
+        //cityOfHe2.addBuilding(200,50, 300, 1);
         canvas.wait(1000);
-        cityOfHe1.addBuilding(200, 50, 400, 1);
+        cityOfHe2.addHeroe("red", 1, 30);
         canvas.wait(1000);
-        cityOfHe1.addBuilding(120, 50, 100, 1);
-        canvas.wait(1000);
-        cityOfHe1.addHeroe("red", 2, 30);
-        canvas.wait(1000);
-        cityOfHe1.isSafeJump("red",60,30);
-        cityOfHe1.jump("red",60,30,false);
-        cityOfHe1.finish();
-        
+        cityOfHe2.isSafeJump("red",60,30);
+        cityOfHe2.jump("red",60,30,false);
     }
-    
-
 }
-

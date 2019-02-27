@@ -312,8 +312,17 @@
         {
             ArrayList<Integer>posicionesX2 = posicionesX;
             for(Integer i : posicionesX2){
-                if (x>=i  && (posiActEdiX!=i && posiActEdiX<=((int)infCoordenadasAncho.get(i)+i) ) && 
+                //posiActEdiX
+                if (x>=i  && (posiActEdiX!=i && x<=((int)infCoordenadasAncho.get(i)+i)) && 
                 ((int)infCoordenadas.get(i) <= y && y<=altoCanvas )){
+                    System.out.println("golpeo edifcio");
+                    // System.out.println(posiActEdiX+" posiActEdiX");
+                    // System.out.println(i+" iiii");
+                    // System.out.println(x +" x");
+                    // System.out.println(((int)infCoordenadasAncho.get(i)+i)+" (int)infCoordenadasAncho.get(i)+i)");
+                    // System.out.println(y +"y");
+                    // System.out.println(((int)infCoordenadas.get(i)+ "((int)infCoordenadas.get(i)"));
+                    // System.out.println(altoCanvas + "altoCanvas");
                     if((strength-(int)durezasEdificios.get(i))<=0){
                         EdificiosDañado=i;
                         this.setHeroeMuerto();
@@ -341,7 +350,14 @@
                 }
                 else if((i!=posiActEdiX) &&( x>i && x<=i+(int)infCoordenadasAncho.get(i)) && (y>=(int)infCoordenadas.get(i)-20 && y<=(int)infCoordenadas.get(i)-13))
                 {
-                    
+                    System.out.println("entro a edifico encima");
+                    // System.out.println(posiActEdiX+" posiActEdiX");
+                    // System.out.println(i+" iiii");
+                    // System.out.println(x +" x");
+                    // System.out.println(i+(int)infCoordenadasAncho.get(i)+ "i+(int)infCoordenadasAncho.get(i)");
+                    // System.out.println(y+ "y");
+                    // System.out.println((int)infCoordenadas.get(i)-20+ " (int)infCoordenadas.get(i)-20");
+                    // System.out.println((int)infCoordenadas.get(i)-13+ "(int)infCoordenadas.get(i)-13");
                     posiActEdiX=i;
                     varibleBool=true;
                     return true;   
@@ -364,26 +380,31 @@
             String color,ArrayList posicionesX,Hashtable durezasEdificios,Hashtable infCoordenadasAncho)
             {
                 if (y>=altoCanvas-15){
+                   System.out.println("y>=altoCanvas-15"); 
                    this.setHeroeMuerto();
                    BorraHeroe(color);
                    return true;
                 }
-                else if (y<=0){
-                   //this.setHeroeMuerto();
-                   //BorraHeroe(color);
-                   //return true;                
-                }
+                // else if (y<=0){
+                   // System.out.println("y<=0"); 
+                   // this.setHeroeMuerto();
+                   // BorraHeroe(color);
+                   // return true;                
+                // }
                 else if (x<=0){
+                   System.out.println("x<=0"); 
                    this.setHeroeMuerto();
                    BorraHeroe(color);
                    return true;                
                 }
                 else if (x>=anchoCanvas){
+                   System.out.println("x>=anchoCanvas"); 
                    this.setHeroeMuerto();
                    BorraHeroe(color);
                    return true;                
                 }
                 else if (verificaChoqueXEdificio(infCoordenadas,x,y,posicionesX,altoCanvas,durezasEdificios,infCoordenadasAncho)){
+                    System.out.println("verdadero");
                     if(varibleBool){
                         return false; 
                     }
@@ -577,12 +598,12 @@
                    varibleBool=false;
                    return false;
                 }
-                else if (y<=0){
-                   encimaEdificio=true;
-                   numeroEdificio=posiActEdiX;
-                   varibleBool=false;
-                   return false;                
-                }
+                // else if (y<=0){
+                   // encimaEdificio=true;
+                   // numeroEdificio=posiActEdiX;
+                   // varibleBool=false;
+                   // return false;                
+                // }
                 else if (x<=0){
                    varibleBool=false;
                    return false;                
@@ -611,7 +632,7 @@
         {
            ArrayList<Integer>posicionesX2 = posicionesX;
             for(Integer i : posicionesX2){
-                if (x>=i  && (posiActEdiX!=i && posiActEdiX<=((int)infCoordenadasAncho.get(i)+i) ) && 
+                if (x>=i  && (posiActEdiX!=i && x<=((int)infCoordenadasAncho.get(i)+i) ) && 
                 ((int)infCoordenadas.get(i) <= y && y<=altoCanvas )){
                     if((strength-(int)durezasEdificios.get(i))<=0){
                         return false; 
@@ -728,10 +749,10 @@
                    // BorraHeroe(color);
                    return false;
                 }
-                else if (y<=0){
-                   // BorraHeroe(color);
-                   //return true;                
-                }
+                // else if (y<=0){
+                   // // BorraHeroe(color);
+                   // return true;                
+                // }
                 else if (x<=0){
                    // BorraHeroe(color);
                    return true;                
@@ -789,10 +810,8 @@
             while (y<altoCanvas){
                 t+=avance;
                 y=((posicionY)-(voy*t) + (4.9*(t*t)));
-                heroe.makeVisible();
                 if (chocoEdificio3(posicionX,y,altoCanvas,anchoCanvas,infCoordenadas,color,posicionesX,durezasEdificios,infCoordenadasAncho)){
                    heroe.setXYposition(posiXoriginal,posiYoriginal);
-                   heroe.makeVisible();
                    return true;
                 }
                 if (!chocoEdificio3(posicionX,y,altoCanvas,anchoCanvas,infCoordenadas,color,posicionesX,durezasEdificios,infCoordenadasAncho)
@@ -801,7 +820,6 @@
                    if (isVisible==true){
                    }
                    heroe.setXYposition(posiXoriginal,posiYoriginal);
-                   heroe.makeVisible();
                    return true;
                 }
                 x= Math.abs(vox*t);
@@ -809,13 +827,12 @@
                 posicionX+=(x/2);
                 posicionY=y;  
                 heroe.setXYposition(posicionX,posicionY);
-                heroe.makeVisible();
                 if(varibleBool){
                     varibleBool=false;
                 }
             }
         heroe.setXYposition(posiXoriginal,posiYoriginal);
-        heroe.makeVisible();
+        //heroe.makeVisible();
         return false;
         }        
         
