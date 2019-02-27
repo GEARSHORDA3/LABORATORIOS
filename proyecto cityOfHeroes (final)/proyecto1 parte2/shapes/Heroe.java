@@ -369,9 +369,9 @@
                    return true;
                 }
                 else if (y<=0){
-                   this.setHeroeMuerto();
-                   BorraHeroe(color);
-                   return true;                
+                   //this.setHeroeMuerto();
+                   //BorraHeroe(color);
+                   //return true;                
                 }
                 else if (x<=0){
                    this.setHeroeMuerto();
@@ -730,7 +730,7 @@
                 }
                 else if (y<=0){
                    // BorraHeroe(color);
-                   return true;                
+                   //return true;                
                 }
                 else if (x<=0){
                    // BorraHeroe(color);
@@ -789,8 +789,10 @@
             while (y<altoCanvas){
                 t+=avance;
                 y=((posicionY)-(voy*t) + (4.9*(t*t)));
+                heroe.makeVisible();
                 if (chocoEdificio3(posicionX,y,altoCanvas,anchoCanvas,infCoordenadas,color,posicionesX,durezasEdificios,infCoordenadasAncho)){
                    heroe.setXYposition(posiXoriginal,posiYoriginal);
+                   heroe.makeVisible();
                    return true;
                 }
                 if (!chocoEdificio3(posicionX,y,altoCanvas,anchoCanvas,infCoordenadas,color,posicionesX,durezasEdificios,infCoordenadasAncho)
@@ -799,6 +801,7 @@
                    if (isVisible==true){
                    }
                    heroe.setXYposition(posiXoriginal,posiYoriginal);
+                   heroe.makeVisible();
                    return true;
                 }
                 x= Math.abs(vox*t);
@@ -806,12 +809,13 @@
                 posicionX+=(x/2);
                 posicionY=y;  
                 heroe.setXYposition(posicionX,posicionY);
+                heroe.makeVisible();
                 if(varibleBool){
                     varibleBool=false;
                 }
             }
         heroe.setXYposition(posiXoriginal,posiYoriginal);
-        //heroe.makeVisible();
+        heroe.makeVisible();
         return false;
         }        
         
