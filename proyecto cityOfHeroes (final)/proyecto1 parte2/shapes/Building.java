@@ -12,7 +12,7 @@ public class Building
     private static final String colores[]={"red","yellow","blue","black","brown","magenta","green","grey","fucsia"};
     private int numero=0;
     private int nColores;
-    private static int hardness;
+    private int hardness;
     private Rectangle cuadrado;
     private int height;
     private int width;
@@ -117,6 +117,14 @@ public class Building
         dañadoEdifcio=true;
     }
     
+    /**
+     * Obtener la dureza del edifico
+     */
+    public int gethardness()
+    {
+        return hardness;
+    }
+
     /**
      * retornar la varibale dañadoEdifcio para saber si esta dañado un edifico
      * @return dañadoEdifcio variable que indica si el heroe esta dañado o no 

@@ -38,7 +38,7 @@ public class CityOfHeroes
     private ArrayList<Integer>listaPlan;
     private boolean message=true;
     int PosicionColor=-2;
-    
+    private int edificioJumpPlan;
     /**
      * constructor
      *
@@ -454,9 +454,18 @@ public class CityOfHeroes
                    Building edificio =Builds.get(a);
                    int xpositionEdi= (edificio.getPositionX());
                    int anchoEdi= edificio.getWidth()+xpositionEdi;
-                   if (xpositionEdi<=posiXHeroe && posiXHeroe<=anchoEdi){      
+                   if (xpositionEdi<=posiXHeroe && posiXHeroe<=anchoEdi){
+                       ArrayList<Integer>listaCarcatEdi= findBuilding(edificioJumpPlan);
+                       Hashtable<Integer,Integer> durezasEdificios2 = new Hashtable<Integer,Integer>();
+                       Hashtable<Integer,Integer> infCoordenadas2 = new Hashtable<Integer,Integer>();
+                       Hashtable<Integer,Integer> infCoordenadasAncho2 = new Hashtable<Integer,Integer>();
+                       ArrayList<Integer>positionX2= new ArrayList<Integer>();
+                       durezasEdificios2.put(listaCarcatEdi.get(0),listaCarcatEdi.get(3));
+                       infCoordenadas2.put(listaCarcatEdi.get(0),listaCarcatEdi.get(1));
+                       infCoordenadasAncho2.put(listaCarcatEdi.get(0),listaCarcatEdi.get(2));
+                       positionX2.add(listaCarcatEdi.get(0));
                        boolean b= (Heroes.get(i)).isSafeJump2(color, angulo, velocidad, altCanvas-posiYHeroe,
-                       posiYHeroe, posiXHeroe,altCanvas,achCanvas, 0.01,isVisible,infCoordenadas,positionX,durezasEdificios,infCoordenadasAncho, posXoriginal,posYoriginal);
+                       posiYHeroe, posiXHeroe,altCanvas,achCanvas, 0.01,isVisible,infCoordenadas2 ,positionX2,durezasEdificios2,infCoordenadasAncho2, posXoriginal,posYoriginal);
                        return b;
                     }
                 }
@@ -466,6 +475,7 @@ public class CityOfHeroes
      }
 
     public ArrayList jumpPlan(String heroe, int building){
+        edificioJumpPlan=building;
         listaPlan = new ArrayList<Integer>();
         notShowMessage();
         
@@ -482,6 +492,41 @@ public class CityOfHeroes
         return listaPlan;
     }
     
+    /**
+     * buscar solo el edifico por su poscicsion visualmente especialmente diseñado para isSafeJump2
+     *
+     * @param  position posicion edifico
+     * @return listaCarcatEdi lista de laposicion en x, su altura, su ancho, su dureza
+     */
+    private ArrayList findBuilding(int position)
+    {
+       ArrayList<Integer>listaCarcatEdi= new ArrayList<Integer>();
+       position-=1; 
+       try{
+           Collections.sort(positionX);
+           int buscador=positionX.get(position);
+           int i; 
+           for(i=0;i<Builds.size();i++){
+             if (Builds.get(i).getPositionX()==buscador){
+                int posiXEdi= Builds.get(i).getPositionX();
+                int alturaEdi = Builds.get(i).getPositionY();
+                int anchoEdi= Builds.get(i).getWidth();
+                int durezaEdi=Builds.get(i).gethardness();
+                listaCarcatEdi.add(posiXEdi);
+                listaCarcatEdi.add(alturaEdi);
+                listaCarcatEdi.add(anchoEdi);
+                listaCarcatEdi.add(durezaEdi);
+                return listaCarcatEdi;
+                }
+           }
+       }catch (IndexOutOfBoundsException e){
+           pruebaOk=false;
+           Toolkit.getDefaultToolkit().beep();
+           mostrarMensaje("No existe dicho edificio");
+        }
+       return listaCarcatEdi;
+    }
+
     private void showMessage(){
         message= true;
     }
