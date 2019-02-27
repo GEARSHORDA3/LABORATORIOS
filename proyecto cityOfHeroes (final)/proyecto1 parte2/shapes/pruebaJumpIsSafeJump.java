@@ -40,7 +40,7 @@ public class pruebaJumpIsSafeJump
     @Test
     public void CityHeores2()
     {
-        CityOfHeroes cityOfHe2 = new CityOfHeroes(500, 500);
+        CityOfHeroes cityOfHe2 = new CityOfHeroes(800, 800);
         cityOfHe2.makeVisible();
         Canvas canvas = Canvas.getCanvas1();
         cityOfHe2.addBuilding(0, 50, 200, 1);
@@ -49,7 +49,7 @@ public class pruebaJumpIsSafeJump
         canvas.wait(1000);
         cityOfHe2.addHeroe("red", 1, 30);
         canvas.wait(1000);
-        cityOfHe2.isSafeJump("red",60,30);
-        cityOfHe2.jump("red",60,30,false);
+        cityOfHe2.isSafeJump("red",180,30);
+        cityOfHe2.jump("red",5,29,false);
     }
 }

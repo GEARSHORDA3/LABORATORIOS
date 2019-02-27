@@ -49,11 +49,13 @@ public class CityOfHeroesTest
         canvas.wait(1000);
         //cityOfHe2.addBuilding(400, 100, 400, 1);
         canvas.wait(1000);
-        cityOfHe2.addBuilding(200, 50, 50, 1);
+        cityOfHe2.addBuilding(400, 100, 400, 1);
         cityOfHe2.addHeroe("red", 1, 30);
         cityOfHe2.addHeroe("green", 1, 500); 
         canvas.wait(1000);
-        cityOfHe2.jumpPlan("red",2);
-        cityOfHe2.jump("green",60,89,false);
+        // cityOfHe2.jumpPlan("green",2);
+        // cityOfHe2.jump("green",5,32,false);
+        cityOfHe2.jump("red",2);
+        cityOfHe2.jump("red",5,32,false);
     }    
 }

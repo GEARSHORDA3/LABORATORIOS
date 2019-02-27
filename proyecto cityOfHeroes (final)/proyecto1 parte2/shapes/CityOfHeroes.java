@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.*;
 import javax.swing.ImageIcon;
@@ -36,6 +37,7 @@ public class CityOfHeroes
     private  Hashtable<Integer,Integer> durezasEdificios = new Hashtable<Integer,Integer>();
     private  ArrayList<Rectangle> Vitalidades;
     private ArrayList<Integer>listaPlan;
+    private ArrayList<Integer>listaPlan2;
     private boolean message=true;
     int PosicionColor=-2;
     private int edificioJumpPlan;
@@ -381,7 +383,8 @@ public class CityOfHeroes
                            
                        }
                        else{
-  
+                           System.out.println(color+" "+ angulo+" "+ velocidad+" "+ (altCanvas-posiYHeroe)+" "+
+                           posiYHeroe+" "+ posiXHeroe+" "+altCanvas+" "+achCanvas+" "+ 0.01+" "+isVisible+" "+infCoordenadas+" "+positionX+" "+durezasEdificios+" "+infCoordenadasAncho);
                            (Heroes.get(i)).Jump(color, angulo, velocidad, altCanvas-posiYHeroe,
                            posiYHeroe, posiXHeroe,altCanvas,achCanvas, 0.01,isVisible,infCoordenadas,positionX,durezasEdificios,infCoordenadasAncho);
                            if(Heroes.get(i).getVeriHeroNoMuerto()){
@@ -477,12 +480,16 @@ public class CityOfHeroes
      }   return false;
      }
 
+    /** Calcula el angulo y la velocidad de un salto a un edificio
+     * 
+     */ 
     public ArrayList jumpPlan(String heroe, int building){
         edificioJumpPlan=building;
         listaPlan = new ArrayList<Integer>();
+        listaPlan2 = new ArrayList<Integer>();
         notShowMessage();
         
-        for (int angulo=1; angulo<90;angulo++){
+        for (int angulo=5; angulo<6;angulo++){
             for (int velocidad=1; velocidad<90;velocidad++){
                 if (isSafeJump2(heroe,angulo,velocidad)){
                     listaPlan.add(angulo);
@@ -490,9 +497,30 @@ public class CityOfHeroes
                 }
             }
         }
+        
+        for (int angulo=60; angulo<61;angulo++){
+            for (int velocidad=1; velocidad<90;velocidad++){
+                if (isSafeJump2(heroe,angulo,velocidad)){
+                    listaPlan2.add(angulo);
+                    listaPlan2.add(velocidad);                    
+                }
+            }
+        }        
         showMessage();
         System.out.println(listaPlan);
         return listaPlan;
+    }
+
+    public void jump (String heroe, int building){
+        ArrayList<Integer> a = new ArrayList<Integer>();
+        a= jumpPlan(heroe, building);
+        System.out.println(a);
+        // int angulo=a.get(a.size()-2);
+        // int velocidad=a.get(a.size()-1);
+        int angulo = a.get(0);
+        int velocidad= a.get(1);
+        System.out.println(angulo+" "+velocidad);
+        jump(heroe,angulo,velocidad,false);
     }
     
     /**
