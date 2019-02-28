@@ -45,14 +45,16 @@ public class prueba2
         CityOfHeroes cityOfHe2 = new CityOfHeroes(500, 500);
         cityOfHe2.makeVisible();
         Canvas canvas = Canvas.getCanvas1();
-        cityOfHe2.addBuilding(0, 50, 100, 1);
+        cityOfHe2.addBuilding(0, 100, 100, 1);
+        cityOfHe2.addBuilding(300, 100, 400, 1);
         canvas.wait(1000);
         //cityOfHe2.addBuilding(60, 300, 30, 1);
         canvas.wait(1000);
         cityOfHe2.addHeroe("red", 1, 30);
-        //canvas.wait(1000);
+        canvas.wait(1000);
         //cityOfHe2.isSafeJump("red",60,30);
-        cityOfHe2.jump("red",5,28,false);
+        cityOfHe2.jump("blue",2);
+        canvas.wait(1000);
         //cityOfHe2.jump("red",60,30,false);
     }
 }

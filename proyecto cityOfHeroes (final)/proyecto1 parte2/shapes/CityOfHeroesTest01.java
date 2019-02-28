@@ -25,9 +25,9 @@ public class CityOfHeroesTest01 {
         ch.addBuilding(0, 10, 20, 5);
         assertTrue(ch.ok());
         ch.addBuilding(0, 10, 20, 10);
-        //çassertFalse(ch.ok());
-        //ch.addBuilding(20, 150, 20, 10);
-        //assertFalse(ch.ok());
+        assertFalse(ch.ok());
+        ch.addBuilding(20, 150, 20, 10);
+        assertFalse(ch.ok());
     }
     
     // @Test
