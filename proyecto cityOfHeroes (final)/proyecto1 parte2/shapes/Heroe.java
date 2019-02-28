@@ -83,10 +83,12 @@
             vitalidad.changeSize(7,anchoVitalidad);
             vitalidad.setXposition(x+(edificioX-8)-7);
             vitalidad.setYposition(y-11-12);
+            ListaVitalidad.add(vitalidad);
+            
             if (isVisible==true){
                 vitalidad.makeVisible();
             }            
-            ListaVitalidad.add(vitalidad);
+
             ListaHeroes.add(heroe);
             ColoresHeroes.add(color);
         }
@@ -532,7 +534,6 @@
             return heroe.getPositionX();
         }
     
-    
         /**
          *  obtener posicion y de heroe
          *
@@ -551,6 +552,10 @@
         public void setXYposition(double x, double y){
             heroe.setPositionX(x);
             heroe.setPositionY(y);
+        }  
+
+        public void setXYposition2(double x, double y){
+            heroe.setXYposition2(x,y);
         }  
     
         public void changeSize(int valor){
@@ -805,7 +810,7 @@
                 y=((posicionY)-(voy*t) + (4.9*(t*t)));
                 if (chocoEdificio3(posicionX,y,altoCanvas,anchoCanvas,infCoordenadas,color,posicionesX,durezasEdificios,infCoordenadasAncho)){
                    heroe.setXYposition(posiXoriginal,posiYoriginal);
-                   heroe.makeVisible();
+                   // heroe.makeVisible();
                    return true;
                 }
                 if (!chocoEdificio3(posicionX,y,altoCanvas,anchoCanvas,infCoordenadas,color,posicionesX,durezasEdificios,infCoordenadasAncho)
@@ -814,7 +819,7 @@
                    if (isVisible==true){
                    }
                    heroe.setXYposition(posiXoriginal,posiYoriginal);
-                   heroe.makeVisible();
+                   // heroe.makeVisible();
                    return true;
                 }
                 if (angulo<89){
@@ -827,15 +832,24 @@
                 posicionX+=(x/2);
                 posicionY=y;  
                 heroe.setXYposition(posicionX,posicionY);
-                heroe.makeVisible();
+                // heroe.makeVisible();
                 if(varibleBool){
                     varibleBool=false;
                 }
             }
         heroe.setXYposition(posiXoriginal,posiYoriginal);
-        heroe.makeVisible();
+        // heroe.makeVisible();
         return false;
         }        
+        
+        public ArrayList getXYPositionHeroe(String Heroe){
+            ArrayList<Integer>listaPositions= new ArrayList<Integer>();
+            int a =heroe.getPositionX();
+            int b =heroe.getPositionY();
+            listaPositions.add(a);
+            listaPositions.add(b);
+            return listaPositions;
+        }
         
 
       

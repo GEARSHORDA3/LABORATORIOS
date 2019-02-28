@@ -54,6 +54,11 @@ public class Circle{
         yPosition+=-yPosition+y;
     }
     
+    public void setXYposition2(double x, double y){
+        xPosition=(int) x;
+        yPosition=(int) y;
+    }    
+    
     public int getPositionX(){
         return xPosition;
     }

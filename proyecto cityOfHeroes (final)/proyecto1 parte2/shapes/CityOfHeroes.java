@@ -136,8 +136,8 @@ public class CityOfHeroes
         }
         else if((method.equals("jump"))){
             int building = (int)parameters.pop(); 
-            //jump((String)parameters.pop(),building);
-            //Falta reparar edificios
+            jump((String)parameters.pop(),building);
+            // Falta reparar edificios
             pruebaOk=true;
             return;
         }
@@ -145,14 +145,14 @@ public class CityOfHeroes
             ArrayList<Object> temp;
             int building = (int)parameters.pop();
             temp=(ArrayList)parameters.pop();
-            //jump((String)temp.get(1),building);
+            jump((String)temp.get(1),building);
            pruebaOk=true;
            return;
         }
         else if((method.equals("jump3"))){
             int building = (int)parameters.pop(); 
-            //jump((String)parameters.pop(),building);
-            //Falta reparar edificios
+            jump((String)parameters.pop(),building);
+            // Falta reparar edificios
             pruebaOk=true;
             return;
         }
@@ -280,7 +280,7 @@ public class CityOfHeroes
          parameters.push(positionX.indexOf(x)+1);
          if (isVisible==true){
          edificio.makeVisible();
-         };
+         }
          pruebaOk=true;
         }
        
@@ -339,17 +339,16 @@ public class CityOfHeroes
                 int edificioHeroeAncho= infCoordenadasAncho.get(x);
                 int ediActualPosi=x;
                 Heroe heroe= new Heroe(color,hidingBuilding,strength, x,y, edificioHeroeAncho,isVisible,ediActualPosi);
-                if (color!="brown"){
-                    System.out.println(color);
+                // if (color!="brown"){
                     Heroes.add(heroe);
-                }
+                // }
                 pruebaOk=true;
-                if (color!="brown"){                
-                infoHeroes.add(hidingBuilding);
-                infoHeroes.add(strength);
-                methods.push("addHeroe");
-                parameters.push(color);
-            }
+                // if (color!="brown"){                
+                    infoHeroes.add(hidingBuilding);
+                    infoHeroes.add(strength);
+                    methods.push("addHeroe");
+                    parameters.push(color);
+            // }
             if (isVisible==true){
                 heroe.makeVisible();
             }
@@ -458,7 +457,7 @@ public class CityOfHeroes
 
     }
     }
-    
+
     /**
      * Mostrar los heroes muertos 
      *
@@ -628,16 +627,15 @@ public class CityOfHeroes
       * 
       */
     public ArrayList jumpPlan(String heroe, int building){
-        addHeroe("brown",building,0);
+        String colorOriginal=heroe;
         
         edificioJumpPlan=building;
         listaPlan = new ArrayList<Integer>();
         listaPlan2 = new ArrayList<Integer>();
         notShowMessage();
-        
         for (int angulo=5; angulo<6;angulo++){
             for (int velocidad=1; velocidad<90;velocidad++){
-                if (isSafeJump2("brown",angulo,velocidad)){
+                if (isSafeJump2(heroe,angulo,velocidad)){
                     listaPlan.add(angulo);
                     listaPlan.add(velocidad);                    
                 }
@@ -646,28 +644,44 @@ public class CityOfHeroes
         
         for (int angulo=60; angulo<61;angulo++){
             for (int velocidad=1; velocidad<90;velocidad++){
-                if (isSafeJump2("brown",angulo,velocidad)){
+                if (isSafeJump2(heroe,angulo,velocidad)){
                     listaPlan2.add(angulo);
                     listaPlan2.add(velocidad);                    
                 }
             }
-        }       
+        }
         
-        // isSafeJump2(heroe,60,40);
-        // listaPlan.add(60);
-        // listaPlan.add(40);
         showMessage();
         System.out.println(listaPlan);
         return listaPlan;
     }
 
+    public ArrayList getXYPositionHeroe(String color){
+        ArrayList<Integer> listaposition = new ArrayList<Integer>();
+        for(int i=0;i<Heroes.size();i++){
+            // System.out.println(Heroes.get(i).getHeroeColor(Heroes.get(i))+"  addasd");
+            if (Heroes.get(i).getHeroeColor(Heroes.get(i)).equals(color)){        
+                listaposition=Heroes.get(i).getXYPositionHeroe( Heroes.get(i).getHeroeColor(Heroes.get(i)) );
+            }
+        }
+        return listaposition;
+    }
+    
+    public void setXYposition2(String color,double x, double y){
+        for(int i=0;i<Heroes.size();i++){
+            if (Heroes.get(i).getHeroeColor(Heroes.get(i)).equals(color)){
+                Heroes.get(i).setXYposition2(x,y);
+                removeHeroe("brown");
+                Heroes.get(i).makeVisible();
+            }
+        }
+    }
     public void jump (String heroe, int building){
+        addHeroe("brown",building,0);
         ArrayList<Integer> a = new ArrayList<Integer>();
-        a= jumpPlan(heroe, building);
-        System.out.println(a);
-        int angulo = a.get(0);
-        int velocidad= a.get(1);
-        jump(heroe,angulo,velocidad,false);
+        a= getXYPositionHeroe("brown");
+        setXYposition2(heroe,a.get(0), a.get(1));
+        a= getXYPositionHeroe(heroe);
     }
     
     /**
