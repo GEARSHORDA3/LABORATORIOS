@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 import java.util.*;
 import javax.swing.ImageIcon;
@@ -9,6 +8,7 @@ import java.util.Collections;
 import java.awt.Toolkit; 
 import java.util.ArrayList;
 import java.util.ArrayList;
+ 
 /**
 * Es la ciudad de los heroes donde se tiene unos edificos y herores que interactuan entre si mediante un salto
 * 
@@ -37,10 +37,14 @@ public class CityOfHeroes
     private  Hashtable<Integer,Integer> durezasEdificios = new Hashtable<Integer,Integer>();
     private  ArrayList<Rectangle> Vitalidades;
     private ArrayList<Integer>listaPlan;
-    private ArrayList<Integer>listaPlan2;
     private boolean message=true;
     int PosicionColor=-2;
     private int edificioJumpPlan;
+    private ArrayList<Integer> infoEdificios = new ArrayList<Integer>();
+    private ArrayList<Integer> infoHeroes = new ArrayList<Integer>();
+    private Stack<Object>methods= new Stack<Object>();
+    private Stack<Object>parameters=new Stack<Object>();
+    private boolean modoRedoOn=false;
     /**
      * constructor
      *
@@ -58,6 +62,78 @@ public class CityOfHeroes
     }
     
     /**
+     * Realizar la ultima accion inversamente a lo que se hizo 
+     * @param  y  a sample parameter for a method
+     */
+    public void redo()
+    {
+        System.out.println(parameters+" parameters");
+        System.out.println(methods+" methods");
+        if(methods.isEmpty()){
+            mostrarMensaje("No se ha realizado ninguna accion");
+            pruebaOk=false;
+            return;
+        }
+        String method = String.valueOf(methods.pop());
+        if(method.equals("addBuilding")){
+            int x = (int)parameters.pop();
+            removeBuilding(x);
+            pruebaOk=true;
+            return;
+        }
+        else if(method.equals("addHeroe")){
+            modoRedoOn=true;
+            System.out.println(parameters+" parameters");
+            String x = (String)parameters.pop();
+            removeHeroe(x);
+            pruebaOk=true;
+            modoRedoOn=false;
+            return;
+        }
+        else if((method.equals("removeBuilding"))){
+            ArrayList<Integer> temp = (ArrayList<Integer>)parameters.pop();
+            addBuilding((int)temp.get(0),(int)temp.get(1),(int)temp.get(2),(int)temp.get(3));
+            pruebaOk=true;
+            return;
+        }
+        else if((method.equals("removeHeroe"))){
+            modoRedoOn=true;
+            ArrayList<Object> temp = (ArrayList)parameters.pop();
+            addHeroe((String)temp.get(0),(int)temp.get(1),(int)temp.get(2));
+            pruebaOk = true;
+            modoRedoOn=false;
+            return;
+        }
+        else if((method.equals("jump"))){
+            int building = (int)parameters.pop(); 
+            //jump((String)parameters.pop(),building);
+            //Falta reparar edificios
+            pruebaOk=true;
+            return;
+        }
+        else if((method.equals("jump2"))){
+            ArrayList<Object> temp;
+            int building = (int)parameters.pop();
+            temp=(ArrayList)parameters.pop();
+            //jump((String)temp.get(1),building);
+           pruebaOk=true;
+           return;
+        }
+        else if((method.equals("jump3"))){
+            int building = (int)parameters.pop(); 
+            //jump((String)parameters.pop(),building);
+            //Falta reparar edificios
+            pruebaOk=true;
+            return;
+        }
+        else{
+            mostrarMensaje("El ultimo metodo no se puede rehacer");
+            pruebaOk=false;
+            return;
+        }
+    }
+
+    /**
      * Hace visible todo lo presente en la ciudad 
      *
      * 
@@ -68,6 +144,23 @@ public class CityOfHeroes
         draw();
     }
     
+    /**
+     * La consulta city debe retornar un vector con dos vectores. El primero con la información de los edificios [x,ancho, alto, dureza] ordenado
+     * por posición en x. El segundo con la información de los heroes [edificio, fortaleza] ordenado por el número de edificio.
+     * @return vector
+     */
+    public Integer[][] city()
+    {
+        Integer[][] array = new Integer[2][];
+        Integer[] infEdificios = new Integer[infoEdificios.size()];
+        infEdificios = infoEdificios.toArray(infEdificios);
+        array[0]= infEdificios;
+        Integer[] infHeroes= new Integer[infoHeroes.size()];
+        infHeroes = infoHeroes.toArray(infHeroes);
+        array[1]= infHeroes;
+        return array;
+    }
+
 
     /**
      * darw the heroe.
@@ -144,6 +237,10 @@ public class CityOfHeroes
          else{
              xNumeroColores++;
          };
+         infoEdificios.add(x);
+         infoEdificios.add(width);
+         infoEdificios.add(height);
+         infoEdificios.add(hardness);
          Building edificio = new Building(x, width, height, hardness,xNumeroColores) ;
          Builds.add(edificio);
          positionX.add(x);
@@ -151,6 +248,7 @@ public class CityOfHeroes
          infCoordenadas.put(x ,y);
          infCoordenadasAncho.put(x,(edificio.getWidth()));
          durezasEdificios.put(x,hardness);
+         parameters.push(positionX.indexOf(x)+1);
          if (isVisible==true){
          edificio.makeVisible();
          pruebaOk=true;
@@ -195,7 +293,7 @@ public class CityOfHeroes
     public void addHeroe(String color,int hidingBuilding, int strength){
         color = color.toLowerCase();
         if(Builds.size()!=0){
-                if (verifyDeadHero(color)){
+                if (verifyDeadHero(color) && !modoRedoOn){
                     pruebaOk=true;
                     return;
                 }
@@ -210,6 +308,10 @@ public class CityOfHeroes
                 Heroe heroe= new Heroe(color,hidingBuilding,strength, x,y, edificioHeroeAncho,isVisible,ediActualPosi);
                 Heroes.add(heroe);
                 pruebaOk=true;
+                infoHeroes.add(hidingBuilding);
+                infoHeroes.add(strength);
+                methods.push("addHeroe");
+                parameters.push(color);
                 if (isVisible==true){
                     heroe.makeVisible();
                 }
@@ -270,6 +372,12 @@ public class CityOfHeroes
            int i; 
            for(i=0;i<Builds.size();i++){
              if (Builds.get(i).getPositionX()==buscador){
+                ArrayList<Integer> lista=new ArrayList<Integer>();
+                lista.add(Builds.get(i).getPositionX());
+                lista.add(infCoordenadasAncho.get(Builds.get(i).getPositionX()));
+                lista.add(Builds.get(i).getHeight());
+                lista.add(Builds.get(i).getHardness());
+                parameters.push(lista);
                 int posiXedi= Builds.get(i).getPositionX();
                 infCoordenadas.remove(posiXedi);
                 infCoordenadasAncho.remove(posiXedi);
@@ -297,6 +405,12 @@ public class CityOfHeroes
        int i; 
        for(i=0;i<Heroes.size();i++){
            if (Heroes.get(i).getHeroeColor(Heroes.get(i)).equals(color)){
+               ArrayList<Object> lista=new ArrayList<Object>();
+               lista.add(color);
+               lista.add(Heroes.get(i).getHidingBuilding());
+               lista.add(Heroes.get(i).getStrength());
+               methods.push("removeHeroe");
+               parameters.push(lista);
                Heroes.get(i).removeBarraVida();
                Heroes.get(i).removeHeroe(Heroes.get(i));
                Heroes.remove(i);
@@ -383,8 +497,7 @@ public class CityOfHeroes
                            
                        }
                        else{
-                           System.out.println(color+" "+ angulo+" "+ velocidad+" "+ (altCanvas-posiYHeroe)+" "+
-                           posiYHeroe+" "+ posiXHeroe+" "+altCanvas+" "+achCanvas+" "+ 0.01+" "+isVisible+" "+infCoordenadas+" "+positionX+" "+durezasEdificios+" "+infCoordenadasAncho);
+  
                            (Heroes.get(i)).Jump(color, angulo, velocidad, altCanvas-posiYHeroe,
                            posiYHeroe, posiXHeroe,altCanvas,achCanvas, 0.01,isVisible,infCoordenadas,positionX,durezasEdificios,infCoordenadasAncho);
                            if(Heroes.get(i).getVeriHeroNoMuerto()){
@@ -480,16 +593,12 @@ public class CityOfHeroes
      }   return false;
      }
 
-    /** Calcula el angulo y la velocidad de un salto a un edificio
-     * 
-     */ 
     public ArrayList jumpPlan(String heroe, int building){
         edificioJumpPlan=building;
         listaPlan = new ArrayList<Integer>();
-        listaPlan2 = new ArrayList<Integer>();
         notShowMessage();
         
-        for (int angulo=5; angulo<6;angulo++){
+        for (int angulo=1; angulo<90;angulo++){
             for (int velocidad=1; velocidad<90;velocidad++){
                 if (isSafeJump2(heroe,angulo,velocidad)){
                     listaPlan.add(angulo);
@@ -497,30 +606,9 @@ public class CityOfHeroes
                 }
             }
         }
-        
-        for (int angulo=60; angulo<61;angulo++){
-            for (int velocidad=1; velocidad<90;velocidad++){
-                if (isSafeJump2(heroe,angulo,velocidad)){
-                    listaPlan2.add(angulo);
-                    listaPlan2.add(velocidad);                    
-                }
-            }
-        }        
         showMessage();
         System.out.println(listaPlan);
         return listaPlan;
-    }
-
-    public void jump (String heroe, int building){
-        ArrayList<Integer> a = new ArrayList<Integer>();
-        a= jumpPlan(heroe, building);
-        System.out.println(a);
-        // int angulo=a.get(a.size()-2);
-        // int velocidad=a.get(a.size()-1);
-        int angulo = a.get(0);
-        int velocidad= a.get(1);
-        System.out.println(angulo+" "+velocidad);
-        jump(heroe,angulo,velocidad,false);
     }
     
     /**
@@ -542,7 +630,7 @@ public class CityOfHeroes
                 int posiXEdi= Builds.get(i).getPositionX();
                 int alturaEdi = Builds.get(i).getPositionY();
                 int anchoEdi= Builds.get(i).getWidth();
-                int durezaEdi=Builds.get(i).gethardness();
+                int durezaEdi=Builds.get(i).getHardness();
                 listaCarcatEdi.add(posiXEdi);
                 listaCarcatEdi.add(alturaEdi);
                 listaCarcatEdi.add(anchoEdi);

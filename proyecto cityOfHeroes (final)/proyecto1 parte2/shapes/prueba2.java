@@ -47,12 +47,12 @@ public class prueba2
         Canvas canvas = Canvas.getCanvas1();
         cityOfHe2.addBuilding(0, 50, 100, 1);
         canvas.wait(1000);
-        cityOfHe2.addBuilding(60, 300, 30, 1);
+        //cityOfHe2.addBuilding(60, 300, 30, 1);
         canvas.wait(1000);
         cityOfHe2.addHeroe("red", 1, 30);
-        canvas.wait(1000);
-        cityOfHe2.isSafeJump("red",60,30);
-        cityOfHe2.jump("red",60,30,false);
-        cityOfHe2.jump("red",60,30,false);
+        //canvas.wait(1000);
+        //cityOfHe2.isSafeJump("red",60,30);
+        cityOfHe2.jump("red",5,28,false);
+        //cityOfHe2.jump("red",60,30,false);
     }
 }

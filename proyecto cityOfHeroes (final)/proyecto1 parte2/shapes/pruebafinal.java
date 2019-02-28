@@ -54,9 +54,9 @@ public class pruebafinal
         canvas.wait(1000);
         cityOfHe1.addHeroe("red", 2, 30);
         canvas.wait(1000);
-        cityOfHe1.isSafeJump("red",60,30);
-        cityOfHe1.jump("red",60,30,false);
-        cityOfHe1.finish();
+        //cityOfHe1.isSafeJump("red",60,30);
+        //cityOfHe1.jump("red",60,30,false);
+        //cityOfHe1.finish();
         
     }
     

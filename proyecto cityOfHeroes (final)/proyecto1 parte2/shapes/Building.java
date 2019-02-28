@@ -90,6 +90,13 @@ public class Building
     }
     
     /**
+     * Return the width
+     */
+    public int getHeight(){
+        return cuadrado.getHeight();
+    }
+    
+    /**
      * Return color edificio
      */
     public String getColor(){
@@ -120,7 +127,7 @@ public class Building
     /**
      * Obtener la dureza del edifico
      */
-    public int gethardness()
+    public int getHardness()
     {
         return hardness;
     }
