@@ -276,6 +276,7 @@
          */
         public void mostrarMensaje(String string)
         {
+           if (isVisible==true){
            Toolkit.getDefaultToolkit().beep();
            JOptionPane p = new JOptionPane(string);
            JFrame frame= new JFrame();
@@ -288,6 +289,7 @@
             } catch (InterruptedException e){
             }
            frame.setVisible(false);
+        }
         }
 
         /**
@@ -469,9 +471,6 @@
                 
                 else if (!chocoEdificio(posicionX,y,altoCanvas,anchoCanvas,infCoordenadas,color,posicionesX,durezasEdificios,infCoordenadasAncho)
                 &&sobreviveHeroeEdi==true){
-                   System.out.println(chocoEdificio(posicionX,y,altoCanvas,anchoCanvas,infCoordenadas,color,posicionesX,durezasEdificios,infCoordenadasAncho));
-                   System.out.println(sobreviveHeroeEdi);
-                   System.out.println("sobrevivio");
                    heroe.setXYposition(posiActEdiX+(((int)infCoordenadasAncho.get(posiActEdiX))-12),y+2);
                    (ListaVitalidad.get(pos1)).setXYposition(heroe.getPositionX()-6,heroe.getPositionY()-7);
                    varibleBool=false;

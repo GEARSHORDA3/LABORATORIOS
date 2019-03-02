@@ -59,7 +59,7 @@ public class CityOfHeroes
         width1=widthNew;
         height1=heightNew;
         canvas = Canvas.getCanvas(widthNew,heightNew);
-        pruebaOk=true;
+        setPruebOk(true);
     }
     
     /**
@@ -70,28 +70,28 @@ public class CityOfHeroes
     {
         if(methods.isEmpty()){
             mostrarMensaje("No se ha realizado ninguna accion");
-            pruebaOk=false;
+            setPruebOk(false);
             return;
         }
         String method = String.valueOf(methods.pop());
         if(method.equals("addBuilding")){
             int x = (int)parameters.pop();
             removeBuilding(x);
-            pruebaOk=true;
+            setPruebOk(true);
             return;
         }
         else if(method.equals("addHeroe")){
             modoRedoOn=true;
             String x = (String)parameters.pop();
             removeHeroe(x);
-            pruebaOk=true;
+            setPruebOk(true);
             modoRedoOn=false;
             return;
         }
         else if((method.equals("removeBuilding"))){
             ArrayList<Integer> temp = (ArrayList<Integer>)parameters.pop();
             addBuilding((int)temp.get(0),(int)temp.get(1),(int)temp.get(2),(int)temp.get(3));
-            pruebaOk=true;
+            setPruebOk(true);
             return;
         }
         else if((method.equals("removeHeroe"))){
@@ -135,7 +135,7 @@ public class CityOfHeroes
             int building = (int)parameters.pop(); 
             jump((String)parameters.pop(),building);
             // Falta reparar edificios
-            pruebaOk=true;
+            setPruebOk(true);
             return;
         }
         else if((method.equals("jump2"))){
@@ -143,19 +143,19 @@ public class CityOfHeroes
             int building = (int)parameters.pop();
             temp=(ArrayList)parameters.pop();
             jump((String)temp.get(1),building);
-           pruebaOk=true;
+           setPruebOk(true);
            return;
         }
         else if((method.equals("jump3"))){
             int building = (int)parameters.pop(); 
             jump((String)parameters.pop(),building);
             // Falta reparar edificios
-            pruebaOk=true;
+            setPruebOk(true);
             return;
         }
         else{
             mostrarMensaje("El ultimo metodo no se puede rehacer");
-            pruebaOk=false;
+            setPruebOk(false);
             return;
         }
     }
@@ -167,7 +167,7 @@ public class CityOfHeroes
      */   
     public void makeVisible(){
         isVisible = true;
-        pruebaOk=true;
+        setPruebOk(true);
         draw();
     }
     
@@ -208,7 +208,7 @@ public class CityOfHeroes
            for(a=0;a<Builds.size();a++){
                Builds.get(a).makeVisible();
                 }
-           pruebaOk=true;
+           setPruebOk(true);
     }      
     } 
     
@@ -219,7 +219,7 @@ public class CityOfHeroes
      */
     public void makeInvisible(){
         erase();
-        pruebaOk=true;
+        setPruebOk(true);
         isVisible = false;
     }
     
@@ -238,7 +238,7 @@ public class CityOfHeroes
            for(a=0;a<Builds.size();a++){
                Builds.get(a).makeInvisible();
                 } 
-           pruebaOk=true;     
+           setPruebOk(true);     
         }
     }
     
@@ -258,7 +258,7 @@ public class CityOfHeroes
        else{
          if (xNumeroColores==colores.length-1){
              xNumeroColores=0;
-             pruebaOk=true;
+             setPruebOk(true);
          }
          else{
              xNumeroColores++;
@@ -278,7 +278,7 @@ public class CityOfHeroes
          if (isVisible==true){
          edificio.makeVisible();
          }
-         pruebaOk=true;
+         setPruebOk(true);
         }
        
     }
@@ -303,13 +303,13 @@ public class CityOfHeroes
           if((xPositionBuild<=xPositionEdi && xPositionEdi<= xwidthBuild) || (xPositionBuild<=x2PositionEdi
           && x2PositionEdi<= xwidthBuild )||(xPositionEdi<=xPositionBuild && xwidthBuild<= x2PositionEdi) || xPositionEdi>=achCanvas
           || xPositionEdi+anchoEdi>=achCanvas){
-             pruebaOk=false;
+             setPruebOk(false);
              Toolkit.getDefaultToolkit().beep();
              mostrarMensaje("El edificio queda sobrepuesto en el edificio "+Builds.get(a).getColor());
              return true; 
             }
         }
-        pruebaOk=true;
+        setPruebOk(true);
         return false; 
     }
    
@@ -324,7 +324,7 @@ public class CityOfHeroes
         color = color.toLowerCase();
         if(Builds.size()!=0){
             if (verifyDeadHero(color) && !modoRedoOn){
-                pruebaOk=true;
+                setPruebOk(true);
                 return;
             }
             else{
@@ -339,7 +339,7 @@ public class CityOfHeroes
                 // if (color!="brown"){
                     Heroes.add(heroe);
                 // }
-                pruebaOk=true;
+                setPruebOk(true);
                 // if (color!="brown"){                
                     infoHeroes.add(hidingBuilding);
                     infoHeroes.add(strength);
@@ -351,13 +351,13 @@ public class CityOfHeroes
             }
             }
             catch(IndexOutOfBoundsException e){
-                pruebaOk=false;
+                setPruebOk(false);
                 Toolkit.getDefaultToolkit().beep();
                 mostrarMensaje("No existe un edificio al cual");                  
             }
         }
         else{
-            pruebaOk=false;
+            setPruebOk(false);
             Toolkit.getDefaultToolkit().beep();
             mostrarMensaje("No existe un edificio al cual"); 
         }
@@ -370,22 +370,22 @@ public class CityOfHeroes
      * @return    boolean
      */
     private boolean  verifyDeadHero(String Color){
-        pruebaOk=true;
+        setPruebOk(true);
         if (DeadsHeroes.contains(Color)){
             Toolkit.getDefaultToolkit().beep();
             mostrarMensaje("El hereoe de color "+Color+" esta muerto o ya ha sido creado"); 
-            pruebaOk=true;
+            setPruebOk(true);
             return true;
         }
         else if(liveHeroes.contains(Color)){
             Toolkit.getDefaultToolkit().beep();
             mostrarMensaje("El hereoe de color "+Color+" ya existe o esta muerto");
-            pruebaOk=true;
+            setPruebOk(true);
             return true;
         }
         else{
              liveHeroes.add(Color);
-             pruebaOk=true;
+             setPruebOk(true);
              return false; 
         }
 
@@ -416,13 +416,13 @@ public class CityOfHeroes
                 infCoordenadas.remove(posiXedi);
                 infCoordenadasAncho.remove(posiXedi);
                 positionX.remove(positionX.indexOf(posiXedi)); 
-                pruebaOk=true;
+                setPruebOk(true);
                 Builds.get(i).removeBuilding(Builds.get(i));
                 Builds.remove(i);
                 }
            }
        }catch (IndexOutOfBoundsException e){
-           pruebaOk=false;
+           setPruebOk(false);
            Toolkit.getDefaultToolkit().beep();
            mostrarMensaje("No existe dicho edificio");
         }
@@ -448,11 +448,12 @@ public class CityOfHeroes
                Heroes.get(i).removeBarraVida();
                Heroes.get(i).removeHeroe(Heroes.get(i));
                Heroes.remove(i);
-               pruebaOk=true;
+               setPruebOk(true);
                return;
             }
 
     }
+    setPruebOk(false);
     }
 
     /**
@@ -462,7 +463,7 @@ public class CityOfHeroes
      */
     public String[] deads()
     {
-        pruebaOk=true;
+        setPruebOk(true);
         String[] stockArr = new String[DeadsHeroes.size()];
         stockArr = DeadsHeroes.toArray(stockArr);
         return stockArr ;
@@ -477,7 +478,6 @@ public class CityOfHeroes
     private void modiAltuEdiChoqueHeroe(int edificoModificadoX,int nuevaAlturaEdiY)
     {
        try{
-           System.out.println("edificoModificadoX "+edificoModificadoX);
            int i; 
            for(i=0;i<Builds.size();i++){
              if (Builds.get(i).getPositionX()==edificoModificadoX){
@@ -486,7 +486,7 @@ public class CityOfHeroes
                 }
            }
        }catch (IndexOutOfBoundsException e){
-           pruebaOk=false;
+           setPruebOk(false);
            Toolkit.getDefaultToolkit().beep();
            mostrarMensaje("No existe dicho edificio para modificar");
         }
@@ -523,13 +523,13 @@ public class CityOfHeroes
                                modiAltuEdiChoqueHeroe(edificoModificadoX,nuevaAlturaEdiY);
                                this.asignarEdiDañado(Heroes.get(i).getXEdiDañado());
                                this.addDeads(Heroes.get(i).deads(),Heroes.get(i));
-                               pruebaOk=true;
+                               setPruebOk(true);
                                return;
                             }
                             else{
                                 this.asignarEdiDañado(Heroes.get(i).getXEdiDañado());
                                 this.addDeads(Heroes.get(i).deads(),Heroes.get(i));
-                                pruebaOk=true;
+                                setPruebOk(true);
                                 return;
                             }
                            
@@ -545,20 +545,20 @@ public class CityOfHeroes
                                modiAltuEdiChoqueHeroe(edificoModificadoX,nuevaAlturaEdiY);
                                this.asignarEdiDañado(Heroes.get(i).getXEdiDañado());
                                this.addDeads(Heroes.get(i).deads(),Heroes.get(i));
-                               pruebaOk=true;
+                               setPruebOk(true);
                                return;
                             }
                             else{
                                 this.asignarEdiDañado(Heroes.get(i).getXEdiDañado());
                                 this.addDeads(Heroes.get(i).deads(),Heroes.get(i));
-                                pruebaOk=true;
+                                setPruebOk(true);
                                 return;
                             }
                         }
                     }
                 }
            }
-           pruebaOk=false;
+           setPruebOk(false);
            
     }         
     }
@@ -587,12 +587,13 @@ public class CityOfHeroes
                    if (xpositionEdi<=posiXHeroe && posiXHeroe<=anchoEdi){
                        boolean n=(Heroes.get(i)).isSafeJump(posXoriginal,posYoriginal,color, angulo, velocidad, altCanvas-posiYHeroe,
                        posiYHeroe, posiXHeroe,altCanvas,achCanvas, 0.01,isVisible,infCoordenadas,positionX,durezasEdificios,infCoordenadasAncho, message);
-                       pruebaOk=true;
+                       setPruebOk(true);
                        return n;
                     }
                 }
            }
-    }  
+    }
+    setPruebOk(true);
     return false;
     }
     
@@ -627,7 +628,7 @@ public class CityOfHeroes
                     }
                 }
            }
-           pruebaOk=false;
+           setPruebOk(false);
      }   return false;
      }
 
@@ -719,7 +720,7 @@ public class CityOfHeroes
                 }
            }
        }catch (IndexOutOfBoundsException e){
-           pruebaOk=false;
+           setPruebOk(false);
            Toolkit.getDefaultToolkit().beep();
            mostrarMensaje("No existe dicho edificio");
         }
@@ -737,15 +738,23 @@ public class CityOfHeroes
     public void zoom(char signo){      
         Canvas canvas = Canvas.getCanvas1();
         canvas.zoom(signo);
-        pruebaOk=true;
+        setPruebOk(true);
     }
     
+
+    public void setPruebOk(boolean estado)
+    {
+        pruebaOk=estado;
+        return;
+    }
+
     /**
      * reutilizar codigo para crear mensaje
      * @param  string cadena a representar
      */
     private void mostrarMensaje(String string)
     {
+       if (isVisible==true){
        Toolkit.getDefaultToolkit().beep();
        JOptionPane p = new JOptionPane(string);
        JFrame frame= new JFrame();
@@ -758,6 +767,7 @@ public class CityOfHeroes
         } catch (InterruptedException e){
         }
        frame.setVisible(false);
+    }
     }
         
     /** Evalua si las pruebas estan bien
