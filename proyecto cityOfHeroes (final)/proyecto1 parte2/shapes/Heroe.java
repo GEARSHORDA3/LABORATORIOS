@@ -45,7 +45,7 @@
         private int strenghtt2;
         private boolean modoIsJumpOn=false;
         private int nuevaAlturaEdificio;
-        private int posiEdiModificado;
+        private int posiEdiModificado=-1;
         private boolean veriHeroNoMuerto=false;
         private int anchoVitalidad=30;
         private ArrayList<Integer>listaPlan;
@@ -77,7 +77,7 @@
             this.hidingBuilding=hidingBuilding;
             heroe= new Circle ();
             heroe.changeColor(color);
-            heroe.setXYposition(x+((edificioX)-12),y-15);
+            heroe.setXYposition(x+((edificioX)-8),y-15);
             vitalidad = new Rectangle();
             vidasHeores.add(vitalidad);
             vitalidad.changeSize(7,anchoVitalidad);
@@ -128,9 +128,10 @@
         {
             return posiEdiModificado;
         }
-        
+
+
         public int listaVitalidadSize(){
-                return ListaVitalidad.size();
+                    return ListaVitalidad.size();
             }
         
         /**
@@ -336,6 +337,7 @@
                            hidingBuilding=posicionesX2.indexOf(i);
                            sobreviveHeroeEdi=true;
                            hereoEnEdiRoto=true;
+                           posiEdiModificado=posiActEdiX;
                            return false;
                         }
                        else{
@@ -376,14 +378,7 @@
                    BorraHeroe(color);
                    return true;
                 }
-                // else if (y<=0){
-                   // System.out.println("y<=0"); 
-                   // this.setHeroeMuerto();
-                   // BorraHeroe(color);
-                   // return true;                
-                // }
                 else if (x<=0){
-                   System.out.println("x<=0"); 
                    this.setHeroeMuerto();
                    BorraHeroe(color);
                    return true;                
@@ -430,8 +425,8 @@
          public void Jump(String color, int angulo, int velocidad,int alturaEdi, int posy, int posx, int altoCanvas,int anchoCanvas,double avance,
          boolean isVisible,Hashtable infCoordenadas,ArrayList posicionesX,Hashtable durezasEdificios,Hashtable infCoordenadasAncho)
         {
-            // System.out.println( color+"  "+ angulo+"  "+ velocidad+"  "+alturaEdi+"  "+ posy+"  "+ posx+"  "+ altoCanvas+"  "+anchoCanvas+"  "+avance+"  "+ isVisible+"  "+infCoordenadas+"  "+posicionesX+"  "+durezasEdificios+"  "+infCoordenadasAncho);
-            Canvas canvas = Canvas.getCanvas1(); 
+            Canvas canvas = Canvas.getCanvas1();
+            sobreviveHeroeEdi=false;
             y=0;
             if(angulo>90){
                 angulo*=-1;
@@ -471,13 +466,16 @@
                 if (chocoEdificio(posicionX,y,altoCanvas,anchoCanvas,infCoordenadas,color,posicionesX,durezasEdificios,infCoordenadasAncho)){
                     return;
                 }
+                
                 else if (!chocoEdificio(posicionX,y,altoCanvas,anchoCanvas,infCoordenadas,color,posicionesX,durezasEdificios,infCoordenadasAncho)
                 &&sobreviveHeroeEdi==true){
+                   System.out.println(chocoEdificio(posicionX,y,altoCanvas,anchoCanvas,infCoordenadas,color,posicionesX,durezasEdificios,infCoordenadasAncho));
+                   System.out.println(sobreviveHeroeEdi);
+                   System.out.println("sobrevivio");
                    heroe.setXYposition(posiActEdiX+(((int)infCoordenadasAncho.get(posiActEdiX))-12),y+2);
                    (ListaVitalidad.get(pos1)).setXYposition(heroe.getPositionX()-6,heroe.getPositionY()-7);
                    varibleBool=false;
                    nuevaAlturaEdificio=heroe.getPositionY()+15;
-                   posiEdiModificado=posiActEdiX;
                    veriHeroNoMuerto=true;
                    infCoordenadas.put(posiActEdiX,(int) heroe.getPositionY()+7);
                    if (isVisible==true){

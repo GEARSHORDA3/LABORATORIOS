@@ -68,8 +68,6 @@ public class CityOfHeroes
      */
     public void redo()
     {
-        System.out.println(parameters+" parameters");
-        System.out.println(methods+" methods");
         if(methods.isEmpty()){
             mostrarMensaje("No se ha realizado ninguna accion");
             pruebaOk=false;
@@ -84,7 +82,6 @@ public class CityOfHeroes
         }
         else if(method.equals("addHeroe")){
             modoRedoOn=true;
-            System.out.println(parameters+" parameters");
             String x = (String)parameters.pop();
             removeHeroe(x);
             pruebaOk=true;
@@ -480,6 +477,7 @@ public class CityOfHeroes
     private void modiAltuEdiChoqueHeroe(int edificoModificadoX,int nuevaAlturaEdiY)
     {
        try{
+           System.out.println("edificoModificadoX "+edificoModificadoX);
            int i; 
            for(i=0;i<Builds.size();i++){
              if (Builds.get(i).getPositionX()==edificoModificadoX){
@@ -501,8 +499,9 @@ public class CityOfHeroes
      * @return void
      */
      public void jump(String color, int angulo, int velocidad, boolean slow){  
-     int achCanvas= canvas.getWidth();
-     int altCanvas= canvas.getHeight();
+       int achCanvas= canvas.getWidth();
+       int altCanvas= canvas.getHeight();
+       color = color.toLowerCase();
        for(int i=0;i<Heroes.size();i++){
            if (Heroes.get(i).getHeroeColor(Heroes.get(i)).equals(color)){
                int posiXHeroe= (Heroes.get(i)).getxPosition();
@@ -525,11 +524,15 @@ public class CityOfHeroes
                                this.asignarEdiDañado(Heroes.get(i).getXEdiDañado());
                                this.addDeads(Heroes.get(i).deads(),Heroes.get(i));
                                pruebaOk=true;
+                               return;
                             }
                             else{
                                 this.asignarEdiDañado(Heroes.get(i).getXEdiDañado());
                                 this.addDeads(Heroes.get(i).deads(),Heroes.get(i));
-                                pruebaOk=true;}
+                                pruebaOk=true;
+                                return;
+                            }
+                           
                        }
                        else{
                            (Heroes.get(i)).Jump(color, angulo, velocidad, altCanvas-posiYHeroe,
@@ -542,16 +545,21 @@ public class CityOfHeroes
                                modiAltuEdiChoqueHeroe(edificoModificadoX,nuevaAlturaEdiY);
                                this.asignarEdiDañado(Heroes.get(i).getXEdiDañado());
                                this.addDeads(Heroes.get(i).deads(),Heroes.get(i));
-                               pruebaOk=true;}
+                               pruebaOk=true;
+                               return;
+                            }
                             else{
                                 this.asignarEdiDañado(Heroes.get(i).getXEdiDañado());
                                 this.addDeads(Heroes.get(i).deads(),Heroes.get(i));
-                                pruebaOk=true;}
+                                pruebaOk=true;
+                                return;
+                            }
                         }
                     }
                 }
            }
            pruebaOk=false;
+           
     }         
     }
     
@@ -659,7 +667,6 @@ public class CityOfHeroes
     public ArrayList getXYPositionHeroe(String color){
         ArrayList<Integer> listaposition = new ArrayList<Integer>();
         for(int i=0;i<Heroes.size();i++){
-            // System.out.println(Heroes.get(i).getHeroeColor(Heroes.get(i))+"  addasd");
             if (Heroes.get(i).getHeroeColor(Heroes.get(i)).equals(color)){        
                 listaposition=Heroes.get(i).getXYPositionHeroe( Heroes.get(i).getHeroeColor(Heroes.get(i)) );
             }
@@ -769,15 +776,15 @@ public class CityOfHeroes
     }
     
     /**
-     * asigna un heroe a la lista deads si el valor o indicador que entra como parametro es true
+     * asigna un heroe a la lista deads si el valor o indicador que entra como parametro es true y lo remueve de la lista de heroes
      * @param bool booleano con true o false
      * @param hereoe objecto de la clase heroe
      */
     private void addDeads(boolean indicador,Heroe heroe)
     {
         if (indicador){
-           this.removeHeroe(heroe.getColor());
            DeadsHeroes.add(heroe.getHeroeColor(heroe));
+           this.removeHeroe(heroe.getColor());
         }
     }
     

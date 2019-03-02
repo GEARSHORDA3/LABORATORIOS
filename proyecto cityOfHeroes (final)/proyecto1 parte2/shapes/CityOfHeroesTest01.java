@@ -30,97 +30,91 @@ public class CityOfHeroesTest01 {
         assertFalse(ch.ok());
     }
     
-    // @Test
-    // public void ShouldAddHeroes() {
-        // CityOfHeroes ch = new CityOfHeroes(100, 250);
-        // ch.addBuilding(0, 10, 20, 5);
-        // assertTrue(ch.ok());
-        // ch.addBuilding(11, 10, 20, 10);
-        // assertTrue(ch.ok());
-        
-        // ch.addHeroe("Blue", 1, 100);
-        // assertTrue(ch.ok());
-        // ch.addHeroe("yElLoW", 2, 100);
-        // assertTrue(ch.ok());
-    // }
+    @Test
+    public void ShouldAddHeroes() {
+        CityOfHeroes ch = new CityOfHeroes(100, 250);
+        ch.addBuilding(0, 10, 20, 5);
+        assertTrue(ch.ok());
+        ch.addBuilding(11, 10, 20, 10);
+        assertTrue(ch.ok());
+        ch.addHeroe("Blue", 1, 100);
+        assertTrue(ch.ok());
+        ch.addHeroe("yElLoW", 2, 100);
+        assertTrue(ch.ok());
+    }
     
-    // @Test
-    // public void ShouldNotAddHeroes() {
-        // CityOfHeroes ch = new CityOfHeroes(100, 250);
-        // ch.addBuilding(0, 10, 20, 5);
-        // assertTrue(ch.ok());
-        // ch.addBuilding(11, 10, 20, 10);
-        // assertTrue(ch.ok());
-        
-        // ch.addHeroe("Blue", 1, 100);
-        // assertTrue(ch.ok());
-        // ch.addHeroe("yElLoW", 3, 100);
-        // assertFalse(ch.ok());
-    // }
+    @Test
+    public void ShouldNotAddHeroes() {
+        CityOfHeroes ch = new CityOfHeroes(100, 250);
+        ch.addBuilding(0, 10, 20, 5);
+        assertTrue(ch.ok());
+        ch.addBuilding(11, 10, 20, 10);
+        assertTrue(ch.ok());
+        ch.addHeroe("Blue", 1, 100);
+        assertTrue(ch.ok());
+        ch.addHeroe("yElLoW", 3, 100);
+        assertFalse(ch.ok());
+    }
     
-    // @Test
-    // public void ShouldNotifyNoDeads() {
-        // CityOfHeroes ch = new CityOfHeroes(100, 250);
-        // ch.addBuilding(0, 10, 20, 5);
-        // assertTrue(ch.ok());
-        // ch.addBuilding(11, 10, 20, 10);
-        // assertTrue(ch.ok());
-        
-        // ch.addHeroe("Blue", 1, 100);
-        // assertTrue(ch.ok());
-        // ch.addHeroe("yElLoW", 2, 100);
-        // assertTrue(ch.ok());
-        
-        // assertArrayEquals(ch.deads(), new String[]{});
-    // }
+    @Test
+    public void ShouldNotifyNoDeads() {
+        CityOfHeroes ch = new CityOfHeroes(100, 250);
+        ch.addBuilding(0, 10, 20, 5);
+        assertTrue(ch.ok());
+        ch.addBuilding(11, 10, 20, 10);
+        assertTrue(ch.ok());
+        ch.addHeroe("Blue", 1, 100);
+        assertTrue(ch.ok());
+        ch.addHeroe("yElLoW", 2, 100);
+        assertTrue(ch.ok());
+        assertArrayEquals(ch.deads(), new String[]{});
+    }
     
-    // @Test
-    // public void ShouldNotifyDeads() {
-        // CityOfHeroes ch = new CityOfHeroes(25, 250);
-        // ch.addBuilding(0, 10, 20, 5);
-        // assertTrue(ch.ok());
-        // ch.addBuilding(11, 10, 20, 10);
-        // assertTrue(ch.ok());
-        
-        // ch.addHeroe("Blue", 1, 100);
-        // assertTrue(ch.ok());
-        // ch.addHeroe("yElLoW", 2, 100);
-        // assertTrue(ch.ok());
-        
-        // ch.jump("blue", 200, 45, true);
-        // assertArrayEquals(ch.deads(), new String[]{"blue"});
-    // }
+    @Test
+    public void ShouldNotifyDeads() {
+        CityOfHeroes ch = new CityOfHeroes(25, 250);
+        ch.addBuilding(0, 10, 20, 5);
+        assertTrue(ch.ok());
+        ch.addBuilding(11, 10, 20, 10);
+        assertTrue(ch.ok());
+        ch.addHeroe("Blue", 1, 100);
+        assertTrue(ch.ok());
+        ch.addHeroe("yElLoW", 2, 100);
+        assertTrue(ch.ok());
+        ch.jump("blue", 200, 45, true);
+        assertArrayEquals(ch.deads(), new String[]{"blue"});
+    }
     
-    // @Test
-    // public void ShouldJump() {
-        // CityOfHeroes ch = new CityOfHeroes(100, 250);
-        // ch.addBuilding(0, 10, 20, 5);
-        // assertTrue(ch.ok());
-        // ch.addBuilding(11, 10, 20, 10);
-        // assertTrue(ch.ok());
-        // ch.addBuilding(22, 10, 20, 10);
-        // assertTrue(ch.ok());
-        // ch.addBuilding(33, 10, 20, 10);
-        // assertTrue(ch.ok());
-        // ch.addBuilding(44, 10, 20, 10);
-        // assertTrue(ch.ok());
-        // ch.addBuilding(55, 10, 20, 10);
-        // assertTrue(ch.ok());
-        // ch.addBuilding(66, 10, 20, 10);
-        // assertTrue(ch.ok());
-        // ch.addBuilding(77, 10, 20, 10);
-        // assertTrue(ch.ok());
+    @Test
+    public void ShouldJump() {
+        CityOfHeroes ch = new CityOfHeroes(100, 250);
+        ch.addBuilding(0, 10, 20, 5);
+        assertTrue(ch.ok());
+        ch.addBuilding(11, 10, 20, 10);
+        assertTrue(ch.ok());
+        ch.addBuilding(22, 10, 20, 10);
+        assertTrue(ch.ok());
+        ch.addBuilding(33, 10, 20, 10);
+        assertTrue(ch.ok());
+        ch.addBuilding(44, 10, 20, 10);
+        assertTrue(ch.ok());
+        ch.addBuilding(55, 10, 20, 10);
+        assertTrue(ch.ok());
+        ch.addBuilding(66, 10, 20, 10);
+        assertTrue(ch.ok());
+        ch.addBuilding(77, 10, 20, 10);
+        assertTrue(ch.ok());
+   
+        ch.addHeroe("Blue", 1, 100);
+        assertTrue(ch.ok());
+        ch.addHeroe("red", 5, 100);
+        assertTrue(ch.ok());
         
-        // ch.addHeroe("Blue", 1, 100);
-        // assertTrue(ch.ok());
-        // ch.addHeroe("red", 5, 100);
-        // assertTrue(ch.ok());
-        
-        // ch.jump("blue", 5, 10, true);
-        // assertTrue(ch.ok());
-        // ch.jump("red", 5, 10, true);
-        // assertTrue(ch.ok());
-    // }
+        ch.jump("blue", 5, 10, true);
+        assertTrue(ch.ok());
+        ch.jump("red", 5, 10, true);
+        assertTrue(ch.ok());
+    }
     
     // @Test
     // public void ShouldNotJump() {

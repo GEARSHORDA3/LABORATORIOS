@@ -41,23 +41,18 @@ public class pruebafinal
     }
 
     @Test
-    public void CityHeores()
-    {
-        CityOfHeroes cityOfHe1 = new CityOfHeroes(500, 500);
-        cityOfHe1.makeVisible();
-        Canvas canvas = Canvas.getCanvas1();
-        cityOfHe1.addBuilding(0, 50, 100, 1);
-        canvas.wait(1000);
-        cityOfHe1.addBuilding(200, 50, 400, 1);
-        canvas.wait(1000);
-        cityOfHe1.addBuilding(120, 50, 100, 1);
-        canvas.wait(1000);
-        cityOfHe1.addHeroe("red", 2, 30);
-        canvas.wait(1000);
-        //cityOfHe1.isSafeJump("red",60,30);
-        //cityOfHe1.jump("red",60,30,false);
-        //cityOfHe1.finish();
-        
+    public void ShouldNotifyDeads() {
+        CityOfHeroes ch = new CityOfHeroes(25, 250);
+        ch.addBuilding(0, 10, 20, 5);
+        assertTrue(ch.ok());
+        ch.addBuilding(11, 10, 20, 10);
+        assertTrue(ch.ok());
+        ch.addHeroe("Blue", 1, 100);
+        assertTrue(ch.ok());
+        ch.addHeroe("yElLoW", 2, 100);
+        assertTrue(ch.ok());
+        ch.jump("blue", 200, 45, true);
+        assertArrayEquals(ch.deads(), new String[]{"blue"});
     }
     
 

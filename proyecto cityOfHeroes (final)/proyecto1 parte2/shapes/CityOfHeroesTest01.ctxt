@@ -1,8 +1,18 @@
 #BlueJ class context
 comment0.target=CityOfHeroesTest01
-comment0.text=\r\n\ The\ test\ class\ CityOfHeroesTest01.\r\n\r\n\ @author\ \ Fredy\ D\u00EDaz\r\n\ @version\ February\ 02,\ 2019\r\n
+comment0.text=\n\ The\ test\ class\ CityOfHeroesTest01.\n\n\ @author\ \ Fredy\ D\u00EDaz\n\ @version\ February\ 02,\ 2019\n
 comment1.params=
 comment1.target=void\ ShouldAddBuildings()
 comment2.params=
 comment2.target=void\ ShouldNotAddBuildings()
-numComments=3
+comment3.params=
+comment3.target=void\ ShouldAddHeroes()
+comment4.params=
+comment4.target=void\ ShouldNotAddHeroes()
+comment5.params=
+comment5.target=void\ ShouldNotifyNoDeads()
+comment6.params=
+comment6.target=void\ ShouldNotifyDeads()
+comment7.params=
+comment7.target=void\ ShouldJump()
+numComments=8

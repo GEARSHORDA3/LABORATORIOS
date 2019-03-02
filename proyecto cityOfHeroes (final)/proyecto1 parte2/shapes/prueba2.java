@@ -44,17 +44,39 @@ public class prueba2
     {
         CityOfHeroes cityOfHe2 = new CityOfHeroes(500, 500);
         cityOfHe2.makeVisible();
-        Canvas canvas = Canvas.getCanvas1();
-        cityOfHe2.addBuilding(0, 100, 100, 1);
-        cityOfHe2.addBuilding(300, 100, 400, 1);
-        canvas.wait(1000);
-        cityOfHe2.addBuilding(200, 50, 30, 1);
-        canvas.wait(1000);
-        cityOfHe2.addHeroe("red", 1, 30);
-        canvas.wait(1000);
-        // cityOfHe2.jumpPlan("red",2);
-        cityOfHe2.jump("red",2);
-        canvas.wait(1000);
-        //cityOfHe2.jump("red",60,30,false);
+        // cityOfHe2.addBuilding(0, 50, 100, 1);
+        // cityOfHe2.addBuilding(150, 50, 100, 1);
+        // cityOfHe2.addHeroe("Blue", 1, 100);
+        // cityOfHe2.addHeroe("red", 2, 100);
+        // cityOfHe2.jump("blue", 5, 10, true);
+        // cityOfHe2.jump("red", 5, 10, true);
+        
+        cityOfHe2.addBuilding(0, 10, 20, 5);
+        assertTrue(cityOfHe2.ok());
+        cityOfHe2.addBuilding(11, 10, 20, 10);
+        assertTrue(cityOfHe2.ok());
+        cityOfHe2.addBuilding(22, 10, 20, 10);
+        assertTrue(cityOfHe2.ok());
+        cityOfHe2.addBuilding(33, 10, 20, 10);
+        assertTrue(cityOfHe2.ok());
+        cityOfHe2.addBuilding(44, 10, 20, 10);
+        assertTrue(cityOfHe2.ok());
+        cityOfHe2.addBuilding(55, 10, 20, 10);
+        assertTrue(cityOfHe2.ok());
+        cityOfHe2.addBuilding(66, 10, 20, 10);
+        assertTrue(cityOfHe2.ok());
+        cityOfHe2.addBuilding(77, 10, 20, 10);
+        assertTrue(cityOfHe2.ok());
+   
+        cityOfHe2.addHeroe("Blue", 1, 100);
+        assertTrue(cityOfHe2.ok());
+        cityOfHe2.addHeroe("red", 5, 100);
+        assertTrue(cityOfHe2.ok());
+        
+        cityOfHe2.jump("blue", 5, 10, true);
+        cityOfHe2.jump("red", 5, 10, true);
+        assertTrue(cityOfHe2.ok());
+        
+        assertTrue(cityOfHe2.ok());
     }
 }
