@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=CityOfHeroesTest01
-comment0.text=\r\n\ The\ test\ class\ CityOfHeroesTest01.\r\n\r\n\ @author\ \ Fredy\ D\u00EDaz\r\n\ @version\ February\ 02,\ 2019\r\n
+comment0.text=\n\ The\ test\ class\ CityOfHeroesTest01.\n\n\ @author\ \ Fredy\ D\u00EDaz\n\ @version\ February\ 02,\ 2019\n
 comment1.params=
 comment1.target=void\ ShouldAddBuildings()
 comment10.params=

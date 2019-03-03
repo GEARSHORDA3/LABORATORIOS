@@ -651,6 +651,7 @@ public class CityOfHeroes
     public ArrayList jumpPlan(String heroe, int building){        
         listaPlan = new ArrayList<Integer>();
         listaPlan2 = new ArrayList<Integer>();
+        edificioJumpPlan=building;
         notShowMessage();
         for (int angulo=5; angulo<6;angulo++){
             for (int velocidad=1; velocidad<90;velocidad++){
