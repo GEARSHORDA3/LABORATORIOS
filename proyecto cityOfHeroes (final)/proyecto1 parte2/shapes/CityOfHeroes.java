@@ -559,7 +559,6 @@ public class CityOfHeroes
                 }
            }
            setPruebOk(false);
-           
     }         
     }
     
@@ -597,6 +596,13 @@ public class CityOfHeroes
     return false;
     }
     
+    
+    
+    
+    
+    
+    
+    
 
     public boolean isSafeJump2(String color, int angulo, int velocidad){  
      int achCanvas= canvas.getWidth();
@@ -632,13 +638,17 @@ public class CityOfHeroes
      }   return false;
      }
 
+     
+     
+     
+     
+     
+     
+     
      /** 
       * 
       */
-    public ArrayList jumpPlan(String heroe, int building){
-        String colorOriginal=heroe;
-        
-        edificioJumpPlan=building;
+    public ArrayList jumpPlan(String heroe, int building){        
         listaPlan = new ArrayList<Integer>();
         listaPlan2 = new ArrayList<Integer>();
         notShowMessage();
@@ -650,7 +660,6 @@ public class CityOfHeroes
                 }
             }
         }
-        
         for (int angulo=60; angulo<61;angulo++){
             for (int velocidad=1; velocidad<90;velocidad++){
                 if (isSafeJump2(heroe,angulo,velocidad)){
@@ -659,13 +668,13 @@ public class CityOfHeroes
                 }
             }
         }
-        
+        // jump(heroe,0,0,true);
         showMessage();
         System.out.println(listaPlan);
         return listaPlan;
     }
 
-    public ArrayList getXYPositionHeroe(String color){
+    private ArrayList getXYPositionHeroe(String color){
         ArrayList<Integer> listaposition = new ArrayList<Integer>();
         for(int i=0;i<Heroes.size();i++){
             if (Heroes.get(i).getHeroeColor(Heroes.get(i)).equals(color)){        
@@ -684,13 +693,19 @@ public class CityOfHeroes
             }
         }
     }
+    
     public void jump (String heroe, int building){
         addHeroe("brown",building,0);
         ArrayList<Integer> a = new ArrayList<Integer>();
         a= getXYPositionHeroe("brown");
         setXYposition2(heroe,a.get(0), a.get(1));
         a= getXYPositionHeroe(heroe);
+        jump(heroe,0,0,true);
     }
+    
+    public void jump (String heroe){
+        jump (heroe, Builds.size());
+    }    
     
     /**
      * buscar solo el edifico por su poscicsion visualmente especialmente diseñado para isSafeJump2

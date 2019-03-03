@@ -42,20 +42,21 @@ public class CityOfHeroesTest
     @Test
     public void CityHeores2()
     {
-        CityOfHeroes cityOfHe2 = new CityOfHeroes(800, 800);
+        CityOfHeroes cityOfHe2 = new CityOfHeroes(800, 600);
         cityOfHe2.makeVisible();
         Canvas canvas = Canvas.getCanvas1();
         cityOfHe2.addBuilding(0, 100, 100, 1);
         canvas.wait(1000);
-        //cityOfHe2.addBuilding(400, 100, 400, 1);
         canvas.wait(1000);
         cityOfHe2.addBuilding(400, 100, 400, 1);
+        cityOfHe2.addBuilding(600, 25, 40, 1);
         cityOfHe2.addHeroe("red", 1, 30);
         cityOfHe2.addHeroe("green", 1, 500); 
         canvas.wait(1000);
-        // cityOfHe2.jumpPlan("green",2);
-        // cityOfHe2.jump("green",5,32,false);
-        cityOfHe2.jump("red",2);
-        cityOfHe2.jump("red",5,32,false);
+        cityOfHe2.jumpPlan("green",2);
+        // cityOfHe2.jump("green");
+        // cityOfHe2.jump("red",2);
+        // cityOfHe2.jump("red",135,28,false);
+        // cityOfHe2.jump("green",135,28,false);
     }    
 }

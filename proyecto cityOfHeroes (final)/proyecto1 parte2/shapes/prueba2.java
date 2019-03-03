@@ -48,7 +48,6 @@ public class prueba2
         assertTrue(cityOfHe2.ok());
         cityOfHe2.addBuilding(11, 10, 200, 10);
         assertTrue(cityOfHe2.ok());
-        
         cityOfHe2.addHeroe("Blue", 1, 100);
         assertTrue(cityOfHe2.ok());
         cityOfHe2.jump("Blue",200,20,true);
