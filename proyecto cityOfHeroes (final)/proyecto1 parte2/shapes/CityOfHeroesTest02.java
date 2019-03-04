@@ -11,6 +11,7 @@ import org.junit.Test;
  * @version (a version number or a date)
  */
 public class CityOfHeroesTest02 {
+    
     @Test
     public void segunARNoDeberiaSaltar() {
         CityOfHeroes cityOfHe1 = new CityOfHeroes(1000, 1000);
@@ -19,11 +20,8 @@ public class CityOfHeroesTest02 {
         cityOfHe1.addBuilding(800, 100, 100, 100);
         cityOfHe1.addBuilding(500, 100, 500, 67);
         cityOfHe1.addHeroe("black", 1, 100);
-        // cityOfHe1.jump("black");
+        cityOfHe1.jump("black");
         assertTrue(cityOfHe1.ok());
-        cityOfHe1.addBuilding(700, 99, 999, 100);
-        // cityOfHe1.jump("black");
-        assertFalse(cityOfHe1.ok());
     }
 
     @Test
@@ -81,7 +79,7 @@ public class CityOfHeroesTest02 {
     @Test
     public void segunJMNoDeberiaHacerZoom() {
         CityOfHeroes coh = new CityOfHeroes(700, 700);
-        coh.addBuilding(100, 100, 100, 100);
+        coh.addBuilding(100, 100, 100, 1000);
         assertTrue(coh.ok());
         coh.addBuilding(220, 100, 200, 1);
         assertTrue(coh.ok());
@@ -89,12 +87,12 @@ public class CityOfHeroesTest02 {
         assertTrue(coh.ok());
         coh.addHeroe("yellow", 1, 100);
         assertTrue(coh.ok());
-        coh.addHeroe("red", 2, 50);
+        coh.addHeroe("red",2,50);
         assertTrue(coh.ok());
         coh.zoom('*');
         assertFalse(coh.ok());
     }
-
+    
     @Test
     public void segunJMDeberiaSaltoOptimo() {
         CityOfHeroes cityOfHe1 = new CityOfHeroes(600, 600);
@@ -102,19 +100,19 @@ public class CityOfHeroesTest02 {
         cityOfHe1.addBuilding(301, 50, 50, 100);
         cityOfHe1.addHeroe("red", 1, 100);
         cityOfHe1.addBuilding(200, 100, 300, 100);
-        // cityOfHe1.jump("red");
+        cityOfHe1.jump("red");
         assertTrue(cityOfHe1.ok());
     }
-
+    
     @Test
     public void segunJMNoDeberiaSaltoOptimo() {
         CityOfHeroes cityOfHe1 = new CityOfHeroes(600, 600);
         cityOfHe1.addBuilding(0, 100, 300, 100);
         cityOfHe1.addHeroe("red", 1, 100);
-        // cityOfHe1.jump("red");
+        cityOfHe1.jump("red");
         assertFalse(cityOfHe1.ok());
     }
-    
+
     @Test
     public void shouldDoUndo() {
         CityOfHeroes ch = new CityOfHeroes(100, 250);

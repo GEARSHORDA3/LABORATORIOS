@@ -108,7 +108,7 @@ public class CityOfHeroes
             if (operador =="+"){
                 zoom('-');
             }
-            else{
+            else if (operador=="-"){
                 zoom('+');
             }
             pruebaOk = true;
@@ -696,12 +696,17 @@ public class CityOfHeroes
     }
     
     public void jump (String heroe, int building){
-        addHeroe("brown",building,0);
-        ArrayList<Integer> a = new ArrayList<Integer>();
-        a= getXYPositionHeroe("brown");
-        setXYposition2(heroe,a.get(0), a.get(1));
-        a= getXYPositionHeroe(heroe);
-        jump(heroe,0,0,true);
+        if(Builds.size()==1){
+            pruebaOk = false;
+        }
+        else{
+            addHeroe("brown",building,0);
+            ArrayList<Integer> a = new ArrayList<Integer>();
+            a= getXYPositionHeroe("brown");
+            setXYposition2(heroe,a.get(0), a.get(1));
+            a= getXYPositionHeroe(heroe);
+            jump(heroe,0,0,true);
+        }
     }
     
     public void jump (String heroe){
@@ -752,9 +757,14 @@ public class CityOfHeroes
     }
     
     public void zoom(char signo){      
-        Canvas canvas = Canvas.getCanvas1();
-        canvas.zoom(signo);
-        setPruebOk(true);
+        if (signo=='+' || signo=='-'){
+            Canvas canvas = Canvas.getCanvas1();
+            canvas.zoom(signo);
+            setPruebOk(true);
+        }
+        else{
+            pruebaOk = false;
+        }
     }
     
 

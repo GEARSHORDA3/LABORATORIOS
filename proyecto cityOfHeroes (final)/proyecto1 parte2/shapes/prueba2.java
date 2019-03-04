@@ -45,12 +45,10 @@ public class prueba2
         CityOfHeroes cityOfHe2 = new CityOfHeroes(500, 500);
         cityOfHe2.makeVisible();
         cityOfHe2.addBuilding(0, 10, 10, 5);
-        assertTrue(cityOfHe2.ok());
         cityOfHe2.addBuilding(11, 10, 200, 10);
-        assertTrue(cityOfHe2.ok());
+        cityOfHe2.addBuilding(200, 10, 200, 10);
         cityOfHe2.addHeroe("Blue", 1, 100);
-        assertTrue(cityOfHe2.ok());
-        cityOfHe2.jump("Blue",200,20,true);
+        cityOfHe2.jump("Blue");
         //assertFalse(cityOfHe2.isSafeJump("blue", 200, 20));
 }
 }
