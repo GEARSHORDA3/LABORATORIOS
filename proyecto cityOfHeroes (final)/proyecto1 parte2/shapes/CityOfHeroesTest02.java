@@ -32,9 +32,8 @@ public class CityOfHeroesTest02 {
         cityOfHe1.addBuilding(800, 100, 100, 100);
         cityOfHe1.addBuilding(500, 100, 500, 67);
         cityOfHe1.addHeroe("black", 1, 100);
-        // cityOfHe1.jump("black");
+        cityOfHe1.jump("black");
         assertTrue(cityOfHe1.ok());
-
     }
 
     @Test
@@ -43,7 +42,7 @@ public class CityOfHeroesTest02 {
         cityOfHe1.addBuilding(100, 100, 100, 100);
         cityOfHe1.addBuilding(201, 100, 999, 100);
         cityOfHe1.addHeroe("black", 1, 100);
-        // assertFalse(cityOfHe1.isSafeJump("black", 2));
+        assertFalse(cityOfHe1.isSafeJump("black", 2));
     }
 
     @Test
@@ -52,7 +51,7 @@ public class CityOfHeroesTest02 {
         cityOfHe1.addBuilding(100, 100, 100, 100);
         cityOfHe1.addBuilding(201, 100, 500, 100);
         cityOfHe1.addHeroe("black", 1, 100);
-        // assertTrue(cityOfHe1.isSafeJump("black", 2));
+        assertTrue(cityOfHe1.isSafeJump("black", 2));
     }
 
     @Test

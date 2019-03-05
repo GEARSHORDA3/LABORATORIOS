@@ -218,7 +218,7 @@ public class CityOfHeroesTest01 {
         ch.addHeroe("Blue", 1, 100);
         assertTrue(ch.ok());
         
-        // assertFalse(ch.isSafeJump("blue", 200, 20));
+        assertFalse(ch.isSafeJump("blue", 200, 20));
     }
     
     @Test

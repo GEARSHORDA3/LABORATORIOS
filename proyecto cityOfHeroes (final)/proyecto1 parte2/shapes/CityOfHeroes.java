@@ -596,14 +596,6 @@ public class CityOfHeroes
     return false;
     }
     
-    
-    
-    
-    
-    
-    
-    
-
     public boolean isSafeJump2(String color, int angulo, int velocidad){  
      int achCanvas= canvas.getWidth();
      int altCanvas= canvas.getHeight();
@@ -637,39 +629,33 @@ public class CityOfHeroes
            setPruebOk(false);
      }   return false;
      }
-
      
-     
-     
-     
-     
-     
+     public boolean isSafeJump(String heroe, int building){
+         int altCanvas= canvas.getHeight();
+         for (int i=0; i<Builds.size(); i++){
+             if (Builds.get(i).getHeight()>=altCanvas-30){
+                 return false;
+             }
+         }
+         return true;
+     }
      
      /** 
       * 
       */
-    public ArrayList jumpPlan(String heroe, int building){        
+     public ArrayList jumpPlan(String heroe, int building){        
         listaPlan = new ArrayList<Integer>();
         listaPlan2 = new ArrayList<Integer>();
         edificioJumpPlan=building;
         notShowMessage();
-        for (int angulo=5; angulo<6;angulo++){
+        for (int angulo=4; angulo<180;angulo++){
             for (int velocidad=1; velocidad<90;velocidad++){
-                if (isSafeJump2(heroe,angulo,velocidad)){
+                if (isSafeJump(heroe,angulo,velocidad)){
                     listaPlan.add(angulo);
                     listaPlan.add(velocidad);                    
                 }
             }
         }
-        for (int angulo=60; angulo<61;angulo++){
-            for (int velocidad=1; velocidad<90;velocidad++){
-                if (isSafeJump2(heroe,angulo,velocidad)){
-                    listaPlan2.add(angulo);
-                    listaPlan2.add(velocidad);                    
-                }
-            }
-        }
-        // jump(heroe,0,0,true);
         showMessage();
         System.out.println(listaPlan);
         return listaPlan;

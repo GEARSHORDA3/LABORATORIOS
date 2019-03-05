@@ -375,7 +375,12 @@
             private boolean chocoEdificio(double x,double y,int altoCanvas,int anchoCanvas,Hashtable infCoordenadas,
             String color,ArrayList posicionesX,Hashtable durezasEdificios,Hashtable infCoordenadasAncho)
             {
-                if (y>=altoCanvas-15){
+                if (y<=0){
+                   this.setHeroeMuerto();
+                   BorraHeroe(color);
+                   return true;                    
+                }
+                else if (y>=altoCanvas-15){
                    this.setHeroeMuerto();
                    BorraHeroe(color);
                    return true;
@@ -479,6 +484,7 @@
                    nuevaAlturaEdificio=heroe.getPositionY()+15;
                    veriHeroNoMuerto=true;
                    infCoordenadas.put(posiActEdiX,(int) heroe.getPositionY()+7);
+                   
                    if (isVisible==true){
                     heroe.makeVisible();
                     ListaVitalidad.get(pos1).makeVisible();
@@ -490,7 +496,6 @@
                 }
                 else if(angulo2>=90){
                     x=-(vox*t);
-                    System.out.println(x+" "+vox+" ");
                 }
                 t+=avance;
                 posicionX+=(x/2);
@@ -601,12 +606,12 @@
                    varibleBool=false;
                    return false;
                 }
-                // else if (y<=0){
-                   // encimaEdificio=true;
-                   // numeroEdificio=posiActEdiX;
-                   // varibleBool=false;
-                   // return false;                
-                // }
+                else if (y<=0){
+                   encimaEdificio=true;
+                   numeroEdificio=posiActEdiX;
+                   varibleBool=false;
+                   return false;                
+                }
                 else if (x<=0){
                    varibleBool=false;
                    return false;                
@@ -672,6 +677,10 @@
             avance=0.01;
             h=alturaEdi;
             vo=velocidad/4;
+            if(angulo>90){
+                angulo*=-1;
+                velocidad*=-1;
+            }            
             if (velocidad>angulo){
                 voy= 2*(vo*Math.sin(-angulo));
                 vox= vo*Math.cos(angulo);
@@ -691,6 +700,7 @@
             while (y>-altoCanvas){
                 t+=avance;
                 y=((posicionY)-(voy*t) + (4.9*(t*t)));
+                heroe.makeVisible();
                 if (chocoEdificio2(posicionX,y,altoCanvas,anchoCanvas,infCoordenadas,color,posicionesX,durezasEdificios,infCoordenadasAncho)
                 && varibleBool==true){
                    if (message){
@@ -724,7 +734,12 @@
                     modoIsJumpOn=false;
                     return false;
                 }
-                x= Math.abs(vox*t);
+                if (angulo<89){
+                    x=Math.abs(vox*t);
+                }
+                else{
+                    x=(vox*t);
+                }
                 t+=avance;
                 posicionX+=(x/2);
                 posicionY=y;
@@ -748,7 +763,10 @@
         private boolean chocoEdificio3(double x,double y,int altoCanvas,int anchoCanvas,Hashtable infCoordenadas,
             String color,ArrayList posicionesX,Hashtable durezasEdificios,Hashtable infCoordenadasAncho)
             {
-                if (y>=altoCanvas-15){
+                if (y<=0){
+                   return true;                    
+                }                
+                else if (y>=altoCanvas-15){
                    return false;
                 }
                 else if (x<=0){

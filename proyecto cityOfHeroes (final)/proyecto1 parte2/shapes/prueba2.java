@@ -42,13 +42,12 @@ public class prueba2
     @Test
     public void CityHeores2()
     {
-        CityOfHeroes cityOfHe2 = new CityOfHeroes(500, 500);
+        CityOfHeroes cityOfHe2 = new CityOfHeroes(800, 600);
         cityOfHe2.makeVisible();
-        cityOfHe2.addBuilding(0, 10, 10, 5);
-        cityOfHe2.addBuilding(11, 10, 200, 10);
-        cityOfHe2.addBuilding(200, 10, 200, 10);
+        cityOfHe2.addBuilding(0, 100, 100, 5);
+        cityOfHe2.addBuilding(210, 100, 200, 10);
         cityOfHe2.addHeroe("Blue", 1, 100);
-        cityOfHe2.jump("Blue");
-        //assertFalse(cityOfHe2.isSafeJump("blue", 200, 20));
+        cityOfHe2.isSafeJump("Blue",2);
+        // assertFalse(cityOfHe2.isSafeJump("blue", 200, 20));
 }
 }
