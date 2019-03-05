@@ -64,9 +64,22 @@ public class CityOfHeroes
     
     /**
      */
-    public void setmodoUndo(boolean estado) 
+    private void setmodoUndo(boolean estado) 
     {
          modoUndoOn=estado;
+    }
+    
+    /**
+     * analiza si la ciudad se puede simular retornando un boolenao
+     * @param buildings
+     * @param configuration
+     * @param building
+     * @return boolean 
+     */
+    public boolean  simulate(int[] configuration, int[][] buildings, int building)
+    {
+        
+        return true;
     }
 
     /**
@@ -197,16 +210,26 @@ public class CityOfHeroes
      * por posición en x. El segundo con la información de los heroes [edificio, fortaleza] ordenado por el número de edificio.
      * @return vector
      */
-    public Integer[][] city()
+    public int[][] city()
     {
-        Integer[][] array = new Integer[2][];
-        Integer[] infEdificios = new Integer[infoEdificios.size()];
-        infEdificios = infoEdificios.toArray(infEdificios);
-        array[0]= infEdificios;
-        Integer[] infHeroes= new Integer[infoHeroes.size()];
-        infHeroes = infoHeroes.toArray(infHeroes);
-        array[1]= infHeroes;
-        return array;
+        int[][] array = new int[2][];
+        
+        int[] infoEdi = new int[infoEdificios.size()];
+        for (int i=0; i < infoEdi.length; i++)
+        {
+            infoEdi[i] = infoEdificios.get(i).intValue();
+        }
+        
+        int[] infoHero = new int[infoHeroes.size()];
+        for (int i=0; i < infoHero.length; i++)
+        {
+            infoHero[i] = infoHeroes.get(i).intValue();
+        }
+        
+        array [0]=infoEdi;
+        array [1]=infoHero;
+
+        return array ;
     }
 
 
@@ -618,7 +641,7 @@ public class CityOfHeroes
     return false;
     }
     
-    public boolean isSafeJump2(String color, int angulo, int velocidad){  
+    private boolean isSafeJump2(String color, int angulo, int velocidad){  
      int achCanvas= canvas.getWidth();
      int altCanvas= canvas.getHeight();
        for(int i=0;i<Heroes.size();i++){
@@ -693,7 +716,7 @@ public class CityOfHeroes
         return listaposition;
     }
     
-    public void setXYposition2(String color,double x, double y){
+    private void setXYposition2(String color,double x, double y){
         for(int i=0;i<Heroes.size();i++){
             if (Heroes.get(i).getHeroeColor(Heroes.get(i)).equals(color)){
                 Heroes.get(i).setXYposition2(x,y);
@@ -776,7 +799,7 @@ public class CityOfHeroes
     }
     
 
-    public void setPruebOk(boolean estado)
+    private void setPruebOk(boolean estado)
     {
         pruebaOk=estado;
         return;

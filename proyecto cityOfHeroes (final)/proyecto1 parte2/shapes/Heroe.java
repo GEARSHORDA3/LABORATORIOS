@@ -700,7 +700,6 @@
             while (y>-altoCanvas){
                 t+=avance;
                 y=((posicionY)-(voy*t) + (4.9*(t*t)));
-                heroe.makeVisible();
                 if (chocoEdificio2(posicionX,y,altoCanvas,anchoCanvas,infCoordenadas,color,posicionesX,durezasEdificios,infCoordenadasAncho)
                 && varibleBool==true){
                    if (message){

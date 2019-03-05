@@ -162,8 +162,8 @@ public class CityOfHeroesTest02 {
         ch.addHeroe("yElLoW", 2, 100);
         assertTrue(ch.ok());
         
-        Integer[][] city = ch.city();
-        assertArrayEquals(city[0], new Integer[]{0, 10, 20, 5, 11, 10, 20, 10});
-        assertArrayEquals(city[1], new Integer[]{1, 100, 2, 100});
+        int[][] city = ch.city();
+        assertArrayEquals(city[0], new int[]{0, 10, 20, 5, 11, 10, 20, 10});
+        assertArrayEquals(city[1], new int[]{1, 100, 2, 100});
     }
 }
