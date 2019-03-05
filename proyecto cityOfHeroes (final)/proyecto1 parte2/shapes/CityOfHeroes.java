@@ -44,7 +44,7 @@ public class CityOfHeroes
     private ArrayList<Integer> infoHeroes = new ArrayList<Integer>();
     private Stack<Object>methods= new Stack<Object>();
     private Stack<Object>parameters=new Stack<Object>();
-    private boolean modoRedoOn=false;
+    private boolean modoUndoOn=false;
     private ArrayList<Integer>listaPlan2;
     /**
      * constructor
@@ -63,10 +63,32 @@ public class CityOfHeroes
     }
     
     /**
+     */
+    public void setmodoUndo(boolean estado) 
+    {
+         modoUndoOn=estado;
+    }
+
+    /**
+     * Hacer lo opuesto a undo
+     */
+    public void redo()
+    {
+        if (modoUndoOn){
+            undo();
+            setmodoUndo(false);
+            setPruebOk(true);
+        }
+        else{
+            setPruebOk(false);
+        }
+    }
+
+    /**
      * Realizar la ultima accion inversamente a lo que se hizo 
      * @param  y  a sample parameter for a method
      */
-    public void redo()
+    public void undo()
     {
         if(methods.isEmpty()){
             mostrarMensaje("No se ha realizado ninguna accion");
@@ -78,32 +100,32 @@ public class CityOfHeroes
             int x = (int)parameters.pop();
             removeBuilding(x);
             setPruebOk(true);
+            setmodoUndo(true);
             return;
         }
         else if(method.equals("addHeroe")){
-            modoRedoOn=true;
+            setmodoUndo(true);
             String x = (String)parameters.pop();
             removeHeroe(x);
             setPruebOk(true);
-            modoRedoOn=false;
             return;
         }
         else if((method.equals("removeBuilding"))){
             ArrayList<Integer> temp = (ArrayList<Integer>)parameters.pop();
             addBuilding((int)temp.get(0),(int)temp.get(1),(int)temp.get(2),(int)temp.get(3));
             setPruebOk(true);
+            setmodoUndo(true);
             return;
         }
         else if((method.equals("removeHeroe"))){
-            modoRedoOn=true;
             ArrayList<Object> temp = (ArrayList)parameters.pop();
             addHeroe((String)temp.get(0),(int)temp.get(1),(int)temp.get(2));
             pruebaOk = true;
-            modoRedoOn=false;
+            setmodoUndo(true);
             return;
         }
         else if((method.equals("zoom"))){
-            modoRedoOn=true;
+            setmodoUndo(true);
             String operador = (String)parameters.pop();
             if (operador =="+"){
                 zoom('-');
@@ -112,23 +134,22 @@ public class CityOfHeroes
                 zoom('+');
             }
             pruebaOk = true;
-            modoRedoOn=false;
+            
             return;
         }
         else if((method.equals("makeInvisible"))){
-            modoRedoOn=true;
+            setmodoUndo(true);
             Integer operador = (Integer)parameters.pop();
             makeVisible();
             pruebaOk = true;
-            modoRedoOn=false;
+            
             return;
         }
         else if((method.equals("makeVisible"))){
-            modoRedoOn=true;
             Integer operador = (Integer)parameters.pop();
             makeInvisible();
             pruebaOk = true;
-            modoRedoOn=false;
+            setmodoUndo(true);
             return;
         }
         else if((method.equals("jump"))){
@@ -323,8 +344,7 @@ public class CityOfHeroes
     public void addHeroe(String color,int hidingBuilding, int strength){
         color = color.toLowerCase();
         if(Builds.size()!=0){
-            if (verifyDeadHero(color) && !modoRedoOn){
-                setPruebOk(true);
+            if (verifyDeadHero(color,hidingBuilding,strength) && !modoUndoOn){
                 return;
             }
             else{
@@ -363,24 +383,26 @@ public class CityOfHeroes
         }
     }
     
+
     /**
      * Verifica si un heroe esta muerto
      *
      * @param     Color
+     * @param     HidingBuilding
+     * @param     Strength
      * @return    boolean
      */
-    private boolean  verifyDeadHero(String Color){
-        setPruebOk(true);
+    private boolean  verifyDeadHero(String Color,int HidingBuilding, int Strength ){
         if (DeadsHeroes.contains(Color)){
             Toolkit.getDefaultToolkit().beep();
             mostrarMensaje("El hereoe de color "+Color+" esta muerto o ya ha sido creado"); 
-            setPruebOk(true);
+            setPruebOk(false);
             return true;
         }
         else if(liveHeroes.contains(Color)){
             Toolkit.getDefaultToolkit().beep();
             mostrarMensaje("El hereoe de color "+Color+" ya existe o esta muerto");
-            setPruebOk(true);
+            setPruebOk(false);
             return true;
         }
         else{
