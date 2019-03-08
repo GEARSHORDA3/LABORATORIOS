@@ -1,0 +1,21 @@
+#BlueJ class context
+comment0.target=EnSalon
+comment1.params=
+comment1.target=int\ getPosicionX()
+comment2.params=
+comment2.target=int\ getPosicionY()
+comment3.params=
+comment3.target=java.awt.Color\ getColor()
+comment4.params=
+comment4.target=void\ inicie()
+comment5.params=
+comment5.target=void\ pare()
+comment6.params=
+comment6.target=java.lang.String\ forma()
+comment7.params=
+comment7.target=java.lang.String\ mensaje()
+comment7.text=\r\n\ Da\ un\ mensaje\ vacio\r\n
+comment8.params=
+comment8.target=void\ decida()
+comment8.text=\r\n\ Decide\ aleatoriamente\ la\ acci\u00F3n\ a\ tomar\r\n
+numComments=9

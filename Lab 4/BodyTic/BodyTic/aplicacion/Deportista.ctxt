@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=Deportista
+comment1.params=salon\ nombre\ posicionx\ posiciony
+comment1.target=Deportista(Salon,\ java.lang.String,\ int,\ int)
+comment2.params=direccion
+comment2.target=boolean\ puedeMover(char)
+comment3.params=
+comment3.target=void\ pare()
+comment4.params=
+comment4.target=void\ inicie()
+comment5.params=
+comment5.target=java.lang.String\ forma()
+comment6.params=
+comment6.target=java.lang.String\ mensaje()
+numComments=7
