@@ -484,7 +484,6 @@
                    nuevaAlturaEdificio=heroe.getPositionY()+15;
                    veriHeroNoMuerto=true;
                    infCoordenadas.put(posiActEdiX,(int) heroe.getPositionY()+7);
-                   
                    if (isVisible==true){
                     heroe.makeVisible();
                     ListaVitalidad.get(pos1).makeVisible();
@@ -834,10 +833,7 @@
                 if (!chocoEdificio3(posicionX,y,altoCanvas,anchoCanvas,infCoordenadas,color,posicionesX,durezasEdificios,infCoordenadasAncho)
                 &&sobreviveHeroeEdi==true){
                    varibleBool=false;
-                   if (isVisible==true){
-                   }
                    heroe.setXYposition(posiXoriginal,posiYoriginal);
-                   // heroe.makeVisible();
                    return true;
                 }
                 if (angulo<89){
@@ -869,79 +865,4 @@
             return listaPositions;
         }
         
-
-        
-        
-         // public boolean isSafeJump2(String color, int angulo, int velocidad,int alturaEdi, int posy, int posx, int altoCanvas,int anchoCanvas,double avance,
-         // boolean isVisible,Hashtable infCoordenadas,ArrayList posicionesX,Hashtable durezasEdificios,Hashtable infCoordenadasAncho,
-         // int posicionXoriginal, int posicionYoriginal)
-        // {
-            // Canvas canvas = Canvas.getCanvas1();
-            // y=0;
-            // int angulo2=angulo;
-            // if(angulo2>90){
-                // Math.abs(angulo-=100);
-                // angulo*=-1;
-                // velocidad*=-1;
-            // }
-            // t=0;
-            // int pos1=ColoresHeroes.indexOf(color);
-            // h=alturaEdi;
-            // vo=velocidad/4;
-            // if (velocidad>angulo){
-                // voy= 2*(vo*Math.sin(-angulo));
-                // vox= vo*Math.cos(angulo);
-            // }
-            // else{
-                // voy= 2*(vo*Math.sin(-angulo))/2;
-                // vox= 2*(vo*Math.cos(angulo)); 
-            // }            
-            // angulo*=Math.PI;
-            // angulo/=180;
-            // heroe.setXYposition(posicionX,posicionY);
-            // posicionY=posy;
-            // posicionX=posx;
-            // h=h/3; 
-            // while (y<altoCanvas){
-                // t+=avance;
-                // y=((posicionY)-(voy*t) + (4.9*(t*t)));
-                // heroe.makeVisible();
-                // System.out.println(y);
-                // if (chocoEdificio3(posicionX,y,altoCanvas,anchoCanvas,infCoordenadas,color,posicionesX,durezasEdificios,infCoordenadasAncho)){
-                    // heroe.setXYposition(posicionXoriginal,posicionYoriginal);
-                    // heroe.makeVisible();
-                    // return true;
-                // }
-                // else if (!chocoEdificio3(posicionX,y,altoCanvas,anchoCanvas,infCoordenadas,color,posicionesX,durezasEdificios,infCoordenadasAncho)
-                // &&sobreviveHeroeEdi==true){
-                   // heroe.setXYposition(posicionXoriginal,posicionYoriginal);
-                   // heroe.makeVisible();
-                   // varibleBool=false;
-                   // return true;
-                // }
-                // if (angulo2<89){
-                    // x=Math.abs(vox*t);
-                // }
-                // else if(angulo2>=90){
-                    // x=-(vox*t);
-                // }
-                // t+=avance;
-                // posicionX+=(x/2);
-                // posicionY=y;  
-                // heroe.setXYposition(posicionX,posicionY);
-                // heroe.makeVisible();
-                 // if(varibleBool){
-                    // heroe.setXYposition(posicionXoriginal,posicionYoriginal);
-                    // varibleBool=false;
-                    // heroe.makeVisible();
-                    // return true; 
-                // }
-            
-        // }
-        // heroe.setXYposition(posicionXoriginal,posicionYoriginal);
-        // heroe.makeVisible();
-        // return false;
-        // }        
-      
-
 }

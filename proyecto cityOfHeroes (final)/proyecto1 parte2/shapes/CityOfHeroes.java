@@ -81,6 +81,19 @@ public class CityOfHeroes
         
         return true;
     }
+    
+    /**
+     * muestra una matriz de alcanze del heroe a los edificos
+     * @param buildings
+     * @param configuration
+     * 
+     * @return String[][] 
+     */
+    // public String[][]  solve(int[] configuration, int[][] buildings)
+    // {
+        // ;
+        // return String[][];
+    // }
 
     /**
      * Hacer lo opuesto a undo
@@ -133,7 +146,7 @@ public class CityOfHeroes
         else if((method.equals("removeHeroe"))){
             ArrayList<Object> temp = (ArrayList)parameters.pop();
             addHeroe((String)temp.get(0),(int)temp.get(1),(int)temp.get(2));
-            pruebaOk = true;
+            setPruebOk(true);
             setmodoUndo(true);
             return;
         }
@@ -146,7 +159,7 @@ public class CityOfHeroes
             else if (operador=="-"){
                 zoom('+');
             }
-            pruebaOk = true;
+            setPruebOk(true);
             
             return;
         }
@@ -154,37 +167,14 @@ public class CityOfHeroes
             setmodoUndo(true);
             Integer operador = (Integer)parameters.pop();
             makeVisible();
-            pruebaOk = true;
-            
+            setPruebOk(true);
             return;
         }
         else if((method.equals("makeVisible"))){
             Integer operador = (Integer)parameters.pop();
             makeInvisible();
-            pruebaOk = true;
+            setPruebOk(true);
             setmodoUndo(true);
-            return;
-        }
-        else if((method.equals("jump"))){
-            int building = (int)parameters.pop(); 
-            jump((String)parameters.pop(),building);
-            // Falta reparar edificios
-            setPruebOk(true);
-            return;
-        }
-        else if((method.equals("jump2"))){
-            ArrayList<Object> temp;
-            int building = (int)parameters.pop();
-            temp=(ArrayList)parameters.pop();
-            jump((String)temp.get(1),building);
-           setPruebOk(true);
-           return;
-        }
-        else if((method.equals("jump3"))){
-            int building = (int)parameters.pop(); 
-            jump((String)parameters.pop(),building);
-            // Falta reparar edificios
-            setPruebOk(true);
             return;
         }
         else{
@@ -390,6 +380,7 @@ public class CityOfHeroes
                     parameters.push(color);
             // }
             if (isVisible==true){
+                
                 heroe.makeVisible();
             }
             }
@@ -527,7 +518,9 @@ public class CityOfHeroes
            for(i=0;i<Builds.size();i++){
              if (Builds.get(i).getPositionX()==edificoModificadoX){
                  Builds.get(i).changeHightEdi(nuevaAlturaEdiY);
+                 if(isVisible){
                  Builds.get(i).makeVisible();
+                }
                 }
            }
        }catch (IndexOutOfBoundsException e){
@@ -547,6 +540,7 @@ public class CityOfHeroes
        int achCanvas= canvas.getWidth();
        int altCanvas= canvas.getHeight();
        color = color.toLowerCase();
+       
        for(int i=0;i<Heroes.size();i++){
            if (Heroes.get(i).getHeroeColor(Heroes.get(i)).equals(color)){
                int posiXHeroe= (Heroes.get(i)).getxPosition();
@@ -688,9 +682,8 @@ public class CityOfHeroes
      /** 
       * 
       */
-     public ArrayList jumpPlan(String heroe, int building){        
+     public int[] jumpPlan(String heroe, int building){        
         listaPlan = new ArrayList<Integer>();
-        listaPlan2 = new ArrayList<Integer>();
         edificioJumpPlan=building;
         notShowMessage();
         for (int angulo=4; angulo<180;angulo++){
@@ -702,8 +695,12 @@ public class CityOfHeroes
             }
         }
         showMessage();
-        System.out.println(listaPlan);
-        return listaPlan;
+        int[] jumpsPlan = new int[listaPlan.size()];
+        for (int i=0; i < listaPlan.size(); i++)
+        {
+            jumpsPlan[i] = listaPlan.get(i).intValue();
+        }
+        return jumpsPlan;
     }
 
     private ArrayList getXYPositionHeroe(String color){
@@ -721,7 +718,6 @@ public class CityOfHeroes
             if (Heroes.get(i).getHeroeColor(Heroes.get(i)).equals(color)){
                 Heroes.get(i).setXYposition2(x,y);
                 removeHeroe("brown");
-                Heroes.get(i).makeVisible();
             }
         }
     }
@@ -831,6 +827,7 @@ public class CityOfHeroes
      * @return el booleano pruebaOk
      */
     public boolean ok(){
+         
         return pruebaOk;
     }
     

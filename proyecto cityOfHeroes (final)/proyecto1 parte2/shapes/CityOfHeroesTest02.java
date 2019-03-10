@@ -11,7 +11,6 @@ import org.junit.Test;
  * @version (a version number or a date)
  */
 public class CityOfHeroesTest02 {
-    
     @Test
     public void segunARNoDeberiaSaltar() {
         CityOfHeroes cityOfHe1 = new CityOfHeroes(1000, 1000);
