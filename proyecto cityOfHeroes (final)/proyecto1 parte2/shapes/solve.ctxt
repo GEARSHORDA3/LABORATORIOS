@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=solve
+comment1.params=configuration\ building
+comment1.target=solve(int[],\ int[][])
+comment2.params=
+comment2.target=int[][]\ b()
+comment3.params=posX\ posY
+comment3.target=int[][]\ bfs(int,\ int)
+comment4.params=posX\ posY\ ex\ ey
+comment4.target=boolean\ getJump(int,\ int,\ int,\ int)
+numComments=5
