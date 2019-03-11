@@ -94,13 +94,22 @@
         }
         
         /**
-         * Hacer visible el heroe
-         *
+         * obtener la posicion del edifcio actual en el que se encuentra el heroe
+         * @return posiActEdiX
          */
-        public void makeVisible(){
-            isVisible = true;
-            draw();
+        public int getPosiActEdiX()
+        {
+            return posiActEdiX;
         }
+
+        /**
+             * Hacer visible el heroe
+             *
+             */
+            public void makeVisible(){
+                isVisible = true;
+                draw();
+            }
         
         public int getHidingBuilding()
         {
@@ -168,14 +177,10 @@
          }
         
          public void setHeroeMuerto()
-        {
+         {
          heroeMuerto=true;
          }
          
-        public int getPosiActEdiX()
-        {
-         return  posiActEdiX;
-         }
         
         /**
          * Retornar el objeto vitalidad del heroe

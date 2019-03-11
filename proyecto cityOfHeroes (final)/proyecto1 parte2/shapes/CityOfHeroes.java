@@ -46,6 +46,7 @@ public class CityOfHeroes
     private Stack<Object>parameters=new Stack<Object>();
     private boolean modoUndoOn=false;
     private ArrayList<Integer>listaPlan2;
+    private ArrayList<Integer>edificioConHeroes=new ArrayList<Integer>();
     /**
      * constructor
      *
@@ -552,28 +553,50 @@ public class CityOfHeroes
                    int anchoEdi= edificio.getWidth()+xpositionEdi;
                    if (xpositionEdi<=posiXHeroe && posiXHeroe<=anchoEdi){
                        if (slow){
+                           try {
+                                edificioConHeroes.remove(edificioConHeroes.indexOf(Heroes.get(i).getPosiActEdiX()));
+                            }
+                            catch(ArrayIndexOutOfBoundsException exception) {
+                            }
                            (Heroes.get(i)).Jump(color, angulo, velocidad, altCanvas-posiYHeroe,
                            posiYHeroe, posiXHeroe,altCanvas,achCanvas, 0.001,isVisible,infCoordenadas,positionX,durezasEdificios,infCoordenadasAncho);
+                           if(edificioConHeroes.contains(Heroes.get(i).getPosiActEdiX())){
+                               edificioConHeroes.remove(edificioConHeroes.indexOf(Heroes.get(i).getPosiActEdiX()));
+                               mostrarMensaje("Heroe "+Heroes.get(i).getColor()+" muerto");
+                               removeHeroe(Heroes.get(i).getColor());
+                           }
+                           else{
                            if(Heroes.get(i).getVeriHeroNoMuerto()){
                                infCoordenadas.put(Heroes.get(i).getPosiActEdiX(),((int) Heroes.get(i).getPositionY())+7);
                                Heroes.get(i).changeVeriHeroNoMuerto();
                                int edificoModificadoX=Heroes.get(i).getposiEdiModificado();
                                int nuevaAlturaEdiY=Heroes.get(i).getNuevaAlturaEdificio();
                                modiAltuEdiChoqueHeroe(edificoModificadoX,nuevaAlturaEdiY);
-                               this.asignarEdiDañado(Heroes.get(i).getXEdiDañado());
-                               this.addDeads(Heroes.get(i).deads(),Heroes.get(i));
+                               this.asignarEdiDañado(Heroes.get(i).getXEdiDañado(),Heroes.get(i).getPosiActEdiX());
+                               this.addDeads(Heroes.get(i).deads(),Heroes.get(i),Heroes.get(i).getPosiActEdiX());
                                setPruebOk(true);
                                return;
                             }
                             else{
-                                this.asignarEdiDañado(Heroes.get(i).getXEdiDañado());
-                                this.addDeads(Heroes.get(i).deads(),Heroes.get(i));
+                                this.asignarEdiDañado(Heroes.get(i).getXEdiDañado(),Heroes.get(i).getPosiActEdiX());
+                                this.addDeads(Heroes.get(i).deads(),Heroes.get(i),Heroes.get(i).getPosiActEdiX());
                                 setPruebOk(true);
                                 return;
                             }
+                        }
                            
                        }
                        else{
+                           try {
+                                edificioConHeroes.remove(edificioConHeroes.indexOf(Heroes.get(i).getPosiActEdiX()));
+                            }
+                            catch(ArrayIndexOutOfBoundsException exception) {
+                            }
+                           if(edificioConHeroes.contains(Heroes.get(i).getPosiActEdiX())){
+                               edificioConHeroes.remove(edificioConHeroes.indexOf(Heroes.get(i).getPosiActEdiX()));
+                               removeHeroe(Heroes.get(i).getColor());
+                           }
+                           else{
                            (Heroes.get(i)).Jump(color, angulo, velocidad, altCanvas-posiYHeroe,
                            posiYHeroe, posiXHeroe,altCanvas,achCanvas, 0.01,isVisible,infCoordenadas,positionX,durezasEdificios,infCoordenadasAncho);
                            if(Heroes.get(i).getVeriHeroNoMuerto()){
@@ -582,17 +605,18 @@ public class CityOfHeroes
                                int edificoModificadoX=Heroes.get(i).getposiEdiModificado();
                                int nuevaAlturaEdiY=Heroes.get(i).getNuevaAlturaEdificio();
                                modiAltuEdiChoqueHeroe(edificoModificadoX,nuevaAlturaEdiY);
-                               this.asignarEdiDañado(Heroes.get(i).getXEdiDañado());
-                               this.addDeads(Heroes.get(i).deads(),Heroes.get(i));
+                               this.asignarEdiDañado(Heroes.get(i).getXEdiDañado(),Heroes.get(i).getPosiActEdiX());
+                               this.addDeads(Heroes.get(i).deads(),Heroes.get(i),Heroes.get(i).getPosiActEdiX());
                                setPruebOk(true);
                                return;
                             }
                             else{
-                                this.asignarEdiDañado(Heroes.get(i).getXEdiDañado());
-                                this.addDeads(Heroes.get(i).deads(),Heroes.get(i));
+                                this.asignarEdiDañado(Heroes.get(i).getXEdiDañado(),Heroes.get(i).getPosiActEdiX());
+                                this.addDeads(Heroes.get(i).deads(),Heroes.get(i),Heroes.get(i).getPosiActEdiX());
                                 setPruebOk(true);
                                 return;
                             }
+                        }
                         }
                     }
                 }
@@ -844,11 +868,14 @@ public class CityOfHeroes
      * @param bool booleano con true o false
      * @param hereoe objecto de la clase heroe
      */
-    private void addDeads(boolean indicador,Heroe heroe)
+    private void addDeads(boolean indicador,Heroe heroe,int edifiConHeroe)
     {
         if (indicador){
            DeadsHeroes.add(heroe.getHeroeColor(heroe));
            this.removeHeroe(heroe.getColor());
+        }
+        else{
+            edificioConHeroes.add(edifiConHeroe);
         }
     }
     
@@ -856,7 +883,7 @@ public class CityOfHeroes
      * asignar al objeto building correspondiente si esta dañado con un numero diferente a -1000000.
      * @param  x  cordenada x del edifico
      */
-    private void asignarEdiDañado(int x)
+    private void asignarEdiDañado(int x,int edifiConHeroe)
     {
         if (x!=-1000000){
             int buscador1=x;
@@ -864,6 +891,7 @@ public class CityOfHeroes
             for(i=0;i<Builds.size();i++){
              if (Builds.get(i).getPositionX()==buscador1){
                 Builds.get(i).setDañadoEdifcioTrue();
+                edificioConHeroes.add(edifiConHeroe);
                 }
            }
             
