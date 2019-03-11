@@ -832,7 +832,6 @@
                 y=((posicionY)-(voy*t) + (4.9*(t*t)));
                 if (chocoEdificio3(posicionX,y,altoCanvas,anchoCanvas,infCoordenadas,color,posicionesX,durezasEdificios,infCoordenadasAncho)){
                    heroe.setXYposition(posiXoriginal,posiYoriginal);
-                   // heroe.makeVisible();
                    return true;
                 }
                 if (!chocoEdificio3(posicionX,y,altoCanvas,anchoCanvas,infCoordenadas,color,posicionesX,durezasEdificios,infCoordenadasAncho)
@@ -851,13 +850,11 @@
                 posicionX+=(x/2);
                 posicionY=y;  
                 heroe.setXYposition(posicionX,posicionY);
-                // heroe.makeVisible();
                 if(varibleBool){
                     varibleBool=false;
                 }
             }
         heroe.setXYposition(posiXoriginal,posiYoriginal);
-        // heroe.makeVisible();
         return false;
         }        
         

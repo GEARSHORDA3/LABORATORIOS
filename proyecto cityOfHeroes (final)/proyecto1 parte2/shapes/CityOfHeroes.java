@@ -370,18 +370,13 @@ public class CityOfHeroes
                 int edificioHeroeAncho= infCoordenadasAncho.get(x);
                 int ediActualPosi=x;
                 Heroe heroe= new Heroe(color,hidingBuilding,strength, x,y, edificioHeroeAncho,isVisible,ediActualPosi);
-                // if (color!="brown"){
-                    Heroes.add(heroe);
-                // }
-                setPruebOk(true);
-                // if (color!="brown"){                
-                    infoHeroes.add(hidingBuilding);
-                    infoHeroes.add(strength);
-                    methods.push("addHeroe");
-                    parameters.push(color);
-            // }
+                Heroes.add(heroe);
+                setPruebOk(true);             
+                infoHeroes.add(hidingBuilding);
+                infoHeroes.add(strength);
+                methods.push("addHeroe");
+                parameters.push(color);
             if (isVisible==true){
-                
                 heroe.makeVisible();
             }
             }
