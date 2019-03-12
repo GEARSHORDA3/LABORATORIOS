@@ -13,7 +13,7 @@ import java.util.*;
 public class Salon{
 	public static final int MAXIMO = 500;
 	private static Salon salon = null;
-	
+	private ArrayList<EnSalon> elementos;
 	public static Salon demeSalon() {
 		if (salon==null){
 			salon=new Salon();
@@ -29,16 +29,10 @@ public class Salon{
 		salon=d;
 	}		
 
-
-	private ArrayList<EnSalon> elementos;
-	
-	
 	private Salon() {
 		elementos= new ArrayList<EnSalon>();
 	}
-	
-	
-	
+
 	public EnSalon deme(int n){
 		EnSalon h=null;
 		if (1<=n && n<=elementos.size()){
@@ -57,22 +51,22 @@ public class Salon{
 	}
 	
 
-    public void entrada(){  
-        Deportista edward = new Deportista(salon,"edward",50,50);
-        Deportista bella = new Deportista(salon, "bella",150,50);
-	}  
+        public void entrada(){  
+            Deportista edward = new Deportista(salon,"edward",50,50);
+            Deportista bella = new Deportista(salon, "bella",150,50);
+    	}  
 	
-    public void salida(){       
-    }
+        public void salida(){       
+        }
 
 	
-   public void inicio(){
-   }	
+       public void inicio(){
+       }	
 
-   public void parada(){
-   }	
+       public void parada(){
+       }	
 
-   public void decision(){
-   }	   
+       public void decision(){
+       }	   
 	
 }

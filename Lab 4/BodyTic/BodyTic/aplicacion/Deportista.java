@@ -5,17 +5,17 @@ import java.awt.Color;
 public class Deportista extends Persona implements EnSalon{
 	
 
-    private Salon salon;   
+        private Salon salon;   
 	protected String palabras;
-    protected int paso;
+        protected int paso;
 
 	public Deportista(Salon salon,String nombre,int posicionx, int posiciony){
 	    super(nombre,posicionx,posiciony);
 	    this.salon=salon;
-		color=Color.BLACK;
-		palabras="Soy"+nombre;
-		salon.adicione(this);
-		paso=0;
+	    color=Color.BLACK;
+	    palabras="Soy"+nombre;
+	    salon.adicione(this);
+	    paso=0;
 	}
 
 
