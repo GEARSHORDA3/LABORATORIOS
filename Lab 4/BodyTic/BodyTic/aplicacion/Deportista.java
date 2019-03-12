@@ -6,51 +6,68 @@ public class Deportista extends Persona implements EnSalon{
     
     private Salon salon;   
     protected String palabras;
-    protected int paso;
-    public Deportista(Salon salon,String nombre,int posicionx, int posiciony){
+    public int paso;
+    protected String nombre;
+    public int var=0;
+    public Deportista(Salon salon,String nombre,int posicionx, int posiciony,int a){
         super(nombre,posicionx,posiciony);
         this.salon=salon;
-        color=Color.ORANGE;
-        palabras="Soy"+nombre;
+        this.nombre = nombre;
+        if (a==0){
+           color=Color.BLACK;
+           paso=0;}
+        else{
+           color=Color.ORANGE;
+           paso=50;}
+        palabras="Soy "+nombre;
         salon.adicione(this);
-        paso=0;
-    }
-    
-    public void puedeMover2(char direccion) {    
-        puedeMover(direccion);
+        
     }
     
     private boolean puedeMover(char direccion) {
-    	boolean puede=false;
-    	int posX = getPosicionX();
-    	int posY = getPosicionY();
-    	switch(direccion){
-    		case 'N' : puede = (posY+1 < salon.MAXIMO);
-    		break;
-    		case 'E' : puede = (posX+1 < salon.MAXIMO);
-    		break;
-    		case 'S' : puede = (posY-1 >= 0);
-    		break;
-    		case 'O': puede = (posX-1 >= 0);
-    		break; 
-    	} 
-    	return puede;
+        boolean puede=false;
+        int posX = getPosicionX();
+        int posY = getPosicionY();
+        switch(direccion){
+            case 'N' : puede = (posY+1 < salon.MAXIMO);
+            break;
+            case 'E' : puede = (posX+1 < salon.MAXIMO);
+            break;
+            case 'S' : puede = (posY-1 >= 0);
+            break;
+            case 'O': puede = (posX-1 >= 0);
+            break; 
+        } 
+        return puede;
     }
     
     
     public void pare(){
-    	muevaBrazo('I','B'); 
-    	muevaPierna('I','P');
-    	muevaBrazo('D','B'); 
-    	muevaPierna('D','P');		
-    	palabras="¡Uff!";
+        muevaBrazo('I','B'); 
+        muevaPierna('I','P');
+        muevaBrazo('D','B'); 
+        muevaPierna('D','P');       
+        palabras="¡Uff!";
     }
     
     
     
     public void inicie(){
-        palabras="Soy n";
+        palabras="Soy"+nombre;
         paso++;
+        if (nombre=="han" || nombre=="leila"){
+            if (var<4){
+                muevaPierna('I','S');
+                muevaPierna('D','S');
+            }
+            else{
+            muevaPierna('I','B');
+            muevaPierna('D','B');
+            var=0;
+            }
+            var+=1;               
+        }
+        else{
         for  (int i=0; i<3;i++){
     	if (getPosicionBrazo('I')==ABAJO && getPosicionBrazo('D')==ABAJO){
     		muevaBrazo('I','S'); 
@@ -79,12 +96,15 @@ public class Deportista extends Persona implements EnSalon{
     		muevaPierna('D','B');
     		muevaBrazo('I','S'); 
     		muevaPierna('I','S');
-    	}		
-    	char direccion=( (paso % 2 == 0)  ? 'E':'O');
-    	if (puedeMover(direccion)){
-    	    muevase(direccion);
-    	}
-    }}
+    	}            
+        } 
+        }
+
+        char direccion=( (paso % 2 == 0)  ? 'E':'O');
+        if (puedeMover(direccion)){
+            muevase(direccion);
+        }
+    }
     
     
     public String forma(){
@@ -92,7 +112,7 @@ public class Deportista extends Persona implements EnSalon{
     }
     
     public String mensaje(){
-    	return  palabras;
+        return  palabras;
     }
 
 }

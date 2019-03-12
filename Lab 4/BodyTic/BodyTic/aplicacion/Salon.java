@@ -14,7 +14,7 @@ public class Salon{
         public static final int MAXIMO = 500;
         private static Salon salon = null;
         private ArrayList<EnSalon> elementos;
-        private int conta;
+        private int conta=0;
         public static Salon demeSalon() {
             if (salon==null){
                 salon=new Salon();
@@ -53,36 +53,39 @@ public class Salon{
     
 
         public void entrada(){  
-            // Deportista edward = new Deportista(salon,"edward",200,50);
-            // Deportista bella = new Deportista(salon, "bella",150,50);
-            Deportista neo = new SuperDeportista(salon,"neo",300,150);
-            Deportista trinity = new SuperDeportista(salon, "trinity",250,150);            
+            Deportista edward = new Deportista(salon,"edward",250,50,0);
+            Deportista bella = new Deportista(salon, "bella",200,50,0);
+            SuperDeportista neo = new SuperDeportista(salon,"neo",250,150);
+            SuperDeportista trinity = new SuperDeportista(salon, "trinity",200,150);
+            DeportistasHabladores han = new DeportistasHabladores(salon,"han",200,250);
+            DeportistasHabladores leila = new DeportistasHabladores(salon,"leila",300,250);
         }  
     
         public void salida(){
             elementos.clear();
         }
 
-       public void inicio(){
-           if (conta<2){
-               elementos.add(elementos.get(0));
-               elementos.add(elementos.get(1));
-               elementos.get(0).inicie();
-               elementos.get(1).inicie();
-           }
-           else{
-               parada();
-           }
+       public void inicio(){              
+           for (int i=0; i<elementos.size(); i++){
+               elementos.get(i).inicie();}             
        }    
 
-       public void parada(){                     
+       public void parada(){                                 
            elementos.get(0).pare();
-           elementos.get(1).pare();    
+           elementos.get(1).pare();
+           if (conta % 3==0){
+               elementos.get(2).pare();
+               elementos.get(3).pare();                  
+           }
+           conta+=1;
        }    
 
        public void decision(){
-            elementos.get(0).decida();
-            elementos.get(1).decida();
+           for (int i=0; i<elementos.size(); i++){
+               elementos.get(0).decida();
+           }
+           // elementos.get(2).decida();
+           // elementos.get(3).decida(); 
        }       
     
 }

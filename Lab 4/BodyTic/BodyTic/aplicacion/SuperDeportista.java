@@ -10,18 +10,18 @@ package aplicacion;
 public class SuperDeportista extends Deportista implements EnSalon
 {
         private Salon salon;   
-	protected String palabras;
+    protected String palabras;
         protected int paso;
     /**
      * Constructor for objects of class SuperDeportista
      */
     public SuperDeportista(Salon salon,String nombre,int posicionx, int posiciony)
     {
-        super(salon,nombre,posicionx,posiciony);
+        super(salon,nombre,posicionx,posiciony, 1);
     }
     
-    private void puedeMover(char direccion) {
-        super.puedeMover2(direccion);
+    public void inicie(){
+        super.PASO=60;
+        super.inicie();
     }
-
 }
