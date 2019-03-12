@@ -12,7 +12,7 @@ public class Deportista extends Persona implements EnSalon{
 	public Deportista(Salon salon,String nombre,int posicionx, int posiciony){
 	    super(nombre,posicionx,posiciony);
 	    this.salon=salon;
-	    color=Color.BLACK;
+	    color=Color.ORANGE;
 	    palabras="Soy"+nombre;
 	    salon.adicione(this);
 	    paso=0;
@@ -48,8 +48,9 @@ public class Deportista extends Persona implements EnSalon{
 
 
 	public void inicie(){
-	    palabras="";
+	    palabras="Soy";
         paso++;
+        for  (int i=0; i<3;i++){
 		if (getPosicionBrazo('I')==ABAJO && getPosicionBrazo('D')==ABAJO){
 			muevaBrazo('I','S'); 
 			muevaPierna('I','S');
@@ -82,7 +83,7 @@ public class Deportista extends Persona implements EnSalon{
 		if (puedeMover(direccion)){
 		    muevase(direccion);
 		}
-	}
+	}}
 
 	
 	public String forma(){

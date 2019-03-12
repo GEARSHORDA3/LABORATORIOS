@@ -4,7 +4,6 @@ import java.util.Random;
 
 public interface EnSalon{
     public static String[] FORMAS = new String[]{"Persona","Circulo", "Cuadrado"};
-    
     Random r = new Random(1);
     
     int getPosicionX();
