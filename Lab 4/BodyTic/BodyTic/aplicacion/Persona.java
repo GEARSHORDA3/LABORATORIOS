@@ -10,7 +10,7 @@ public class Persona {
 	public final static int ABAJO=2;
     
 	//Dimension pasos
-	private final static int PASO=20;
+	private final static int PASO=40;
 
 	private String nombre;	
 	private int brazoIzq;

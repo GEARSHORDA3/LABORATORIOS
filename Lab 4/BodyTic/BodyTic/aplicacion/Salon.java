@@ -14,6 +14,7 @@ public class Salon{
         public static final int MAXIMO = 500;
         private static Salon salon = null;
         private ArrayList<EnSalon> elementos;
+        private int conta;
         public static Salon demeSalon() {
             if (salon==null){
                 salon=new Salon();
@@ -52,20 +53,26 @@ public class Salon{
     
 
         public void entrada(){  
-            Deportista edward = new Deportista(salon,"edward",50,50);
-            Deportista bella = new Deportista(salon, "bella",150,50);
+            // Deportista edward = new Deportista(salon,"edward",200,50);
+            // Deportista bella = new Deportista(salon, "bella",150,50);
+            Deportista neo = new SuperDeportista(salon,"neo",300,150);
+            Deportista trinity = new SuperDeportista(salon, "trinity",250,150);            
         }  
     
         public void salida(){
             elementos.clear();
         }
 
-    
        public void inicio(){
-           elementos.add(elementos.get(0));
-           elementos.add(elementos.get(1));
-           elementos.get(0).inicie();
-           elementos.get(1).inicie();
+           if (conta<2){
+               elementos.add(elementos.get(0));
+               elementos.add(elementos.get(1));
+               elementos.get(0).inicie();
+               elementos.get(1).inicie();
+           }
+           else{
+               parada();
+           }
        }    
 
        public void parada(){                     
