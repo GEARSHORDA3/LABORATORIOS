@@ -12,6 +12,7 @@ public class SuperDeportista extends Deportista implements EnSalon
         private Salon salon;   
     protected String palabras;
         protected int paso;
+        private int conta;
     /**
      * Constructor for objects of class SuperDeportista
      */
@@ -21,7 +22,13 @@ public class SuperDeportista extends Deportista implements EnSalon
     }
     
     public void inicie(){
-        super.PASO=60;
+        // if (conta%2==0){
+            super.PASO=60;
+        // }
+        // else{
+            // super.PASO=60;
+        // }
         super.inicie();
+        conta+=1;
     }
 }

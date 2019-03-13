@@ -10,9 +10,11 @@ package aplicacion;
 public class DeportistasHabladores extends Deportista
 {
     // instance variables - replace the example below with your own
-        private Salon salon;   
+    private Salon salon;   
     protected String palabras;
-        protected int paso;
+    protected int paso;
+    private int cima;
+    private int otro;
     /**
      * Constructor for objects of class DeportistasHabladores
      */
@@ -22,6 +24,18 @@ public class DeportistasHabladores extends Deportista
     }
 
     public void inicie(){
-        super.inicie();
+        if (cima<7){
+            super.muevase('S');
+            super.inicie();
+        }
+        else{
+            super.PASO=40;
+            super.inicie();
+        }
+        cima+=1;
+    }
+    
+    public void pare(){
+        super.palabras="¿Hola como has estado? "+nombre;
     }
 }

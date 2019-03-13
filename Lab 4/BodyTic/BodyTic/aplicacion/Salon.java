@@ -70,9 +70,12 @@ public class Salon{
                elementos.get(i).inicie();}             
        }    
 
-       public void parada(){                                 
-           elementos.get(0).pare();
-           elementos.get(1).pare();
+       public void parada(){
+           for (int i=0; i<elementos.size(); i++){
+               if (i!=2 || i!=3){
+                   elementos.get(i).pare();
+               }
+           }           
            if (conta % 3==0){
                elementos.get(2).pare();
                elementos.get(3).pare();                  
@@ -82,7 +85,7 @@ public class Salon{
 
        public void decision(){
            for (int i=0; i<elementos.size(); i++){
-               elementos.get(0).decida();
+               elementos.get(i).decida();
            }
            // elementos.get(2).decida();
            // elementos.get(3).decida(); 

@@ -6,4 +6,6 @@ comment1.target=DeportistasHabladores(Salon,\ java.lang.String,\ int,\ int)
 comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ DeportistasHabladores\r\n
 comment2.params=
 comment2.target=void\ inicie()
-numComments=3
+comment3.params=
+comment3.target=void\ pare()
+numComments=4
