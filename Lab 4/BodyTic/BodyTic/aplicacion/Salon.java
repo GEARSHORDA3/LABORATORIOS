@@ -53,14 +53,20 @@ public class Salon{
     
 
         public void entrada(){  
-            Bola bol = new Bola();
+            PistaDeBaile Bass = new PistaDeBaile(salon,20,-20);
+            Bola bol = new Bola(salon,40,10);
+            Bola bol2 = new Bola(salon,480,410);
             elementos.add(bol);
-            // Deportista edward = new Deportista(salon,"edward",250,50,0);
-            // Deportista bella = new Deportista(salon, "bella",200,50,0);
-            // SuperDeportista neo = new SuperDeportista(salon,"neo",250,150);
-            // SuperDeportista trinity = new SuperDeportista(salon, "trinity",200,150);
-            // DeportistasHabladores han = new DeportistasHabladores(salon,"han",200,250);
-            // DeportistasHabladores leila = new DeportistasHabladores(salon,"leila",300,250);
+            elementos.add(bol2);
+            elementos.add(Bass);
+            Deportista edward = new Deportista(salon,"edward",250,50,0);
+            Deportista bella = new Deportista(salon, "bella",200,50,0);
+            DeportistasAvanzados neo = new DeportistasAvanzados(salon,"neo",250,150);
+            DeportistasAvanzados trinity = new DeportistasAvanzados(salon, "trinity",200,150);
+            DeportistasHabladores han = new DeportistasHabladores(salon,"han",200,250);
+            DeportistasHabladores leila = new DeportistasHabladores(salon,"leila",300,250);
+            DeportistaSalsero David = new  DeportistaSalsero(salon,"David",420,150); 
+            DeportistaSalsero Andres = new  DeportistaSalsero(salon,"Andres",20,150); 
         }  
     
         public void salida(){
@@ -78,7 +84,7 @@ public class Salon{
                    elementos.get(i).pare();
                }
            }           
-           if (conta % 3==0){
+           if (conta % 3==0 && elementos.size()>3){
                elementos.get(2).pare();
                elementos.get(3).pare();                  
            }
@@ -89,8 +95,6 @@ public class Salon{
            for (int i=0; i<elementos.size(); i++){
                elementos.get(i).decida();
            }
-           // elementos.get(2).decida();
-           // elementos.get(3).decida(); 
        }       
     
 }

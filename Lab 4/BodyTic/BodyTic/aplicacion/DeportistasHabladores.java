@@ -14,7 +14,6 @@ public class DeportistasHabladores extends Deportista
     protected String palabras;
     protected int paso;
     private int cima;
-    private int otro;
     /**
      * Constructor for objects of class DeportistasHabladores
      */

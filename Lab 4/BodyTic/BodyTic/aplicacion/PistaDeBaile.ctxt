@@ -1,7 +1,7 @@
 #BlueJ class context
-comment0.target=Bola
+comment0.target=PistaDeBaile
 comment1.params=salon\ posicionx\ posiciony
-comment1.target=Bola(Salon,\ int,\ int)
+comment1.target=PistaDeBaile(Salon,\ int,\ int)
 comment2.params=
 comment2.target=java.lang.String\ forma()
 comment3.params=

@@ -103,7 +103,7 @@ public class Persona {
         if (c=='E') {
             posicionx=getPosicionX()+PASO;
         } else if (c=='O'){
-           posicionx=getPosicionX()-PASO;   
+                posicionx=getPosicionX()-PASO;   
         } else if (c=='N'){
             posiciony=getPosicionY()-PASO;
         } else if (c=='S'){

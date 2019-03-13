@@ -1,19 +1,19 @@
 package aplicacion;
 import java.awt.Color;
-public class Bola implements EnSalon{
+public class PistaDeBaile implements EnSalon{
     private Salon salon;
     public static int paso;
     public int posicionX;
     public int posicionY;
     public String color;
     public String[] colores = new String[]{"ORANGE","PINK","RED","BLUE","YELLOW","GREEN"};
-    public Bola (Salon salon,int posicionx, int posiciony){
+    public PistaDeBaile(Salon salon,int posicionx, int posiciony){
         posicionX=posicionx;
         posicionY=posiciony;
         color=colores[paso];
     }
     public String forma(){
-        return EnSalon.FORMAS[1];
+        return EnSalon.FORMAS[2];
     }
     public void inicie(){
         if (paso==5){
@@ -53,5 +53,5 @@ public class Bola implements EnSalon{
     }
     public int getPosicionY(){
         return posicionY;
-    }
+    }    
 }

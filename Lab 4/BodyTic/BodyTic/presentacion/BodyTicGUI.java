@@ -179,9 +179,9 @@ public class BodyTicGUI extends JFrame{
                 if (e.forma().equals("Persona")){
                     humano(g,(Persona)e,x,y);
                 } else  if (e.forma().equals("Circulo")){
-                    g.fillOval(x+10,y+0,10,10);
+                    g.fillOval(x+10,y+0,25,25);
                 } else  if (e.forma().equals("Cuadrado")){
-                    g.fillRect(x,y,10,10);
+                    g.fillRect(x-22,y,1000,50);
                 }
             }
             super.paintComponent(g);
