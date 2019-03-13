@@ -1,3 +1,15 @@
 #BlueJ class context
 comment0.target=Bola
-numComments=1
+comment1.params=
+comment1.target=java.lang.String\ forma()
+comment2.params=
+comment2.target=void\ inicie()
+comment3.params=
+comment3.target=void\ pare()
+comment4.params=
+comment4.target=java.awt.Color\ getColor()
+comment5.params=
+comment5.target=int\ getPosicionX()
+comment6.params=
+comment6.target=int\ getPosicionY()
+numComments=7

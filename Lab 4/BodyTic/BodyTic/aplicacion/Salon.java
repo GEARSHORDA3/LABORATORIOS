@@ -53,12 +53,14 @@ public class Salon{
     
 
         public void entrada(){  
-            Deportista edward = new Deportista(salon,"edward",250,50,0);
-            Deportista bella = new Deportista(salon, "bella",200,50,0);
-            SuperDeportista neo = new SuperDeportista(salon,"neo",250,150);
-            SuperDeportista trinity = new SuperDeportista(salon, "trinity",200,150);
-            DeportistasHabladores han = new DeportistasHabladores(salon,"han",200,250);
-            DeportistasHabladores leila = new DeportistasHabladores(salon,"leila",300,250);
+            Bola bol = new Bola();
+            elementos.add(bol);
+            // Deportista edward = new Deportista(salon,"edward",250,50,0);
+            // Deportista bella = new Deportista(salon, "bella",200,50,0);
+            // SuperDeportista neo = new SuperDeportista(salon,"neo",250,150);
+            // SuperDeportista trinity = new SuperDeportista(salon, "trinity",200,150);
+            // DeportistasHabladores han = new DeportistasHabladores(salon,"han",200,250);
+            // DeportistasHabladores leila = new DeportistasHabladores(salon,"leila",300,250);
         }  
     
         public void salida(){
