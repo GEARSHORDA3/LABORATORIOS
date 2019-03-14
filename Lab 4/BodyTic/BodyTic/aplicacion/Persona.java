@@ -42,7 +42,11 @@ public class Persona {
         return color;
     }
 
-
+    /**Retorna el nombre del vestido*/
+    public String getNombre(){
+        return nombre;
+    }
+    
     /**Mueve un brazo segun las indicaciones
     @param c el brazo a mover: I(zquierdo) o D(erecho)
     @param d el modo de moverlo: S(ubir) o B(ajar)

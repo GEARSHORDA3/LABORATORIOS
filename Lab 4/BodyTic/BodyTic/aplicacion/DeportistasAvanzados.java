@@ -9,10 +9,10 @@ package aplicacion;
  */
 public class DeportistasAvanzados extends Deportista implements EnSalon
 {
-        private Salon salon;   
+    private Salon salon;   
     protected String palabras;
-        protected int paso;
-        private int conta;
+    protected int paso;
+    private int conta;
     /**
      * Constructor for objects of class SuperDeportista
      */

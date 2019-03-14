@@ -43,6 +43,10 @@ public class Deportista extends Persona implements EnSalon{
         return puede;
     }
     
+    /**Retorna la palabra del deportista*/
+    public String getPalabras(){
+        return palabras;
+    }
     
     public void pare(){
         muevaBrazo('I','B'); 

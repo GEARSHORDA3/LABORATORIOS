@@ -30,7 +30,7 @@ public class Salon{
             salon=d;
         }       
     
-            private Salon() {
+        public Salon() {
             elementos= new ArrayList<EnSalon>();
         }
 
