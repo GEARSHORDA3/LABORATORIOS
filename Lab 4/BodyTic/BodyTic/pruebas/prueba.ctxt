@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=prueba
+comment0.text=\r\n\ The\ test\ class\ CityOfHeroesTest02.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=
+comment1.target=void\ deberiaSerbirMetodos()
+comment2.params=
+comment2.target=void\ deberiaCrearLosDeportistas()
+comment3.params=
+comment3.target=void\ deberiaFuncionarCaracteristicasDeportistaAvanzado()
+comment4.params=
+comment4.target=void\ deberiaFuncionarCaracteristicasDeportistaHabladores()
+comment5.params=
+comment5.target=void\ deberiaFuncionarCaracteristicasBola()
+numComments=6

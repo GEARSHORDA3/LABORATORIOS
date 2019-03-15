@@ -99,7 +99,7 @@ public class Persona {
         return (c=='I'? piernaIzq: piernaDer);
     }
 
-
+    
     /**Se mueve en la direccion indicada
      * @param c indica la direccion. N(orte), S(ur), E(ste), O(este)
     */

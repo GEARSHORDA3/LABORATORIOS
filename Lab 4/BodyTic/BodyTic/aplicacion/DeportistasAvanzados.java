@@ -21,6 +21,7 @@ public class DeportistasAvanzados extends Deportista implements EnSalon
         super(salon,nombre,posicionx,posiciony, 1);
     }
     
+    /**iniciar el movimiento del DeportistasAvanzados sobreescribiendolo*/
     public void inicie(){
         super.PASO=60;
         super.inicie();

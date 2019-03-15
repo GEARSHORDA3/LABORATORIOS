@@ -21,13 +21,9 @@ public class SuperDeportista extends Deportista implements EnSalon
         super(salon,nombre,posicionx,posiciony, 1);
     }
     
+    /**iniciar el movimiento del SuperDeportista sobreescribiendolo*/
     public void inicie(){
-        // if (conta%2==0){
             super.PASO=60;
-        // }
-        // else{
-            // super.PASO=60;
-        // }
         super.inicie();
         conta+=1;
     }

@@ -12,9 +12,13 @@ public class Bola implements EnSalon{
         posicionY=posiciony;
         color=colores[paso];
     }
+    
+    /**Retorna la forma de la bola que es circulo*/
     public String forma(){
         return EnSalon.FORMAS[1];
     }
+    
+    /**inicia el movimiento de la bola con un color menos el negro*/
     public void inicie(){
         if (paso==5){
             paso=0;
@@ -22,11 +26,15 @@ public class Bola implements EnSalon{
         color=colores[paso];
         paso+=1;
     }
+    
+    /**para el movimiento de la bola con un color negro*/
     public void pare(){
         color="BLACK";
         paso=0;
         getColor();
     }
+    
+    /**Obtiene el color para la bola, retornando un color*/
     public Color getColor(){
         if (color=="ORANGE"){
             return Color.RED;
@@ -48,9 +56,13 @@ public class Bola implements EnSalon{
         }
         return Color.GREEN;
     }
+    
+    /**Obtiene la posicion de la bola en x*/
     public int getPosicionX(){
         return posicionX;
     }
+    
+    /**Obtiene la posicion de la bola en y*/
     public int getPosicionY(){
         return posicionY;
     }

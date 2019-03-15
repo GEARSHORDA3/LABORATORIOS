@@ -22,18 +22,22 @@ public class Salon{
             return salon;
         }
         
+        /**crear un nuevo salon*/
         public static void nuevoSalon() {
             salon=new Salon();
         }   
         
+        /**cambiar entre salones*/
         public static void cambieSalon(Salon d) {
             salon=d;
         }       
-    
+        
+        /**crear una lista de todos los salones que existan*/
         public Salon() {
             elementos= new ArrayList<EnSalon>();
         }
-
+        
+        /**buscar un salon sino es nulo*/
         public EnSalon deme(int n){
             EnSalon h=null;
             if (1<=n && n<=elementos.size()){
@@ -42,16 +46,17 @@ public class Salon{
             return h; 
         }
     
-    
+        /**adicionar salones a la lista elementos*/
         public void adicione(EnSalon e){
             elementos.add(e);
         }
     
+        /**retornar la cantidad de salones existentes con un entero*/
         public int numeroEnSalon(){
             return elementos.size();
         }
     
-
+        /**crear todos los objetos de los salones*/
         public void entrada(){  
             PistaDeBaile Bass = new PistaDeBaile(salon,20,-20);
             Bola bol = new Bola(salon,40,10);
@@ -68,16 +73,19 @@ public class Salon{
             DeportistaSalsero David = new  DeportistaSalsero(salon,"David",420,150); 
             DeportistaSalsero Andres = new  DeportistaSalsero(salon,"Andres",20,150); 
         }  
-    
+        
+        /**quitar todos los elemntos existentes de los salones*/
         public void salida(){
             elementos.clear();
         }
-
+        
+        /**poner en moviminto todos los elemntos de todos los salones*/
        public void inicio(){              
            for (int i=0; i<elementos.size(); i++){
                elementos.get(i).inicie();}             
        }    
-
+       
+       /**parar el movimiento que esten realizando los objetos de elementos*/
        public void parada(){
            for (int i=0; i<elementos.size(); i++){
                if (i!=2 || i!=3){
@@ -90,7 +98,8 @@ public class Salon{
            }
            conta+=1;
        }    
-
+       
+       /**poner en moviminto todos los elemntos de todos los salones*/
        public void decision(){
            for (int i=0; i<elementos.size(); i++){
                elementos.get(i).decida();

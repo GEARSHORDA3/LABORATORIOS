@@ -26,6 +26,7 @@ public class Deportista extends Persona implements EnSalon{
         
     }
     
+    /**Retorna un booleano si el heroe se puede mover en una dirrecion*/
     private boolean puedeMover(char direccion) {
         boolean puede=false;
         int posX = getPosicionX();
@@ -48,6 +49,7 @@ public class Deportista extends Persona implements EnSalon{
         return palabras;
     }
     
+    /**Para las extremidades del deportista*/
     public void pare(){
         muevaBrazo('I','B'); 
         muevaPierna('I','P');
@@ -56,7 +58,7 @@ public class Deportista extends Persona implements EnSalon{
         
     }
     
-
+    /**inicia el movimiento del heroe tanto en direccion como extremidades*/
     public void inicie(){
         palabras="Soy"+nombre;
         paso++;
@@ -115,11 +117,12 @@ public class Deportista extends Persona implements EnSalon{
         }
     }
     
-    
+    /**Retorna una cadena de la forma del deportista*/
     public String forma(){
         return EnSalon.FORMAS[0];
     }
     
+    /**Retorna una cadena con las palabras del deportista*/
     public String mensaje(){
         return  palabras;
     }

@@ -12,9 +12,13 @@ public class PistaDeBaile implements EnSalon{
         posicionY=posiciony;
         color=colores[paso];
     }
+    
+    /**Retorna la forma de la pista que es un rectangulo*/
     public String forma(){
         return EnSalon.FORMAS[2];
     }
+    
+    /**inicia el movimiento de la pista con colores menos el negro*/
     public void inicie(){
         if (paso==5){
             paso=0;
@@ -22,11 +26,15 @@ public class PistaDeBaile implements EnSalon{
         color=colores[paso];
         paso+=1;
     }
+    
+    /**para la pista con color negro*/
     public void pare(){
         color="BLACK";
         paso=0;
         getColor();
     }
+    
+    /**retorna el color de la pista sea para inicio o pare*/
     public Color getColor(){
         if (color=="ORANGE"){
             return Color.RED;
@@ -48,9 +56,13 @@ public class PistaDeBaile implements EnSalon{
         }
         return Color.GREEN;
     }
+    
+    /**retorna la poscision en x de la pista*/
     public int getPosicionX(){
         return posicionX;
     }
+    
+    /**retorna la poscision en y de la pista*/
     public int getPosicionY(){
         return posicionY;
     }    

@@ -27,6 +27,7 @@ public class DeportistaSalsero extends Deportista
         posicionYoriginal=posiciony;        
     }
     
+    /**inicia el movimiento del DeportistaSalsero  sobreescribiendo*/
     public void inicie(){
         if (conta==20){
             for (int i =0; i<6; i++){

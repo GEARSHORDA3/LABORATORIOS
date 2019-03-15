@@ -9,7 +9,6 @@ package aplicacion;
  */
 public class DeportistasHabladores extends Deportista
 {
-    // instance variables - replace the example below with your own
     private Salon salon;   
     protected String palabras;
     protected int paso;
@@ -21,7 +20,8 @@ public class DeportistasHabladores extends Deportista
     {
         super(salon,nombre,posicionx,posiciony, 1);
     }
-
+    
+    /**inicia el movimiento del DeportistasHabladores sobreescribiendo*/
     public void inicie(){
         if (cima<7){
             super.muevase('S');
@@ -34,6 +34,7 @@ public class DeportistasHabladores extends Deportista
         cima+=1;
     }
     
+    /**para el movimiento del DeportistasHabladores sobreescribiendo*/
     public void pare(){
         super.palabras="¿Hola como has estado? "+nombre;
     }
