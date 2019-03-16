@@ -21,11 +21,11 @@ public void SegunAWshouldSolve(){
     correct = new String [][] {{"1"},{"1"},{"1"},{"1"},{"1"} ,{"1"},{"1"},{"1"},{"1"},{"1"},{"1"},{"1"},{"1"},{"0"},{"1"},{"1"},{"1"},{"1"},{"1"},{"1"}};
     assertTrue(Arrays.deepEquals(solved,correct));
     
-    // configuracion = new int[] {2,2,700,83,1,1};
-    // building = new int [][] {{703,854},{763,240}};
-    // solved = ch.solve(configuracion,building);
-    // correct = new String [][] {{"0","X"},{"X","1"}};
-    // assertTrue(Arrays.deepEquals(solved,correct));
+    configuracion = new int[] {2,2,700,83,1,1};
+    building = new int [][] {{703,854},{763,240}};
+    solved = ch.solve(configuracion,building);
+    correct = new String [][] {{"0","X"},{"X","1"}};
+    assertTrue(Arrays.deepEquals(solved,correct));
     
     configuracion = new int[] {20,1,2,500,1,1};
     building = new int [][] {{1,1000,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1000,1}};

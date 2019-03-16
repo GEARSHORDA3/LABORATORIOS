@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.target=CityOfHeroesContest
+comment1.params=configuration\ building
+comment1.target=CityOfHeroesContest(int[],\ int[][])
+comment2.params=configuration\ building
+comment2.target=void\ lectura(int[],\ int[][])
+comment3.params=
+comment3.target=java.lang.String[][]\ b()
+comment4.params=posX\ posY
+comment4.target=void\ imprimeMatriz(int,\ int)
+comment5.params=posX\ posY
+comment5.target=int[][]\ bfs(int,\ int)
+comment6.params=posX\ posY\ ex\ ey
+comment6.target=boolean\ isSafeJump(int,\ int,\ int,\ int)
+comment7.params=configuration\ buildings\ building
+comment7.target=boolean\ simulate(int[],\ int[][],\ int)
+comment7.text=\r\n\ analiza\ si\ la\ ciudad\ se\ puede\ simular\ retornando\ un\ boolenao\r\n\ @param\ buildings\r\n\ @param\ configuration\r\n\ @param\ building\r\n\ @return\ boolean\ \r\n
+numComments=8

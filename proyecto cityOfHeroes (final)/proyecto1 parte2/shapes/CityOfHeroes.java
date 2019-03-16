@@ -923,39 +923,14 @@ public class CityOfHeroes
     }
     
     public String[][] solve(int[] configuration, int[][] building){
-        solve resolver = new solve(configuration,building);
-        int[][] rta = new int[configuration[1]][configuration[0]];
-        rta= resolver.b();
-        String[][] rta2= new String[configuration[1]][configuration[0]];
-        for (int i=0; i<configuration[1];i++){
-            for (int j=0;j<configuration[0];j++){
-                String str= Integer.toString(rta[i][j]);
-                rta2[i][j]=str;
-                System.out.print(rta[i][j]+" ");
-            }
-        }
-        return rta2;
+        CityOfHeroesContest resolver = new CityOfHeroesContest(configuration,building);
+        return resolver.b();
     }
     
-    /**
-     * analiza si la ciudad se puede simular retornando un boolenao
-     * @param buildings
-     * @param configuration
-     * @param building
-     * @return boolean 
-     */
-    public boolean  simulate(int[] configuration, int[][] buildings, int building)
-    {
-        String[][] rta = new String[configuration[1]][configuration[0]];
-        rta=solve(configuration,buildings);
-        if (configuration[1]>1){
-            return false;
-        }        
-        System.out.println(rta[0][building-1]+"  aaaaaa");
-        if(rta[0][building]=="0" || rta[0][building]=="X"){
-            return false;
-        }
-        return true;
-    }    
+    public boolean simulate(int[] configuration, int[][] buildings, int building){
+        CityOfHeroesContest resolver = new CityOfHeroesContest(configuration,buildings);
+        boolean a= resolver.simulate(configuration,buildings,building);
+        return a;
+    }
     
 }
