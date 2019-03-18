@@ -692,7 +692,7 @@ public class CityOfHeroes
         listaPlan = new ArrayList<Integer>();
         edificioJumpPlan=building;
         notShowMessage();
-        for (int angulo=4; angulo<180;angulo++){
+        for (int angulo=80; angulo<81;angulo++){
             for (int velocidad=1; velocidad<90;velocidad++){
                 if (isSafeJump(heroe,angulo,velocidad)){
                     listaPlan.add(angulo);
@@ -700,6 +700,15 @@ public class CityOfHeroes
                 }
             }
         }
+        for (int angulo=60; angulo<61;angulo++){
+            for (int velocidad=1; velocidad<90;velocidad++){
+                if (isSafeJump(heroe,angulo,velocidad)){
+                    listaPlan.add(angulo);
+                    listaPlan.add(velocidad);                    
+                }
+            }
+        }        
+        System.out.println(listaPlan);
         showMessage();
         int[] jumpsPlan = new int[listaPlan.size()];
         for (int i=0; i < listaPlan.size(); i++)
@@ -909,7 +918,7 @@ public class CityOfHeroes
          * @param  position posicion del edificio
          * @return boolean si es true es que esta dañado, si retorna false es que no esta dañado
          */
-        public boolean isDamaged(int position)
+    public boolean isDamaged(int position)
         {
            Collections.sort(positionX);
            int buscador=positionX.get(position-1);
@@ -923,14 +932,15 @@ public class CityOfHeroes
     }
     
     public String[][] solve(int[] configuration, int[][] building){
-        CityOfHeroesContest resolver = new CityOfHeroesContest(configuration,building);
-        return resolver.b();
+        CityOfHeroesContest resolver = new CityOfHeroesContest();
+        return resolver.lectura(configuration,building);
     }
     
     public boolean simulate(int[] configuration, int[][] buildings, int building){
-        CityOfHeroesContest resolver = new CityOfHeroesContest(configuration,buildings);
+        CityOfHeroesContest resolver = new CityOfHeroesContest();
         boolean a= resolver.simulate(configuration,buildings,building);
         return a;
     }
+	
     
 }

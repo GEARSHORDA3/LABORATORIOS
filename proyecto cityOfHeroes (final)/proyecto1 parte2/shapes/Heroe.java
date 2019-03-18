@@ -744,7 +744,12 @@
                     x=(vox*t);
                 }
                 t+=avance;
-                posicionX+=(x/2);
+                if (angulo!=80){
+                    posicionX+=(x/2);
+                }
+                else{
+                    posicionX+=x;
+                }
                 posicionY=y;
                 heroe.setXYposition(posicionX,posicionY);
             }
