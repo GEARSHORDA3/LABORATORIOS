@@ -1,0 +1,23 @@
+#BlueJ class context
+comment0.target=Circle
+comment0.text=\n\ A\ circle\ that\ can\ be\ manipulated\ and\ that\ draws\ itself\ on\ a\ canvas.\n\ \n\ @author\ \ Michael\ Kolling\ and\ David\ J.\ Barnes\n\ @version\ 1.0.\ \ (15\ July\ 2000)\ \n
+comment1.params=
+comment1.target=Circle()
+comment1.text=\n\ Create\ a\ new\ circle\ at\ default\ position\ with\ default\ color.\n
+comment2.params=x\ y
+comment2.target=void\ setXYposition2(double,\ double)
+comment3.params=
+comment3.target=int\ getPositionX()
+comment4.params=
+comment4.target=int\ getPositionY()
+comment5.params=a
+comment5.target=void\ setPositionX(double)
+comment6.params=b
+comment6.target=void\ setPositionY(double)
+comment7.params=newDiameter
+comment7.target=void\ changeSize(int)
+comment7.text=\n\ Change\ the\ size.\n\ @param\ newDiameter\ the\ new\ size\ (in\ pixels).\ Size\ must\ be\ >\=0.\n
+comment8.params=
+comment8.target=void\ draw()
+comment8.text=\n\ Draw\ the\ circle\ with\ current\ specifications\ on\ screen.\n
+numComments=9
